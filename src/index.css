@@ -2,41 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* WPaaS Design System - Apple Human Interface Guidelines inspired
+All colors MUST be HSL. Global theme variables for consistent branding.
 */
 
 @layer base {
   :root {
+    /* WPaaS Brand Colors - Apple HIG neutral palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 210 11% 15%;
+    
+    /* Apple-inspired surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 210 11% 15%;
+    --surface: 210 20% 98%;
+    --surface-secondary: 210 20% 96%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 11% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* WPaaS Primary - #4A90E2 */
+    --primary: 212 78% 59%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 212 78% 54%;
+    --primary-pressed: 212 78% 49%;
+    
+    /* WPaaS Accent - #F5A623 */
+    --accent-brand: 40 92% 56%;
+    --accent-brand-foreground: 0 0% 100%;
+    --accent-brand-hover: 40 92% 51%;
+    
+    /* Apple HIG Secondary colors */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 210 11% 15%;
+    --secondary-hover: 210 20% 94%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neutral grays following Apple's system */
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 10% 46%;
+    --subtle: 210 20% 98%;
+    
+    /* System colors */
+    --accent: 212 78% 59%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 92% 56%;
+    --warning-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Interface elements */
+    --border: 210 20% 90%;
+    --border-subtle: 210 20% 95%;
+    --input: 210 20% 96%;
+    --ring: 212 78% 59%;
+    
+    /* Apple HIG spacing and typography */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+    
+    /* Elevations - Apple-style shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(210 20% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(210 20% 0% / 0.1), 0 2px 4px -1px hsl(210 20% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(210 20% 0% / 0.1), 0 4px 6px -2px hsl(210 20% 0% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(210 20% 0% / 0.1), 0 10px 10px -5px hsl(210 20% 0% / 0.04);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-hover)));
+    --gradient-surface: linear-gradient(180deg, hsl(var(--background)), hsl(var(--surface)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent-brand) / 0.05));
+    
+    /* Animations - Apple-style timing */
+    --duration-fast: 0.15s;
+    --duration-normal: 0.25s;
+    --duration-slow: 0.35s;
+    --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.6, 1);
+    
+    /* Sidebar tokens */
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +145,129 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-system antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+  }
+  
+  /* Apple HIG Typography System */
+  .text-large-title {
+    @apply text-4xl font-bold tracking-tight;
+  }
+  
+  .text-title-1 {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  
+  .text-title-2 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+  
+  .text-title-3 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+  
+  .text-headline {
+    @apply text-lg font-semibold;
+  }
+  
+  .text-body {
+    @apply text-base leading-relaxed;
+  }
+  
+  .text-callout {
+    @apply text-sm font-medium;
+  }
+  
+  .text-subhead {
+    @apply text-sm;
+  }
+  
+  .text-footnote {
+    @apply text-xs;
+  }
+  
+  .text-caption-1 {
+    @apply text-xs;
+  }
+  
+  .text-caption-2 {
+    @apply text-xs font-medium;
+  }
+}
+
+@layer components {
+  /* Apple HIG Button Variants */
+  .btn-primary {
+    @apply bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] active:scale-[0.98];
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] border border-border-subtle;
+  }
+  
+  .btn-accent {
+    @apply bg-accent-brand hover:bg-accent-brand-hover text-accent-brand-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] active:scale-[0.98];
+  }
+  
+  /* Apple HIG Card Styles */
+  .card-surface {
+    @apply bg-card border border-border-subtle rounded-[var(--radius)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)];
+  }
+  
+  .card-elevated {
+    @apply bg-card border border-border-subtle rounded-[var(--radius)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)];
+  }
+  
+  /* Apple HIG Navigation */
+  .nav-item {
+    @apply relative px-4 py-2 rounded-lg font-medium text-foreground hover:bg-surface transition-all duration-[var(--duration-fast)] ease-[var(--ease-out)];
+  }
+  
+  .nav-item-active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Apple HIG focus states */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+  }
+}
+
+@layer utilities {
+  /* Apple HIG spacing system */
+  .space-system {
+    @apply space-y-6;
+  }
+  
+  /* Apple HIG motion */
+  .motion-safe {
+    @media (prefers-reduced-motion: no-preference) {
+      animation-duration: var(--duration-normal);
+    }
+  }
+  
+  .motion-reduce {
+    @media (prefers-reduced-motion: reduce) {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+  
+  /* Apple HIG gradients */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-surface {
+    background: var(--gradient-surface);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
   }
 }
