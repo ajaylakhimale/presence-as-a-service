@@ -412,7 +412,7 @@ const Home = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-4 font-semibold backdrop-blur-sm" variant="outline">
+              <Button className="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300">
                 Talk to an Expert
               </Button>
             </Link>
