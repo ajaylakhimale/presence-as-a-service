@@ -14,6 +14,7 @@ import LiveStats from "./pages/LiveStats";
 import ClientLogin from "./pages/ClientLogin";
 import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
+import Industries from "./pages/Industries";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/client-login" element={<ClientLogin />} />
           <Route path="/client-dashboard" element={<ClientDashboard />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/industries" element={<Industries />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
