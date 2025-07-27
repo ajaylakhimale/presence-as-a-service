@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Slider } from '@/components/ui/slider';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 
 const Pricing = () => {
   const [showComparison, setShowComparison] = useState(false);
@@ -152,6 +153,18 @@ const Pricing = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Transparent Pricing | Custom Web & Mobile Solutions</title>
+        <meta name="description" content="Flexible, transparent pricing for web and mobile development. Get a custom quote for your industry and project needs." />
+        <meta property="og:title" content="Transparent Pricing | macro presence" />
+        <meta property="og:description" content="No hidden fees. Get your custom quote." />
+        <meta property="og:image" content="https://macro-presence.dev/og-pricing.jpg" />
+        <meta property="og:url" content="https://macro-presence.dev/pricing" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-pricing.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-hero py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

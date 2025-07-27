@@ -17,6 +17,7 @@ import {
   Star,
   ArrowRight
 } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   const services = [
@@ -108,6 +109,18 @@ const About = () => {
 
   return (
     <Layout showMobileTabBar={false}>
+      <Helmet>
+        <title>About Us | Premium Web Agency for B2B Digital Solutions</title>
+        <meta name="description" content="Discover our mission, team, and approach to delivering high-impact web and mobile solutions for businesses across 20+ industries." />
+        <meta property="og:title" content="About Us | macro presence" />
+        <meta property="og:description" content="Meet the team behind your next digital success." />
+        <meta property="og:image" content="https://macro-presence.dev/og-about.jpg" />
+        <meta property="og:url" content="https://macro-presence.dev/about" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-about.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />

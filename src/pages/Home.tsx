@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const [stats, setStats] = useState({
@@ -150,6 +151,18 @@ const Home = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Custom Web & Mobile Solutions for Every Industry | macro presence</title>
+        <meta name="description" content="Premium web agency delivering tailored digital solutions for 20+ industries. Expert UI/UX, seamless onboarding, and proven results. Get your custom quote today!" />
+        <meta property="og:title" content="Custom Web & Mobile Solutions for Every Industry | macro presence" />
+        <meta property="og:description" content="Premium web and mobile development for Real Estate, Law, Startups, and more." />
+        <meta property="og:image" content="https://macro-presence.dev/og-image.png" />
+        <meta property="og:url" content="https://macro-presence.dev/" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-image.png" />
+      </Helmet>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 min-h-screen flex items-center">
         {/* Background Elements */}
@@ -186,7 +199,7 @@ const Home = () => {
                 </Button>
               </Link>
               <Link to="/industries">
-                <Button className="btn-secondary text-lg px-10 py-6 h-auto hover:bg-surface/80 backdrop-blur-sm">
+                <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   <Play className="mr-3 h-6 w-6" />
                   Industries We Serve
                 </Button>

@@ -16,34 +16,37 @@ import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import NotFound from "./pages/NotFound";
+import { HelmetProvider } from 'react-helmet-async';
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/showcase" element={<Showcase />} />
-          <Route path="/showcase/:id" element={<ProjectDetails />} />
-          <Route path="/testimonials" element={<Testimonials />} />
-          <Route path="/tech-stack" element={<TechStack />} />
-          <Route path="/stats" element={<LiveStats />} />
-          <Route path="/client-login" element={<ClientLogin />} />
-          <Route path="/client-dashboard" element={<ClientDashboard />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/industries" element={<Industries />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/showcase" element={<Showcase />} />
+            <Route path="/showcase/:id" element={<ProjectDetails />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/tech-stack" element={<TechStack />} />
+            <Route path="/stats" element={<LiveStats />} />
+            <Route path="/client-login" element={<ClientLogin />} />
+            <Route path="/client-dashboard" element={<ClientDashboard />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/industries" element={<Industries />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

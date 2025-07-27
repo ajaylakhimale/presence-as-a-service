@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 
 const Testimonials = () => {
   const [filterPlan, setFilterPlan] = useState('all');
@@ -135,6 +136,18 @@ const Testimonials = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Client Testimonials | Trusted by Industry Leaders</title>
+        <meta name="description" content="Read real reviews from satisfied clients in Real Estate, Law, Startups, and more. Discover why businesses trust us for their digital needs." />
+        <meta property="og:title" content="Client Testimonials | macro presence" />
+        <meta property="og:description" content="Hear from our happy clients." />
+        <meta property="og:image" content="https://macro-presence.dev/og-testimonials.jpg" />
+        <meta property="og:url" content="https://macro-presence.dev/testimonials" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-testimonials.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-hero py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

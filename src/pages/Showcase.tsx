@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import Layout from '@/components/layout/Layout';
+import { Helmet } from 'react-helmet-async';
 
 const Showcase = () => {
   const [selectedIndustry, setSelectedIndustry] = useState('all');
@@ -124,6 +125,18 @@ const Showcase = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Portfolio | Custom Web Projects for Leading Industries</title>
+        <meta name="description" content="Explore our portfolio of successful web and mobile projects for Real Estate, Law Firms, Startups, and more. See what we can build for you!" />
+        <meta property="og:title" content="Portfolio | macro presence" />
+        <meta property="og:description" content="See our work for top B2B clients." />
+        <meta property="og:image" content="https://macro-presence.dev/og-work.jpg" />
+        <meta property="og:url" content="https://macro-presence.dev/showcase" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-work.jpg" />
+      </Helmet>
       {/* Hero Section */}
       <section className="bg-gradient-hero py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

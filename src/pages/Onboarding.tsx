@@ -38,6 +38,7 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { Helmet } from 'react-helmet-async';
 
 interface FormData {
   // Step 1: Business Overview
@@ -671,6 +672,18 @@ const Onboarding = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+      <Helmet>
+        <title>Project Requirement Form | Get Your Custom Quote</title>
+        <meta name="description" content="Tell us about your project. Fill out our requirement form for a tailored web or mobile solution quote." />
+        <meta property="og:title" content="Project Requirement Form | macro presence" />
+        <meta property="og:description" content="Share your project details for a custom proposal." />
+        <meta property="og:image" content="https://macro-presence.dev/og-requirement.jpg" />
+        <meta property="og:url" content="https://macro-presence.dev/onboarding" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@macro_presence" />
+        <meta name="twitter:image" content="https://macro-presence.dev/og-requirement.jpg" />
+      </Helmet>
       {/* Header */}
       <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
