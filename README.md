@@ -1,6 +1,6 @@
-# WPaaS - Web Presence as a Service
+# macro presence
 
-A modern React application for a web development service company that provides professional websites and web applications with transparent pricing.
+_Crafting Powerful Online Identities_
 
 ## Project info
 

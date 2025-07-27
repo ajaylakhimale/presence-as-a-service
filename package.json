@@ -1,5 +1,6 @@
 {
-  "name": "wpaas-website",
+  "name": "macro-presence",
+  "description": "Crafting Powerful Online Identities",
   "private": true,
   "version": "0.0.0",
   "type": "module",
