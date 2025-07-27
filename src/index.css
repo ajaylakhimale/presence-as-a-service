@@ -198,29 +198,29 @@ All colors MUST be HSL. Global theme variables for consistent branding.
 @layer components {
   /* Apple HIG Button Variants */
   .btn-primary {
-    @apply bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] active:scale-[0.98];
+    @apply bg-primary hover:bg-primary-hover text-primary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-out shadow-sm hover:shadow-md active:scale-[0.98];
   }
   
   .btn-secondary {
-    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] border border-border-subtle;
+    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-out border border-border-subtle;
   }
   
   .btn-accent {
-    @apply bg-accent-brand hover:bg-accent-brand-hover text-accent-brand-foreground rounded-lg px-6 py-3 font-medium transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] active:scale-[0.98];
+    @apply bg-accent-brand hover:bg-accent-brand-hover text-accent-brand-foreground rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-out shadow-sm hover:shadow-md active:scale-[0.98];
   }
   
   /* Apple HIG Card Styles */
   .card-surface {
-    @apply bg-card border border-border-subtle rounded-[var(--radius)] shadow-[var(--shadow-sm)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)];
+    @apply bg-card border border-border-subtle rounded-lg shadow-sm transition-all duration-300 ease-out;
   }
   
   .card-elevated {
-    @apply bg-card border border-border-subtle rounded-[var(--radius)] shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)];
+    @apply bg-card border border-border-subtle rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ease-out;
   }
   
   /* Apple HIG Navigation */
   .nav-item {
-    @apply relative px-4 py-2 rounded-lg font-medium text-foreground hover:bg-surface transition-all duration-[var(--duration-fast)] ease-[var(--ease-out)];
+    @apply relative px-4 py-2 rounded-lg font-medium text-foreground hover:bg-surface transition-all duration-150 ease-out;
   }
   
   .nav-item-active {
