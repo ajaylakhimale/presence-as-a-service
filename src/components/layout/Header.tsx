@@ -25,11 +25,11 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full glassmorphism-nav border-b border-white/10 supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex max-w-7xl items-center h-16 px-4 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <div className="flex items-center flex-shrink-0 mr-10">
-          <Link 
-            to="/" 
+      <nav className="mx-auto flex items-center h-16 px-4 sm:px-6 lg:px-8 justify-between">
+        {/* Left: Logo */}
+        <div className="flex items-center">
+          <Link
+            to="/"
             className="flex items-center space-x-2 text-xl font-bold text-foreground hover:text-primary transition-colors"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -39,7 +39,7 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Center: Desktop Navigation */}
         <div className="hidden lg:flex flex-1 justify-center items-center gap-6">
           {navigation.map((item) => (
             <Link
@@ -52,9 +52,9 @@ const Header = () => {
           ))}
         </div>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-4 ml-10">
-          <Link 
+        {/* Right: Desktop CTA */}
+        <div className="hidden lg:flex items-center gap-4">
+          <Link
             to="/client-login"
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
@@ -70,7 +70,7 @@ const Header = () => {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="lg:hidden"
+          className="lg:hidden flex items-center px-4"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
@@ -100,14 +100,14 @@ const Header = () => {
               </Link>
             ))}
             <div className="pt-4 space-y-2">
-              <Link 
+              <Link
                 to="/client-login"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:bg-white/20 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Client Login
               </Link>
-              <Link 
+              <Link
                 to="/onboarding"
                 onClick={() => setIsMenuOpen(false)}
               >

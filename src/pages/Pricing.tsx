@@ -386,24 +386,27 @@ const Pricing = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-primary text-primary-foreground">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-title-1 mb-6">Ready to Get Started?</h2>
-          <p className="text-body mb-8 opacity-90">
-            Choose your plan and start your project today. No contracts, no surprises.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/onboarding">
-              <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-lg px-8 py-4">
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-4" variant="outline">
-                Contact Sales
-              </Button>
-            </Link>
+      <section className="py-24 bg-gradient-to-br from-primary/80 via-background/90 to-accent-brand/80 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+        <div className="relative z-10 mx-auto max-w-2xl px-6 lg:px-8">
+          <div className="rounded-2xl shadow-2xl bg-white/90 dark:bg-black/80 p-10 text-center border border-white/30 dark:border-black/30 backdrop-blur-md">
+            <h2 className="text-title-1 mb-4 text-gray-900 dark:text-white drop-shadow-lg">Ready to Get Started?</h2>
+            <p className="text-body mb-8 text-gray-700 dark:text-gray-200 opacity-95">
+              Choose your plan and start your project today. No contracts, no surprises.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/onboarding">
+                <Button className="btn-primary text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                  Start Your Project
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button className="btn-secondary text-lg px-8 py-4">
+                  Contact Sales
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
