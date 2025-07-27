@@ -25,8 +25,8 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full glassmorphism-nav border-b border-white/20">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full glassmorphism-nav border-b border-white/10 supports-[backdrop-filter]:bg-background/60">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
         {/* Logo */}
         <Link 
           to="/" 
