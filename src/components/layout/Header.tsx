@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { siteConfig } from '@/config/site';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border-subtle bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full glassmorphism border-b border-white/10">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4">
         {/* Logo */}
         <Link 
@@ -34,7 +35,7 @@ const Header = () => {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <Zap className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span>WPaaS</span>
+          <span>{siteConfig.name}</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -43,7 +44,7 @@ const Header = () => {
             <Link
               key={item.name}
               to={item.href}
-              className={`nav-item ${isActive(item.href) ? 'nav-item-active' : ''}`}
+              className={`nav-item ${isActive(item.href) ? 'nav-item-active' : ''} hover:bg-white/20 transition-all duration-200`}
             >
               {item.name}
             </Link>
@@ -81,7 +82,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-border-subtle animate-fade-in">
+        <div className="lg:hidden glassmorphism border-t border-white/10 animate-fade-in">
           <div className="space-y-1 px-6 py-4">
             {navigation.map((item) => (
               <Link

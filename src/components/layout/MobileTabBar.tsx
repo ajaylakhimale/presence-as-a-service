@@ -18,7 +18,7 @@ const MobileTabBar = () => {
   };
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-border-subtle">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 glassmorphism border-t border-white/10">
       <div className="grid grid-cols-5">
         {tabs.map((tab) => {
           const Icon = tab.icon;

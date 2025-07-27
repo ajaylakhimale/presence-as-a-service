@@ -1,4 +1,6 @@
-# Welcome to your Lovable project
+# WPaaS - Web Presence as a Service
+
+A modern React application for a web development service company that provides professional websites and web applications with transparent pricing.
 
 ## Project info
 
@@ -54,11 +56,34 @@ npm run dev
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite** - Fast build tool and development server
+- **TypeScript** - Type-safe JavaScript
+- **React 18** - Modern React with hooks and functional components
+- **React Router** - Client-side routing
+- **shadcn/ui** - Beautiful, accessible UI components
+- **Tailwind CSS** - Utility-first CSS framework
+- **Lucide React** - Beautiful icons
+
+## Site Configuration
+
+The website name and other site-wide settings are centralized in `src/config/site.ts`. To change the website name:
+
+### Option 1: Manual Update
+Edit `src/config/site.ts` and update the `name` and `fullName` properties.
+
+### Option 2: Using the Script
+Run the provided script to change the site name across all files:
+
+```bash
+node scripts/change-site-name.js "New Site Name" "new-site-slug"
+```
+
+This will update:
+- Site configuration
+- HTML title and meta tags
+- Package.json
+- README.md
+- All component references
 
 ## How can I deploy this project?
 

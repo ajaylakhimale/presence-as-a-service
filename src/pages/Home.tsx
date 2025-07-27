@@ -270,22 +270,24 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-8 relative">
-            {processSteps.map((step, index) => (
-              <div key={step.step} className="text-center animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="relative">
-                  <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl mb-4">
-                    {step.icon}
+          <div className="relative">
+            {/* Connecting lines for desktop */}
+            <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 z-0" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-8 relative">
+              {processSteps.map((step, index) => (
+                <div key={step.step} className="text-center animate-fade-in-up relative" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="relative">
+                    <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl mb-4 relative z-10 border-4 border-background">
+                      {step.icon}
+                    </div>
+                    <div className="text-caption-2 text-primary font-bold mb-2">{step.step}</div>
+                    <h3 className="text-headline font-semibold mb-2">{step.title}</h3>
+                    <p className="text-subhead text-muted-foreground">{step.description}</p>
                   </div>
-                  <div className="text-caption-2 text-primary font-bold mb-2">{step.step}</div>
-                  <h3 className="text-headline font-semibold mb-2">{step.title}</h3>
-                  <p className="text-subhead text-muted-foreground">{step.description}</p>
                 </div>
-                {index < processSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-px bg-border-subtle transform translate-x-8 -translate-y-1/2" />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

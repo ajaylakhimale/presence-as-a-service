@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
+import ProjectInfoForm, { ProjectFormData } from '@/components/ProjectInfoForm';
+import { siteConfig } from '@/config/site';
 import { 
   Bell, 
   Calendar, 
@@ -31,12 +33,17 @@ import {
   Eye,
   Edit3,
   ExternalLink,
-  Plus
+  Plus,
+  Image as ImageIcon,
+  X
 } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 const ClientDashboard = () => {
   const [clientEmail, setClientEmail] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [showProjectForm, setShowProjectForm] = useState(false);
+  const [projectFormData, setProjectFormData] = useState<ProjectFormData | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +64,17 @@ const ClientDashboard = () => {
     localStorage.removeItem('clientLoggedIn');
     localStorage.removeItem('clientEmail');
     navigate('/');
+  };
+
+  const handleProjectFormSubmit = (data: ProjectFormData) => {
+    setProjectFormData(data);
+    setShowProjectForm(false);
+    // Here you would typically send the data to your backend
+    console.log('Project form submitted:', data);
+  };
+
+  const handleProjectFormCancel = () => {
+    setShowProjectForm(false);
   };
 
   // Mock data for demonstration
@@ -434,6 +452,247 @@ const ClientDashboard = () => {
     </Card>
   );
 
+  const renderFeedback = () => (
+    <div className="space-y-6">
+      {showProjectForm ? (
+        <ProjectInfoForm
+          onSubmit={handleProjectFormSubmit}
+          onCancel={handleProjectFormCancel}
+          initialData={projectFormData || undefined}
+        />
+      ) : (
+        <>
+          <Card className="dashboard-card">
+            <CardHeader>
+              <CardTitle className="title-2">Project Showcase Information</CardTitle>
+              <CardDescription>
+                Help us showcase your project in our portfolio by providing detailed information
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                    <Star className="h-6 w-6 text-primary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-headline font-semibold mb-2">Share Your Project Story</h3>
+                    <p className="text-body text-muted-foreground mb-4">
+                      By providing detailed information about your project, we can create a comprehensive showcase 
+                      that highlights the value we delivered and helps other potential clients understand our capabilities.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                        <span className="text-sm">Showcase your project in our portfolio</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                        <span className="text-sm">Detailed project case study</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                        <span className="text-sm">Client testimonial and review</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckCircle className="h-4 w-4 text-success" />
+                        <span className="text-sm">Technical implementation details</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="border-dashed border-2 border-border hover:border-primary/50 transition-colors">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <FileText className="h-8 w-8 text-primary" />
+                    </div>
+                    <h4 className="text-headline font-semibold mb-2">Project Information</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Provide comprehensive details about your project including features, challenges, and results
+                    </p>
+                    <Button 
+                      onClick={() => setShowProjectForm(true)}
+                      className="w-full"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Fill Project Form
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-dashed border-2 border-border hover:border-primary/50 transition-colors">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <ImageIcon className="h-8 w-8 text-accent" />
+                    </div>
+                    <h4 className="text-headline font-semibold mb-2">Project Images</h4>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Upload screenshots and images of your project for the showcase gallery
+                    </p>
+                    <Button variant="outline" className="w-full">
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload Images
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {projectFormData && (
+                <Card className="border-success/20 bg-success/5">
+                  <CardHeader>
+                    <CardTitle className="text-success flex items-center gap-2">
+                      <CheckCircle className="h-5 w-5" />
+                      Project Information Submitted
+                    </CardTitle>
+                    <CardDescription>
+                      Your project information has been successfully submitted and is under review
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Project Title:</span>
+                        <span className="text-sm">{projectFormData.title}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Industry:</span>
+                        <span className="text-sm">{projectFormData.industry}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Project Type:</span>
+                        <span className="text-sm">{projectFormData.type}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium">Technologies:</span>
+                        <span className="text-sm">{projectFormData.technologies.join(', ')}</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setShowProjectForm(true)}
+                      >
+                        <Edit3 className="h-4 w-4 mr-2" />
+                        Edit Information
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setProjectFormData(null)}
+                      >
+                        <X className="h-4 w-4 mr-2" />
+                        Remove
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="dashboard-card">
+            <CardHeader>
+              <CardTitle className="title-2">Client Testimonials</CardTitle>
+              <CardDescription>
+                Share your experience and help other clients make informed decisions
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-muted/50 rounded-xl p-4">
+                <h4 className="text-headline font-semibold mb-2">Write a Testimonial</h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Tell us about your experience working with WPaaS and how the project turned out
+                </p>
+                <Textarea 
+                  placeholder="Share your thoughts about the project, our team, and the overall experience..."
+                  rows={4}
+                />
+                <div className="mt-3 flex gap-2">
+                  <Button size="sm">
+                    <Send className="h-4 w-4 mr-2" />
+                    Submit Testimonial
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    Save Draft
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="dashboard-card">
+            <CardHeader>
+              <CardTitle className="title-2">Feedback & Suggestions</CardTitle>
+              <CardDescription>
+                Help us improve our services by sharing your feedback
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-sm font-medium">How would you rate your overall experience?</Label>
+                  <div className="flex gap-1 mt-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        className="text-2xl text-muted-foreground hover:text-accent transition-colors"
+                      >
+                        ★
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">What went well?</Label>
+                  <Textarea 
+                    placeholder="Tell us what you liked about our service..."
+                    rows={3}
+                  />
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">What could we improve?</Label>
+                  <Textarea 
+                    placeholder="Share suggestions for improvement..."
+                    rows={3}
+                  />
+                </div>
+                
+                <div>
+                  <Label className="text-sm font-medium">Would you recommend us to others?</Label>
+                  <div className="flex gap-4 mt-2">
+                    <label className="flex items-center gap-2">
+                      <input type="radio" name="recommend" value="yes" className="text-primary" />
+                      <span className="text-sm">Yes, definitely</span>
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input type="radio" name="recommend" value="maybe" className="text-primary" />
+                      <span className="text-sm">Maybe</span>
+                    </label>
+                    <label className="flex items-center gap-2">
+                      <input type="radio" name="recommend" value="no" className="text-primary" />
+                      <span className="text-sm">No</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <Button className="w-full">
+                  <Send className="h-4 w-4 mr-2" />
+                  Submit Feedback
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </>
+      )}
+    </div>
+  );
+
   const renderMainContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -461,6 +720,8 @@ const ClientDashboard = () => {
         return renderCommunication();
       case 'billing':
         return renderBilling();
+      case 'feedback':
+        return renderFeedback();
       default:
         return (
           <Card className="dashboard-card">
@@ -474,16 +735,16 @@ const ClientDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
+    <div className="h-screen bg-background flex flex-col overflow-hidden">
+      {/* Header - Fixed at top */}
+      <header className="flex-shrink-0 z-40 glassmorphism border-b border-white/10">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="caption-1 font-bold text-primary-foreground">W</span>
             </div>
             <div>
-              <h1 className="headline">WPaaS Dashboard</h1>
+              <h1 className="headline">{siteConfig.name} Dashboard</h1>
               <p className="caption-2">{clientEmail}</p>
             </div>
           </div>
@@ -503,10 +764,11 @@ const ClientDashboard = () => {
         </div>
       </header>
 
-      <div className="flex">
-        {/* Sidebar Navigation */}
-        <nav className="hidden lg:flex flex-col w-64 border-r border-border bg-background/50 backdrop-blur-sm sticky top-[73px] h-[calc(100vh-73px)]">
-          <div className="p-6">
+      {/* Main Container - Takes remaining height */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar Navigation - Fixed width, no scroll */}
+        <nav className="hidden lg:flex flex-col w-64 border-r border-white/10 glassmorphism flex-shrink-0">
+          <div className="p-6 overflow-y-auto">
             <div className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
@@ -519,7 +781,7 @@ const ClientDashboard = () => {
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${
                       isActive 
                         ? 'bg-primary text-primary-foreground shadow-sm' 
-                        : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+                        : 'hover:bg-white/20 text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     <Icon className="h-5 w-5" />
@@ -531,14 +793,14 @@ const ClientDashboard = () => {
           </div>
         </nav>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
+        {/* Main Content - Scrollable */}
+        <main className="flex-1 overflow-y-auto p-6">
           {renderMainContent()}
         </main>
       </div>
 
-      {/* Mobile Tab Bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-border">
+      {/* Mobile Tab Bar - Fixed at bottom */}
+      <div className="lg:hidden flex-shrink-0 glassmorphism border-t border-white/10">
         <div className="grid grid-cols-4">
           {navigationItems.slice(0, 4).map((item) => {
             const Icon = item.icon;

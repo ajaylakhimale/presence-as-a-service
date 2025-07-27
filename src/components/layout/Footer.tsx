@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Zap, Twitter, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { siteConfig } from '@/config/site';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -34,10 +35,10 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { name: 'Twitter', href: '#', icon: Twitter },
-    { name: 'GitHub', href: '#', icon: Github },
-    { name: 'LinkedIn', href: '#', icon: Linkedin },
-    { name: 'Email', href: 'mailto:hello@wpaas.dev', icon: Mail },
+    { name: 'Twitter', href: siteConfig.links.twitter, icon: Twitter },
+    { name: 'GitHub', href: siteConfig.links.github, icon: Github },
+    { name: 'LinkedIn', href: siteConfig.links.linkedin, icon: Linkedin },
+    { name: 'Email', href: `mailto:${siteConfig.links.email}`, icon: Mail },
   ];
 
   return (
@@ -68,11 +69,10 @@ const Footer = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
                 <Zap className="h-5 w-5 text-primary-foreground" />
               </div>
-              <span>WPaaS</span>
+              <span>{siteConfig.name}</span>
             </Link>
             <p className="text-body text-muted-foreground mb-6 max-w-sm">
-              Pay-As-You-Need Web Presence. Professional websites and web applications delivered fast, 
-              with transparent pricing and ongoing support.
+              {siteConfig.description}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => {
@@ -114,7 +114,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 border-t border-border-subtle pt-8 flex flex-col md:flex-row md:items-center md:justify-between">
           <p className="text-subhead text-muted-foreground">
-            © {currentYear} WPaaS. All rights reserved.
+            © {currentYear} {siteConfig.name}. All rights reserved.
           </p>
           <div className="mt-4 md:mt-0 flex space-x-6">
             <Link

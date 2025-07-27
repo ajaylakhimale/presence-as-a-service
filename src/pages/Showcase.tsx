@@ -25,7 +25,7 @@ const Showcase = () => {
       id: 1,
       title: 'TechStart Landing Page',
       description: 'Modern SaaS landing page with animated hero section and conversion-optimized design',
-      image: '🚀',
+      image: '/placeholder.svg',
       industry: 'Technology',
       type: 'Landing Page',
       tech: ['React', 'TypeScript', 'Tailwind'],
@@ -39,7 +39,7 @@ const Showcase = () => {
       id: 2,
       title: 'Local Bistro Website',
       description: 'Restaurant website with online reservations and menu management',
-      image: '🍽️',
+      image: '/placeholder.svg',
       industry: 'Food & Beverage',
       type: 'Business Website',
       tech: ['React', 'Node.js', 'Stripe'],
@@ -53,7 +53,7 @@ const Showcase = () => {
       id: 3,
       title: 'Design Agency Portfolio',
       description: 'Creative portfolio showcasing design work with smooth animations',
-      image: '🎨',
+      image: '/placeholder.svg',
       industry: 'Creative',
       type: 'Portfolio',
       tech: ['React', 'Framer Motion', 'Sanity'],
@@ -67,7 +67,7 @@ const Showcase = () => {
       id: 4,
       title: 'E-commerce Platform',
       description: 'Full-featured online store with payment processing and inventory management',
-      image: '🛒',
+      image: '/placeholder.svg',
       industry: 'Retail',
       type: 'E-commerce',
       tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe'],
@@ -81,7 +81,7 @@ const Showcase = () => {
       id: 5,
       title: 'Healthcare Dashboard',
       description: 'Patient management system with secure data handling and analytics',
-      image: '🏥',
+      image: '/placeholder.svg',
       industry: 'Healthcare',
       type: 'Web Application',
       tech: ['React', 'Node.js', 'MongoDB', 'Auth0'],
@@ -95,7 +95,7 @@ const Showcase = () => {
       id: 6,
       title: 'Real Estate Platform',
       description: 'Property listing site with advanced search and virtual tours',
-      image: '🏘️',
+      image: '/placeholder.svg',
       industry: 'Real Estate',
       type: 'Web Application',
       tech: ['React', 'TypeScript', 'Mapbox', 'Cloudinary'],
@@ -126,7 +126,7 @@ const Showcase = () => {
     <Layout>
       {/* Hero Section */}
       <section className="bg-gradient-hero py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-large-title mb-6">
               Our <span className="text-primary">Showcase</span>
@@ -141,7 +141,7 @@ const Showcase = () => {
 
       {/* Filters */}
       <section className="py-12 bg-background border-b border-border-subtle">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
             <div className="flex items-center space-x-2 flex-1">
               <Search className="h-5 w-5 text-muted-foreground" />
@@ -203,13 +203,17 @@ const Showcase = () => {
 
       {/* Projects Grid */}
       <section className="py-24 bg-background">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project, index) => (
               <Card key={project.id} className="card-elevated hover:scale-105 transition-transform duration-300 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardHeader className="p-0">
-                  <div className="aspect-video bg-surface rounded-t-lg flex items-center justify-center text-6xl">
-                    {project.image}
+                  <div className="aspect-video bg-surface rounded-t-lg overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                 </CardHeader>
                 <CardContent className="p-6">
@@ -293,7 +297,7 @@ const Showcase = () => {
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-primary text-primary-foreground">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-title-1 mb-6">Want One Like This?</h2>
           <p className="text-body mb-8 opacity-90">
             Every project is unique, but we can create something similar for your business. 
