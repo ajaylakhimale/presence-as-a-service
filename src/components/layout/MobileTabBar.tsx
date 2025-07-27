@@ -18,7 +18,7 @@ const MobileTabBar = () => {
   };
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 glassmorphism border-t border-white/10">
+    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 glassmorphism-mobile border-t border-white/20">
       <div className="grid grid-cols-5">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -28,7 +28,7 @@ const MobileTabBar = () => {
             <Link
               key={tab.name}
               to={tab.href}
-              className={`flex flex-col items-center justify-center py-2 px-1 transition-all duration-[var(--duration-fast)] ${
+              className={`flex flex-col items-center justify-center py-2 px-1 transition-all duration-200 ${
                 active
                   ? 'text-primary'
                   : 'text-muted-foreground hover:text-foreground'

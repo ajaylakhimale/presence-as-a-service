@@ -322,37 +322,140 @@ All colors MUST be HSL. Global theme variables for consistent branding.
 
   /* Apple-style glassmorphism */
   .glassmorphism {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
 
   .glassmorphism-dark {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
 
   /* Enhanced backdrop blur support */
   @supports (backdrop-filter: blur(20px)) {
     .glassmorphism {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.4);
     }
     .glassmorphism-dark {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.4);
     }
   }
 
   /* Subtle glassmorphism for cards and elements */
   .glassmorphism-subtle {
     background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px) saturate(160%);
-    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Navigation-specific glassmorphism */
+  .glassmorphism-nav {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Mobile navigation glassmorphism */
+  .glassmorphism-mobile {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Glassmorphism hover effects */
+  .glassmorphism-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glassmorphism-hover:hover {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+  }
+
+  /* Glassmorphism active state */
+  .glassmorphism-active {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Ensure sticky positioning works properly */
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  /* Force backdrop-filter support */
+  @supports (backdrop-filter: blur(1px)) {
+    .glassmorphism,
+    .glassmorphism-dark,
+    .glassmorphism-subtle,
+    .glassmorphism-nav,
+    .glassmorphism-mobile {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+  }
+
+  /* Fallback for browsers without backdrop-filter support */
+  @supports not (backdrop-filter: blur(1px)) {
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .glassmorphism-nav {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .glassmorphism-mobile {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+
+  /* Smooth transitions for all glassmorphism elements */
+  .glassmorphism,
+  .glassmorphism-dark,
+  .glassmorphism-subtle,
+  .glassmorphism-nav,
+  .glassmorphism-mobile {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced navigation item hover effects */
+  .nav-item {
+    @apply relative px-4 py-2 rounded-lg font-medium text-foreground transition-all duration-200 ease-out;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-item-active {
+    @apply bg-primary text-primary-foreground;
+    background: hsl(var(--primary));
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.2);
   }
 }
 

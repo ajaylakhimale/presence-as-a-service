@@ -11,10 +11,10 @@ interface LayoutProps {
 
 const Layout = ({ children, showFooter = true, showMobileTabBar = true }: LayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden">
+    <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-1 pb-safe-area-inset-bottom overflow-x-hidden">
+      <main className="flex-1 overflow-x-hidden">
         {children}
       </main>
       

@@ -737,7 +737,7 @@ const ClientDashboard = () => {
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
       {/* Header - Fixed at top */}
-      <header className="flex-shrink-0 z-40 glassmorphism border-b border-white/10">
+      <header className="flex-shrink-0 z-40 glassmorphism-nav border-b border-white/20">
         <div className="flex items-center justify-between px-6 py-4">
           <div className="flex items-center gap-4">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
@@ -767,7 +767,7 @@ const ClientDashboard = () => {
       {/* Main Container - Takes remaining height */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar Navigation - Fixed width, no scroll */}
-        <nav className="hidden lg:flex flex-col w-64 border-r border-white/10 glassmorphism flex-shrink-0">
+        <nav className="hidden lg:flex flex-col w-64 border-r border-white/20 glassmorphism-nav flex-shrink-0">
           <div className="p-6 overflow-y-auto">
             <div className="space-y-2">
               {navigationItems.map((item) => {
@@ -800,7 +800,7 @@ const ClientDashboard = () => {
       </div>
 
       {/* Mobile Tab Bar - Fixed at bottom */}
-      <div className="lg:hidden flex-shrink-0 glassmorphism border-t border-white/10">
+      <div className="lg:hidden flex-shrink-0 glassmorphism-mobile border-t border-white/20">
         <div className="grid grid-cols-4">
           {navigationItems.slice(0, 4).map((item) => {
             const Icon = item.icon;

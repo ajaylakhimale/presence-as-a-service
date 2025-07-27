@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full glassmorphism border-b border-white/10">
+    <header className="sticky top-0 z-50 w-full glassmorphism-nav border-b border-white/20">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4">
         {/* Logo */}
         <Link 
@@ -44,7 +44,7 @@ const Header = () => {
             <Link
               key={item.name}
               to={item.href}
-              className={`nav-item ${isActive(item.href) ? 'nav-item-active' : ''} hover:bg-white/20 transition-all duration-200`}
+              className={`nav-item ${isActive(item.href) ? 'nav-item-active' : ''} transition-all duration-200`}
             >
               {item.name}
             </Link>
@@ -82,7 +82,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden glassmorphism border-t border-white/10 animate-fade-in">
+        <div className="lg:hidden glassmorphism-mobile border-t border-white/20">
           <div className="space-y-1 px-6 py-4">
             {navigation.map((item) => (
               <Link
@@ -91,7 +91,7 @@ const Header = () => {
                 className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${
                   isActive(item.href)
                     ? 'bg-primary text-primary-foreground'
-                    : 'text-foreground hover:bg-surface-secondary'
+                    : 'text-foreground hover:bg-white/20'
                 }`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -101,7 +101,7 @@ const Header = () => {
             <div className="pt-4 space-y-2">
               <Link 
                 to="/client-login"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:bg-surface-secondary rounded-lg"
+                className="block px-3 py-2 text-base font-medium text-foreground hover:bg-white/20 rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Client Login
