@@ -394,22 +394,25 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary text-primary-foreground">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-title-1 mb-6">Ready to Transform Your Web Presence?</h2>
-          <p className="text-body mb-8 opacity-90">
+      <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-accent-brand relative overflow-hidden">
+        {/* Background overlay for better text contrast */}
+        <div className="absolute inset-0 bg-background/5 backdrop-blur-sm" />
+        
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-title-1 mb-6 text-white font-bold drop-shadow-lg">Ready to Transform Your Web Presence?</h2>
+          <p className="text-body mb-8 text-white/90 drop-shadow-md max-w-2xl mx-auto">
             Join hundreds of businesses who trust WPaaS for their web development needs. 
             No contracts, no surprises – just great results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
-              <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-lg px-8 py-4">
+              <Button className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/contact">
-              <Button className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-4" variant="outline">
+              <Button className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-4 font-semibold backdrop-blur-sm" variant="outline">
                 Talk to an Expert
               </Button>
             </Link>
