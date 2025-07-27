@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border-subtle bg-background/80 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-4">
         {/* Logo */}
         <Link 
           to="/" 
@@ -39,7 +39,7 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex lg:items-center lg:space-x-1">
-          {navigation.map((item) => (
+          {navigation.slice(0, 6).map((item) => (
             <Link
               key={item.name}
               to={item.href}

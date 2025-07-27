@@ -42,7 +42,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-surface border-t border-border-subtle">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 lg:px-8">
         {/* Newsletter Section */}
         <div className="mb-12 rounded-2xl bg-gradient-hero p-8 text-center">
           <h3 className="text-title-2 mb-4">Stay Updated</h3>
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
+        <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-6">
           {/* Logo and Description */}
           <div className="col-span-2">
             <Link to="/" className="flex items-center space-x-2 text-xl font-bold text-foreground mb-4">

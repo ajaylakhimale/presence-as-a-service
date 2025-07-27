@@ -144,9 +144,20 @@ All colors MUST be HSL. Global theme variables for consistent branding.
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-system antialiased;
     font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+    overflow-x: hidden;
   }
   
   /* Apple HIG Typography System */
@@ -191,7 +202,7 @@ All colors MUST be HSL. Global theme variables for consistent branding.
   }
   
   .text-caption-2 {
-    @apply text-xs font-medium;
+    @apply text-xs;
   }
 }
 
