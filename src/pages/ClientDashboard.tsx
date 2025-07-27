@@ -3,11 +3,40 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import Layout from '@/components/layout/Layout';
-import { BarChart3, FileText, Settings, User, LogOut, Calendar, Bell, TrendingUp } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Textarea } from '@/components/ui/textarea';
+import { 
+  Bell, 
+  Calendar, 
+  CheckCircle, 
+  Clock, 
+  CreditCard, 
+  Download, 
+  FileText, 
+  Globe, 
+  HelpCircle, 
+  Home, 
+  LogOut, 
+  MessageSquare, 
+  Settings, 
+  Star, 
+  Upload, 
+  User,
+  ChevronRight,
+  AlertCircle,
+  Shield,
+  Folder,
+  Send,
+  Eye,
+  Edit3,
+  ExternalLink,
+  Plus
+} from 'lucide-react';
 
 const ClientDashboard = () => {
   const [clientEmail, setClientEmail] = useState('');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,120 +59,507 @@ const ClientDashboard = () => {
     navigate('/');
   };
 
-  const stats = [
-    { title: 'Total Projects', value: '12', icon: FileText, trend: '+2 this month' },
-    { title: 'Active Campaigns', value: '8', icon: TrendingUp, trend: '+15% growth' },
-    { title: 'Team Members', value: '24', icon: User, trend: '3 new members' },
-    { title: 'This Month Revenue', value: '$45,280', icon: BarChart3, trend: '+12% vs last month' },
+  // Mock data for demonstration
+  const projectData = {
+    name: "Modern Portfolio Website",
+    clientName: "Ajay Kumar",
+    currentPhase: "Development",
+    progress: 65,
+    dueDate: "July 29, 2024",
+    projectManager: "Sarah Chen"
+  };
+
+  const timelineSteps = [
+    { name: "Onboarding", status: "completed", duration: "2 days", team: "PM Team" },
+    { name: "Design", status: "completed", duration: "5 days", team: "Design Team" },
+    { name: "Development", status: "in-progress", duration: "8 days", team: "Dev Team" },
+    { name: "Testing", status: "pending", duration: "3 days", team: "QA Team" },
+    { name: "Review", status: "pending", duration: "2 days", team: "Client" },
+    { name: "Deployment", status: "pending", duration: "1 day", team: "DevOps" },
+    { name: "Delivered", status: "pending", duration: "Final", team: "PM Team" }
   ];
 
-  const recentActivities = [
-    { title: 'Project Alpha launched', time: '2 hours ago', type: 'success' },
-    { title: 'New team member added', time: '5 hours ago', type: 'info' },
-    { title: 'Campaign Beta completed', time: '1 day ago', type: 'success' },
-    { title: 'Monthly report generated', time: '2 days ago', type: 'info' },
+  const milestones = [
+    { 
+      title: "Wireframes Ready", 
+      status: "completed", 
+      date: "July 15", 
+      description: "Initial site structure and layout approved" 
+    },
+    { 
+      title: "Design Mockups", 
+      status: "completed", 
+      date: "July 20", 
+      description: "High-fidelity designs for all pages" 
+    },
+    { 
+      title: "First Development Build", 
+      status: "in-progress", 
+      date: "July 25", 
+      description: "Functional website with core features" 
+    },
+    { 
+      title: "Client Review", 
+      status: "pending", 
+      date: "July 29", 
+      description: "Final review and feedback collection" 
+    }
   ];
 
-  return (
-    <Layout showMobileTabBar={false}>
-      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/10">
-        {/* Header */}
-        <div className="bg-background/80 backdrop-blur-xl border-b border-border-subtle">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold">Client Dashboard</h1>
-                <p className="text-muted-foreground">Welcome back, {clientEmail}</p>
+  const files = [
+    { name: "Design_Mockups_v2.figma", type: "design", date: "July 20", size: "2.4 MB" },
+    { name: "Brand_Guidelines.pdf", type: "docs", date: "July 18", size: "1.2 MB" },
+    { name: "Development_Build_1.zip", type: "dev", date: "July 23", size: "15.7 MB" },
+    { name: "Logo_Assets.sketch", type: "design", date: "July 16", size: "3.1 MB" }
+  ];
+
+  const messages = [
+    { 
+      sender: "Sarah Chen (PM)", 
+      message: "Hi Ajay! The development team has completed the homepage. Please review and let us know your thoughts.", 
+      time: "2 hours ago",
+      needsReply: true
+    },
+    { 
+      sender: "Ajay Kumar", 
+      message: "Looks great! Can we adjust the header font size slightly?", 
+      time: "4 hours ago",
+      needsReply: false
+    },
+    { 
+      sender: "Mike Johnson (Developer)", 
+      message: "Sure thing! I've updated the header styling. Check it out on the staging link.", 
+      time: "1 day ago",
+      needsReply: false
+    }
+  ];
+
+  const invoices = [
+    { id: "INV-001", title: "Initial Payment - 50%", amount: "$2,500", status: "paid", date: "July 10" },
+    { id: "INV-002", title: "Milestone Payment - 30%", amount: "$1,500", status: "paid", date: "July 20" },
+    { id: "INV-003", title: "Final Payment - 20%", amount: "$1,000", status: "pending", date: "July 30" }
+  ];
+
+  const navigationItems = [
+    { id: 'dashboard', icon: Home, label: 'Dashboard' },
+    { id: 'timeline', icon: Calendar, label: 'Timeline' },
+    { id: 'milestones', icon: CheckCircle, label: 'Milestones' },
+    { id: 'files', icon: Folder, label: 'Files' },
+    { id: 'communication', icon: MessageSquare, label: 'Communication' },
+    { id: 'billing', icon: CreditCard, label: 'Billing' },
+    { id: 'support', icon: HelpCircle, label: 'Support' },
+    { id: 'domains', icon: Globe, label: 'Domains' },
+    { id: 'feedback', icon: Star, label: 'Feedback' }
+  ];
+
+  const renderWelcomeBanner = () => (
+    <div className="dashboard-card bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+      <div className="flex justify-between items-start mb-4">
+        <div>
+          <h1 className="large-title text-primary">Welcome back, {projectData.clientName}!</h1>
+          <p className="body text-muted-foreground mt-1">
+            {projectData.name} • {projectData.currentPhase} Phase
+          </p>
+        </div>
+        <Button variant="outline" size="sm">
+          <HelpCircle className="h-4 w-4 mr-2" />
+          Need Help?
+        </Button>
+      </div>
+      
+      <div className="bg-accent/10 border border-accent/20 rounded-xl p-4 mt-4">
+        <div className="flex items-center gap-2">
+          <Bell className="h-4 w-4 text-accent" />
+          <span className="callout text-accent">Your review is due by {projectData.dueDate}</span>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderProjectStatusTracker = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Project Status Tracker</CardTitle>
+        <CardDescription>Current progress: {projectData.progress}% complete</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Progress value={projectData.progress} className="mb-6" />
+        
+        <div className="space-y-4">
+          {timelineSteps.map((step, index) => (
+            <div key={step.name} className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors">
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                step.status === 'completed' ? 'bg-success text-success-foreground' :
+                step.status === 'in-progress' ? 'bg-accent text-accent-foreground' :
+                'bg-muted text-muted-foreground'
+              }`}>
+                {step.status === 'completed' ? (
+                  <CheckCircle className="h-4 w-4" />
+                ) : step.status === 'in-progress' ? (
+                  <Clock className="h-4 w-4" />
+                ) : (
+                  <span className="caption-1">{index + 1}</span>
+                )}
               </div>
-              <div className="flex items-center gap-4">
-                <Button variant="ghost" size="icon">
-                  <Bell className="h-5 w-5" />
+              
+              <div className="flex-1">
+                <div className="headline">{step.name}</div>
+                <div className="caption-2">{step.duration} • {step.team}</div>
+              </div>
+              
+              <Badge className={
+                step.status === 'completed' ? 'status-completed' :
+                step.status === 'in-progress' ? 'status-in-progress' :
+                'status-pending'
+              }>
+                {step.status.replace('-', ' ')}
+              </Badge>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  const renderMilestones = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Milestones & Approvals</CardTitle>
+        <CardDescription>Key project deliverables and approval points</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {milestones.map((milestone) => (
+          <div key={milestone.title} className="border border-border rounded-xl p-4 interactive-hover">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h4 className="headline">{milestone.title}</h4>
+                <p className="caption-2 mt-1">{milestone.description}</p>
+              </div>
+              <Badge className={
+                milestone.status === 'completed' ? 'status-completed' :
+                milestone.status === 'in-progress' ? 'status-in-progress' :
+                'status-pending'
+              }>
+                {milestone.status.replace('-', ' ')}
+              </Badge>
+            </div>
+            
+            <div className="flex justify-between items-center mt-3">
+              <span className="subhead text-muted-foreground">Due: {milestone.date}</span>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm">
+                  <Eye className="h-3 w-3 mr-1" />
+                  View Details
                 </Button>
-                <Button variant="ghost" size="icon">
-                  <Settings className="h-5 w-5" />
-                </Button>
-                <Button onClick={handleLogout} variant="outline" size="sm">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </Button>
+                {milestone.status === 'in-progress' && (
+                  <Button size="sm">
+                    <CheckCircle className="h-3 w-3 mr-1" />
+                    Approve
+                  </Button>
+                )}
               </div>
             </div>
           </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+
+  const renderFiles = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <div>
+            <CardTitle className="title-2">Deliverables & Files</CardTitle>
+            <CardDescription>Project files and shared assets</CardDescription>
+          </div>
+          <Button variant="outline" size="sm">
+            <Upload className="h-4 w-4 mr-2" />
+            Upload Files
+          </Button>
         </div>
-
-        <div className="container mx-auto px-4 py-8">
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <Card key={index}>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                    <Icon className="h-4 w-4 text-muted-foreground" />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold">{stat.value}</div>
-                    <p className="text-xs text-muted-foreground mt-1">{stat.trend}</p>
-                  </CardContent>
-                </Card>
-              );
-            })}
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {files.map((file) => (
+          <div key={file.name} className="flex items-center justify-between p-3 border border-border rounded-xl hover:bg-muted/50 transition-colors">
+            <div className="flex items-center gap-3">
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                file.type === 'design' ? 'bg-primary/10 text-primary' :
+                file.type === 'dev' ? 'bg-accent/10 text-accent' :
+                'bg-muted text-muted-foreground'
+              }`}>
+                <FileText className="h-4 w-4" />
+              </div>
+              <div>
+                <div className="subhead font-medium">{file.name}</div>
+                <div className="caption-2">{file.date} • {file.size}</div>
+              </div>
+            </div>
+            <Button variant="ghost" size="sm">
+              <Download className="h-4 w-4" />
+            </Button>
           </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Recent Activities */}
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <CardTitle>Recent Activities</CardTitle>
-                <CardDescription>Your latest project updates and activities</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentActivities.map((activity, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border border-border-subtle rounded-lg">
-                      <div>
-                        <p className="font-medium">{activity.title}</p>
-                        <p className="text-sm text-muted-foreground">{activity.time}</p>
-                      </div>
-                      <Badge variant={activity.type === 'success' ? 'default' : 'secondary'}>
-                        {activity.type}
-                      </Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>Frequently used actions</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Button className="w-full justify-start" variant="outline">
-                  <FileText className="h-4 w-4 mr-2" />
-                  Create New Project
-                </Button>
-                <Button className="w-full justify-start" variant="outline">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  Schedule Meeting
-                </Button>
-                <Button className="w-full justify-start" variant="outline">
-                  <BarChart3 className="h-4 w-4 mr-2" />
-                  View Analytics
-                </Button>
-                <Button className="w-full justify-start" variant="outline">
-                  <User className="h-4 w-4 mr-2" />
-                  Manage Team
-                </Button>
-              </CardContent>
-            </Card>
+  const renderCommunication = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Communication Thread</CardTitle>
+        <CardDescription>Chat with your project team</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4 mb-4 max-h-64 overflow-y-auto">
+          {messages.map((msg, index) => (
+            <div key={index} className={`p-3 rounded-xl ${
+              msg.needsReply ? 'bg-accent/10 border border-accent/20' : 'bg-muted/50'
+            }`}>
+              <div className="flex justify-between items-start mb-2">
+                <span className="caption-1 text-primary">{msg.sender}</span>
+                <span className="caption-2">{msg.time}</span>
+              </div>
+              <p className="subhead">{msg.message}</p>
+              {msg.needsReply && (
+                <Badge variant="secondary" className="mt-2">
+                  Reply Needed
+                </Badge>
+              )}
+            </div>
+          ))}
+        </div>
+        
+        <div className="border-t pt-4">
+          <div className="flex gap-2">
+            <Textarea placeholder="Type your message..." className="resize-none" rows={2} />
+            <Button size="sm" className="shrink-0">
+              <Send className="h-4 w-4" />
+            </Button>
           </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  const renderBilling = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Billing & Payments</CardTitle>
+        <CardDescription>Invoice history and payment status</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        {invoices.map((invoice) => (
+          <div key={invoice.id} className="flex items-center justify-between p-4 border border-border rounded-xl">
+            <div>
+              <div className="headline">{invoice.title}</div>
+              <div className="caption-2">Invoice {invoice.id} • Due: {invoice.date}</div>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="title-3">{invoice.amount}</span>
+              <Badge className={invoice.status === 'paid' ? 'status-completed' : 'status-pending'}>
+                {invoice.status}
+              </Badge>
+              {invoice.status === 'pending' && (
+                <Button size="sm">Pay Now</Button>
+              )}
+            </div>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+
+  const renderQuickActions = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Quick Actions</CardTitle>
+        <CardDescription>Frequently used actions</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <Button className="w-full justify-start" variant="outline">
+          <Plus className="h-4 w-4 mr-2" />
+          Request Update
+        </Button>
+        <Button className="w-full justify-start" variant="outline">
+          <Calendar className="h-4 w-4 mr-2" />
+          Schedule Meeting
+        </Button>
+        <Button className="w-full justify-start" variant="outline">
+          <Globe className="h-4 w-4 mr-2" />
+          View Live Site
+        </Button>
+        <Button className="w-full justify-start" variant="outline">
+          <MessageSquare className="h-4 w-4 mr-2" />
+          Contact Support
+        </Button>
+      </CardContent>
+    </Card>
+  );
+
+  const renderDomainManagement = () => (
+    <Card className="dashboard-card">
+      <CardHeader>
+        <CardTitle className="title-2">Domain & Hosting</CardTitle>
+        <CardDescription>Domain status and hosting information</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex items-center justify-between p-3 bg-muted/50 rounded-xl">
+          <div>
+            <div className="headline">ajayportfolio.com</div>
+            <div className="caption-2">Primary domain</div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Shield className="h-4 w-4 text-success" />
+            <Badge className="status-completed">SSL Active</Badge>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-4">
+          <div className="p-3 border border-border rounded-xl">
+            <div className="caption-1 text-muted-foreground">Status</div>
+            <div className="headline text-success">Live</div>
+          </div>
+          <div className="p-3 border border-border rounded-xl">
+            <div className="caption-1 text-muted-foreground">Hosting</div>
+            <div className="headline">WPaaS Cloud</div>
+          </div>
+        </div>
+        
+        <Button variant="outline" className="w-full">
+          <ExternalLink className="h-4 w-4 mr-2" />
+          Visit Live Site
+        </Button>
+      </CardContent>
+    </Card>
+  );
+
+  const renderMainContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return (
+          <div className="space-y-6">
+            {renderWelcomeBanner()}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {renderProjectStatusTracker()}
+              <div className="space-y-6">
+                {renderQuickActions()}
+                {renderDomainManagement()}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {renderCommunication()}
+              {renderBilling()}
+            </div>
+          </div>
+        );
+      case 'milestones':
+        return renderMilestones();
+      case 'files':
+        return renderFiles();
+      case 'communication':
+        return renderCommunication();
+      case 'billing':
+        return renderBilling();
+      default:
+        return (
+          <Card className="dashboard-card">
+            <CardHeader>
+              <CardTitle className="title-2">Coming Soon</CardTitle>
+              <CardDescription>This section is under development</CardDescription>
+            </CardHeader>
+          </Card>
+        );
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border">
+        <div className="flex items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-4">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <span className="caption-1 font-bold text-primary-foreground">W</span>
+            </div>
+            <div>
+              <h1 className="headline">WPaaS Dashboard</h1>
+              <p className="caption-2">{clientEmail}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon">
+              <Bell className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <Settings className="h-5 w-5" />
+            </Button>
+            <Button onClick={handleLogout} variant="outline" size="sm">
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex">
+        {/* Sidebar Navigation */}
+        <nav className="hidden lg:flex flex-col w-64 border-r border-border bg-background/50 backdrop-blur-sm sticky top-[73px] h-[calc(100vh-73px)]">
+          <div className="p-6">
+            <div className="space-y-2">
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setActiveTab(item.id)}
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${
+                      isActive 
+                        ? 'bg-primary text-primary-foreground shadow-sm' 
+                        : 'hover:bg-muted text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="subhead font-medium">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </nav>
+
+        {/* Main Content */}
+        <main className="flex-1 p-6">
+          {renderMainContent()}
+        </main>
+      </div>
+
+      {/* Mobile Tab Bar */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-border">
+        <div className="grid grid-cols-4">
+          {navigationItems.slice(0, 4).map((item) => {
+            const Icon = item.icon;
+            const isActive = activeTab === item.id;
+            
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`flex flex-col items-center justify-center py-2 transition-all duration-200 ${
+                  isActive ? 'text-primary' : 'text-muted-foreground'
+                }`}
+              >
+                <Icon className={`h-5 w-5 mb-1 ${isActive ? 'scale-110' : ''}`} />
+                <span className="caption-2 font-medium">{item.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 
