@@ -736,9 +736,9 @@ const ClientDashboard = () => {
 
   return (
     <div className="h-screen bg-background flex flex-col overflow-hidden">
-      {/* Header - Fixed at top */}
-      <header className="flex-shrink-0 z-40 glassmorphism-nav border-b border-white/20">
-        <div className="flex items-center justify-between px-6 py-4">
+      {/* Header - Fixed at top with Apple HIG glassmorphism */}
+      <header className="flex-shrink-0 z-50 fixed top-0 left-0 right-0 glassmorphism-nav border-b border-white/10 supports-[backdrop-filter]:bg-background/60">
+        <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-4">
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="caption-1 font-bold text-primary-foreground">W</span>
@@ -750,10 +750,10 @@ const ClientDashboard = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="hover:bg-white/20">
               <Bell className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="hover:bg-white/20">
               <Settings className="h-5 w-5" />
             </Button>
             <Button onClick={handleLogout} variant="outline" size="sm">
@@ -764,11 +764,11 @@ const ClientDashboard = () => {
         </div>
       </header>
 
-      {/* Main Container - Takes remaining height */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar Navigation - Fixed width, no scroll */}
-        <nav className="hidden lg:flex flex-col w-64 border-r border-white/20 glassmorphism-nav flex-shrink-0">
-          <div className="p-6 overflow-y-auto">
+      {/* Main Container - Takes remaining height with top padding for fixed header */}
+      <div className="flex flex-1 overflow-hidden pt-16">
+        {/* Sidebar Navigation - Fixed width with enhanced glassmorphism */}
+        <nav className="hidden lg:flex flex-col w-64 border-r border-white/10 glassmorphism-nav flex-shrink-0">
+          <div className="p-6 pt-6 overflow-y-auto">
             <div className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
@@ -793,15 +793,15 @@ const ClientDashboard = () => {
           </div>
         </nav>
 
-        {/* Main Content - Scrollable */}
-        <main className="flex-1 overflow-y-auto p-6">
+        {/* Main Content - Scrollable with proper spacing for both desktop and mobile */}
+        <main className="flex-1 overflow-y-auto p-6 pb-20 lg:pb-6">
           {renderMainContent()}
         </main>
       </div>
 
-      {/* Mobile Tab Bar - Fixed at bottom */}
-      <div className="lg:hidden flex-shrink-0 glassmorphism-mobile border-t border-white/20">
-        <div className="grid grid-cols-4">
+      {/* Mobile Tab Bar - Fixed at bottom with enhanced glassmorphism */}
+      <div className="lg:hidden flex-shrink-0 fixed bottom-0 left-0 right-0 z-50 glassmorphism-mobile border-t border-white/10">
+        <div className="grid grid-cols-4 h-16">
           {navigationItems.slice(0, 4).map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
