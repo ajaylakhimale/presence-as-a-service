@@ -185,10 +185,10 @@ const Home = () => {
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
               </Link>
-              <Link to="/showcase">
+              <Link to="/industries">
                 <Button className="btn-secondary text-lg px-10 py-6 h-auto hover:bg-surface/80 backdrop-blur-sm">
                   <Play className="mr-3 h-6 w-6" />
-                  View Our Work
+                  Industries We Serve
                 </Button>
               </Link>
             </div>

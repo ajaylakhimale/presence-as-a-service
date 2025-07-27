@@ -10,11 +10,10 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Pricing & Plans', href: '/pricing' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Showcase', href: '/showcase' },
     { name: 'Testimonials', href: '/testimonials' },
-    { name: 'Tech Stack', href: '/tech-stack' },
-    { name: 'Live Stats', href: '/stats' },
+    { name: 'Stats', href: '/stats' },
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -26,21 +25,23 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full glassmorphism-nav border-b border-white/10 supports-[backdrop-filter]:bg-background/60">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+      <nav className="mx-auto flex max-w-7xl items-center h-16 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link 
-          to="/" 
-          className="flex items-center space-x-2 text-xl font-bold text-foreground hover:text-primary transition-colors"
-        >
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <Zap className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span>{siteConfig.name}</span>
-        </Link>
+        <div className="flex items-center flex-shrink-0 mr-10">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-2 text-xl font-bold text-foreground hover:text-primary transition-colors"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+              <Zap className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <span>{siteConfig.name}</span>
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex lg:items-center lg:space-x-1">
-          {navigation.slice(0, 6).map((item) => (
+        <div className="hidden lg:flex flex-1 justify-center items-center gap-6">
+          {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
@@ -52,12 +53,12 @@ const Header = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex lg:items-center lg:space-x-4">
+        <div className="hidden lg:flex items-center gap-4 ml-10">
           <Link 
             to="/client-login"
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
-            Client Login
+            Login
           </Link>
           <Link to="/onboarding">
             <Button className="btn-primary">
