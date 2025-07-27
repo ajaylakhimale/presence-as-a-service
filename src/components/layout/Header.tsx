@@ -53,7 +53,7 @@ const Header = () => {
         {/* Desktop CTA */}
         <div className="hidden lg:flex lg:items-center lg:space-x-4">
           <Link 
-            to="/auth/login"
+            to="/client-login"
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
           >
             Client Login
@@ -99,7 +99,7 @@ const Header = () => {
             ))}
             <div className="pt-4 space-y-2">
               <Link 
-                to="/auth/login"
+                to="/client-login"
                 className="block px-3 py-2 text-base font-medium text-foreground hover:bg-surface-secondary rounded-lg"
                 onClick={() => setIsMenuOpen(false)}
               >

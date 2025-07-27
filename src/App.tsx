@@ -9,6 +9,8 @@ import Showcase from "./pages/Showcase";
 import Testimonials from "./pages/Testimonials";
 import TechStack from "./pages/TechStack";
 import LiveStats from "./pages/LiveStats";
+import ClientLogin from "./pages/ClientLogin";
+import ClientDashboard from "./pages/ClientDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/tech-stack" element={<TechStack />} />
           <Route path="/stats" element={<LiveStats />} />
+          <Route path="/client-login" element={<ClientLogin />} />
+          <Route path="/client-dashboard" element={<ClientDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
