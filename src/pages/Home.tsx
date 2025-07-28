@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Star, Zap, Users, Clock, TrendingUp, ChevronDown, Play } from 'lucide-react';
+import { ArrowRight, CheckCircle, Star, Zap, Users, Clock, TrendingUp, ChevronDown, Play, Globe, Smartphone, Monitor, Workflow, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 
@@ -379,6 +380,101 @@ const Home = () => {
                 View All Testimonials
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Connected Systems Feature Section */}
+      <section className="py-24 bg-gradient-to-br from-primary/5 via-accent-brand/5 to-primary/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-6 animate-fade-in-up">
+                <Sparkles className="h-4 w-4 mr-2" />
+                Revolutionary Technology
+              </Badge>
+              <h2 className="text-title-1 mb-6 animate-fade-in-up [animation-delay:0.1s]">
+                One Business. One Ecosystem. Every Platform.
+              </h2>
+              <p className="text-body text-muted-foreground mb-8 animate-fade-in-up [animation-delay:0.2s]">
+                We don't just build websites — we craft a presence that dominates the digital landscape. 
+                Get a unified system with web app, mobile app, desktop app, and powerful automations.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-4 mb-8 animate-fade-in-up [animation-delay:0.3s]">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Globe className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-medium">Web App</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-accent-brand/10 rounded-lg flex items-center justify-center">
+                    <Smartphone className="h-4 w-4 text-accent-brand" />
+                  </div>
+                  <span className="text-sm font-medium">Mobile App</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-success/10 rounded-lg flex items-center justify-center">
+                    <Monitor className="h-4 w-4 text-success" />
+                  </div>
+                  <span className="text-sm font-medium">Desktop App</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Workflow className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-medium">Automations</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:0.4s]">
+                <Link to="/connected-systems">
+                  <Button className="btn-primary">
+                    Explore Connected Systems
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="/onboarding">
+                  <Button className="btn-secondary">
+                    Start My Project
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            
+            <div className="relative animate-fade-in-up [animation-delay:0.5s]">
+              <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 hover:bg-card/70 transition-all duration-300">
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="p-4 bg-primary/10 rounded-2xl">
+                      <Globe className="h-8 w-8 text-primary mb-2" />
+                      <div className="text-sm font-medium">Web Platform</div>
+                      <div className="text-xs text-muted-foreground">Responsive & Fast</div>
+                    </div>
+                    <div className="p-4 bg-success/10 rounded-2xl">
+                      <Monitor className="h-8 w-8 text-success mb-2" />
+                      <div className="text-sm font-medium">Desktop App</div>
+                      <div className="text-xs text-muted-foreground">Windows, Mac, Linux</div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-accent-brand/10 rounded-2xl">
+                      <Smartphone className="h-8 w-8 text-accent-brand mb-2" />
+                      <div className="text-sm font-medium">Mobile Apps</div>
+                      <div className="text-xs text-muted-foreground">iOS & Android</div>
+                    </div>
+                    <div className="p-4 bg-primary/10 rounded-2xl">
+                      <Workflow className="h-8 w-8 text-primary mb-2" />
+                      <div className="text-sm font-medium">Integrations</div>
+                      <div className="text-xs text-muted-foreground">500+ APIs</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-success rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-accent-brand rounded-full animate-pulse [animation-delay:0.5s]"></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
