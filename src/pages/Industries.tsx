@@ -46,63 +46,63 @@ const Industries = () => {
       title: "Education & e-Learning",
       description: "Online learning platforms (LMS), quiz & exam dashboards, course management panels",
       image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c",
-      link: "#"
+      link: "/industries/education"
     },
     {
       icon: Truck,
       title: "Logistics & Transportation",
       description: "Fleet tracking dashboards, warehouse management systems, parcel tracking web apps",
       image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-      link: "#"
+      link: "/industries/logistics"
     },
     {
       icon: UtensilsCrossed,
       title: "Food & Hospitality",
       description: "Restaurant order management, custom food ordering platforms, kitchen & inventory web apps",
       image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
-      link: "#"
+      link: "/industries/food-hospitality"
     },
     {
       icon: Home,
       title: "Real Estate & Property",
       description: "Booking and listing dashboards, property management web apps, construction project tracking",
       image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff",
-      link: "#"
+      link: "/industries/real-estate"
     },
     {
       icon: Calculator,
       title: "Finance & Insurance",
       description: "Invoice generators, expense tracking dashboards, budget tools, insurance claim management",
       image: "https://images.unsplash.com/photo-1496307653780-42ee777d4833",
-      link: "#"
+      link: "/industries/finance"
     },
     {
       icon: Rocket,
       title: "Startups & SaaS",
       description: "MVP web apps, user subscription dashboards, admin analytics portals, beta testing dashboards",
       image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-      link: "#"
+      link: "/industries/startups-saas"
     },
     {
       icon: Calendar,
       title: "Events & Bookings",
       description: "Event management dashboards, custom RSVP planners, booking panels, ticketing systems",
       image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
-      link: "#"
+      link: "/industries/events"
     },
     {
       icon: Dumbbell,
       title: "Fitness & Wellness",
       description: "Gym dashboards, diet & workout planning portals, subscription tracking, online class booking",
       image: "https://images.unsplash.com/photo-1517022812141-2362092815c9",
-      link: "#"
+      link: "/industries/fitness"
     },
     {
       icon: Megaphone,
       title: "Marketing & Agencies",
       description: "Client campaign dashboards, performance analytics tools, content management, social media systems",
       image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-      link: "#"
+      link: "/industries/marketing"
     }
   ];
 
