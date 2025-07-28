@@ -309,10 +309,10 @@ const Showcase = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary text-primary-foreground">
+      <section className="py-24 bg-gradient-primary">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-title-1 mb-6">Want One Like This?</h2>
-          <p className="text-body mb-8 opacity-90">
+          <h2 className="text-title-1 mb-6 text-black">Want One Like This?</h2>
+          <p className="text-body mb-8 text-black">
             Every project is unique, but we can create something similar for your business. 
             Let's discuss your specific needs and requirements.
           </p>
