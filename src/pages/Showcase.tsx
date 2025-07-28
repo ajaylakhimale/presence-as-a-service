@@ -318,12 +318,12 @@ const Showcase = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
-              <Button className="bg-background text-foreground hover:bg-background/90 text-lg px-8 py-4">
+              <Button className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4">
                 Start Your Project
               </Button>
             </Link>
             <Link to="/contact">
-              <Button className="border-background text-background hover:bg-background/10 text-lg px-8 py-4" variant="outline">
+              <Button className="border-white text-white hover:bg-white/10 text-lg px-8 py-4" variant="outline">
                 Discuss Your Needs
               </Button>
             </Link>
