@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
+import { Link } from "react-router-dom";
 import { 
   Building2, 
   Heart, 
@@ -23,73 +24,85 @@ const Industries = () => {
       icon: Building2,
       title: "Corporate & Enterprise",
       description: "Employee management systems, internal communication tools, inventory tracking & dashboards",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      link: "/industries/corporate-enterprise"
     },
     {
       icon: Heart,
       title: "Healthcare",
       description: "Online appointment systems, patient portals, telemedicine platforms, hospital admin dashboards",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      link: "/industries/healthcare"
     },
     {
       icon: ShoppingCart,
       title: "E-Commerce & Retail",
       description: "Custom product configurators, admin panels for inventory, vendor dashboards, analytics platforms",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+      link: "/industries/ecommerce-retail"
     },
     {
       icon: GraduationCap,
       title: "Education & e-Learning",
       description: "Online learning platforms (LMS), quiz & exam dashboards, course management panels",
-      image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c"
+      image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c",
+      link: "#"
     },
     {
       icon: Truck,
       title: "Logistics & Transportation",
       description: "Fleet tracking dashboards, warehouse management systems, parcel tracking web apps",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7"
+      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+      link: "#"
     },
     {
       icon: UtensilsCrossed,
       title: "Food & Hospitality",
       description: "Restaurant order management, custom food ordering platforms, kitchen & inventory web apps",
-      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9"
+      image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9",
+      link: "#"
     },
     {
       icon: Home,
       title: "Real Estate & Property",
       description: "Booking and listing dashboards, property management web apps, construction project tracking",
-      image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff"
+      image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff",
+      link: "#"
     },
     {
       icon: Calculator,
       title: "Finance & Insurance",
       description: "Invoice generators, expense tracking dashboards, budget tools, insurance claim management",
-      image: "https://images.unsplash.com/photo-1496307653780-42ee777d4833"
+      image: "https://images.unsplash.com/photo-1496307653780-42ee777d4833",
+      link: "#"
     },
     {
       icon: Rocket,
       title: "Startups & SaaS",
       description: "MVP web apps, user subscription dashboards, admin analytics portals, beta testing dashboards",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+      link: "#"
     },
     {
       icon: Calendar,
       title: "Events & Bookings",
       description: "Event management dashboards, custom RSVP planners, booking panels, ticketing systems",
-      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21"
+      image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
+      link: "#"
     },
     {
       icon: Dumbbell,
       title: "Fitness & Wellness",
       description: "Gym dashboards, diet & workout planning portals, subscription tracking, online class booking",
-      image: "https://images.unsplash.com/photo-1517022812141-2362092815c9"
+      image: "https://images.unsplash.com/photo-1517022812141-2362092815c9",
+      link: "#"
     },
     {
       icon: Megaphone,
       title: "Marketing & Agencies",
       description: "Client campaign dashboards, performance analytics tools, content management, social media systems",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81"
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+      link: "#"
     }
   ];
 
@@ -119,37 +132,38 @@ const Industries = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {industries.map((industry, index) => (
-              <Card 
-                key={index} 
-                className="group glassmorphism hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 cursor-pointer border-primary/10 hover:border-primary/20"
-              >
-                <CardContent className="p-6 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <industry.icon className="h-8 w-8 text-primary group-hover:text-accent transition-colors duration-300" />
-                    <div className="w-12 h-12 rounded-full overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity">
-                      <img 
-                        src={industry.image} 
-                        alt={industry.title}
-                        className="w-full h-full object-cover"
-                      />
+              <Link to={industry.link} key={index}>
+                <Card 
+                  className="group glassmorphism hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 cursor-pointer border-primary/10 hover:border-primary/20"
+                >
+                  <CardContent className="p-6 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <industry.icon className="h-8 w-8 text-primary group-hover:text-accent transition-colors duration-300" />
+                      <div className="w-12 h-12 rounded-full overflow-hidden opacity-70 group-hover:opacity-100 transition-opacity">
+                        <img 
+                          src={industry.image} 
+                          alt={industry.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold group-hover:text-primary transition-colors duration-300">
-                    {industry.title}
-                  </h3>
-                  
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {industry.description}
-                  </p>
-                  
-                  <div className="pt-2">
-                    <span className="text-sm text-primary/70 group-hover:text-primary font-medium transition-colors duration-300">
-                      See Examples →
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
+                    
+                    <h3 className="text-lg font-semibold group-hover:text-primary transition-colors duration-300">
+                      {industry.title}
+                    </h3>
+                    
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {industry.description}
+                    </p>
+                    
+                    <div className="pt-2">
+                      <span className="text-sm text-primary/70 group-hover:text-primary font-medium transition-colors duration-300">
+                        See Examples →
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

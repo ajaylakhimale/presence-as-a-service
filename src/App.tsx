@@ -16,6 +16,9 @@ import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import ConnectedSystems from "./pages/ConnectedSystems";
+import CorporateEnterprise from "./pages/industries/CorporateEnterprise";
+import Healthcare from "./pages/industries/Healthcare";
+import EcommerceRetail from "./pages/industries/EcommerceRetail";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -41,6 +44,9 @@ const App = () => (
             <Route path="/client-dashboard" element={<ClientDashboard />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/industries" element={<Industries />} />
+            <Route path="/industries/corporate-enterprise" element={<CorporateEnterprise />} />
+            <Route path="/industries/healthcare" element={<Healthcare />} />
+            <Route path="/industries/ecommerce-retail" element={<EcommerceRetail />} />
             <Route path="/connected-systems" element={<ConnectedSystems />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
