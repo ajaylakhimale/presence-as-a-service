@@ -309,24 +309,52 @@ const Showcase = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-title-1 mb-6 text-black">Want One Like This?</h2>
-          <p className="text-body mb-8 text-black">
-            Every project is unique, but we can create something similar for your business. 
-            Let's discuss your specific needs and requirements.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/onboarding">
-              <Button className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4">
-                Start Your Project
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button className="border-white text-white hover:bg-white/10 text-lg px-8 py-4" variant="outline">
-                Discuss Your Needs
-              </Button>
-            </Link>
+      <section className="py-24 bg-gradient-hero relative overflow-hidden">
+        <div className="absolute inset-0 bg-surface/30"></div>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="card-elevated bg-card/80 backdrop-blur-sm p-12 rounded-3xl">
+            <h2 className="text-title-1 mb-4 text-foreground">Want One Like This?</h2>
+            <p className="text-body text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Every project is unique, but we can create something similar for your business. 
+              Let's discuss your specific needs and requirements.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <Link to="/onboarding">
+                <Button className="btn-primary text-lg px-8 py-4 hover-scale">
+                  Start Your Project
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button className="btn-secondary text-lg px-8 py-4 hover-scale">
+                  Discuss Your Needs
+                </Button>
+              </Link>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-accent-brand rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-accent-brand-foreground font-semibold">1</span>
+                </div>
+                <h3 className="text-subhead font-medium mb-2">Share Your Vision</h3>
+                <p className="text-caption-2 text-muted-foreground">Tell us about your project goals and requirements</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-primary-foreground font-semibold">2</span>
+                </div>
+                <h3 className="text-subhead font-medium mb-2">We Design & Build</h3>
+                <p className="text-caption-2 text-muted-foreground">Our team creates your custom solution</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-success rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-success-foreground font-semibold">3</span>
+                </div>
+                <h3 className="text-subhead font-medium mb-2">Launch & Grow</h3>
+                <p className="text-caption-2 text-muted-foreground">Go live with ongoing support and maintenance</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
