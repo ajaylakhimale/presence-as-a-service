@@ -29,6 +29,8 @@ import StartupsSaaS from "./pages/industries/StartupsSaaS";
 import Events from "./pages/industries/Events";
 import Fitness from "./pages/industries/Fitness";
 import Marketing from "./pages/industries/Marketing";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -68,6 +70,8 @@ const App = () => (
             <Route path="/industries/fitness" element={<Fitness />} />
             <Route path="/industries/marketing" element={<Marketing />} />
             <Route path="/connected-systems" element={<ConnectedSystems />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
