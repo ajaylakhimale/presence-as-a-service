@@ -32,6 +32,7 @@ import Marketing from "./pages/industries/Marketing";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BlogAdmin from "./pages/BlogAdmin";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -74,6 +75,7 @@ const App = () => (
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/blogAdmin" element={<BlogAdmin />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
