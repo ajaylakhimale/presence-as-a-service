@@ -12,6 +12,7 @@ import Testimonials from "./pages/Testimonials";
 import TechStack from "./pages/TechStack";
 import LiveStats from "./pages/LiveStats";
 import ClientLogin from "./pages/ClientLogin";
+import ClientSignup from "./pages/ClientSignup";
 import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/tech-stack" element={<TechStack />} />
             <Route path="/stats" element={<LiveStats />} />
             <Route path="/client-login" element={<ClientLogin />} />
+            <Route path="/client-signup" element={<ClientSignup />} />
             <Route path="/client-dashboard" element={<ClientDashboard />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/industries" element={<Industries />} />
