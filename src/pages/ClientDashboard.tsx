@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -44,9 +44,6 @@ const ClientDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [projectFormData, setProjectFormData] = useState<ProjectFormData | null>(null);
-  const [clientFeedback, setClientFeedback] = useState<{[key: number]: string}>({});
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const inProgressRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -844,35 +841,6 @@ const ClientDashboard = () => {
       }
     ];
 
-    // Auto-scroll to in-progress item when timeline loads
-    useEffect(() => {
-      if (activeTab === 'timeline' && inProgressRef.current) {
-        setTimeout(() => {
-          inProgressRef.current?.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center',
-            inline: 'nearest'
-          });
-        }, 100);
-      }
-    }, [activeTab]);
-
-    const handleFeedbackChange = (eventIndex: number, value: string) => {
-      setClientFeedback(prev => ({
-        ...prev,
-        [eventIndex]: value
-      }));
-    };
-
-    const handleSubmitFeedback = (eventIndex: number) => {
-      const feedback = clientFeedback[eventIndex];
-      if (feedback?.trim()) {
-        // Here you would typically send the feedback to your backend
-        console.log('Feedback submitted for event', eventIndex, ':', feedback);
-        // Show success message or update UI
-      }
-    };
-
     const getStatusColor = (status: string) => {
       switch (status) {
         case 'completed':
@@ -900,7 +868,7 @@ const ClientDashboard = () => {
     };
 
     return (
-      <div className="space-y-6" ref={timelineRef}>
+      <div className="space-y-6">
         <Card className="dashboard-card">
           <CardHeader>
             <CardTitle className="title-2">Detailed Project Timeline</CardTitle>
@@ -915,26 +883,15 @@ const ClientDashboard = () => {
               
               <div className="space-y-8">
                 {timelineEvents.map((event, index) => (
-                  <div 
-                    key={index} 
-                    className="relative flex gap-6"
-                    ref={event.status === 'in-progress' ? inProgressRef : null}
-                  >
-                    {/* Timeline dot with animation for in-progress */}
-                    <div className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 ${getStatusColor(event.status)} ${
-                      event.status === 'in-progress' ? 'animate-pulse' : ''
-                    }`}>
+                  <div key={index} className="relative flex gap-6">
+                    {/* Timeline dot */}
+                    <div className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 ${getStatusColor(event.status)}`}>
                       {getStatusIcon(event.status)}
-                      {event.status === 'in-progress' && (
-                        <div className="absolute inset-0 rounded-full border-2 border-accent animate-ping"></div>
-                      )}
                     </div>
                     
                     {/* Event content */}
                     <div className="flex-1 pb-8">
-                      <Card className={`border ${getStatusColor(event.status)} ${
-                        event.status === 'in-progress' ? 'ring-2 ring-accent/20 shadow-lg' : ''
-                      }`}>
+                      <Card className={`border ${getStatusColor(event.status)}`}>
                         <CardContent className="p-6">
                           <div className="flex items-start justify-between mb-4">
                             <div>
@@ -945,11 +902,6 @@ const ClientDashboard = () => {
                                 <span className="caption-2 text-muted-foreground">
                                   {event.date} • {event.time}
                                 </span>
-                                {event.status === 'in-progress' && (
-                                  <Badge className="bg-accent/10 text-accent animate-fade-in">
-                                    Current
-                                  </Badge>
-                                )}
                               </div>
                               <h3 className="title-3 mb-2">{event.title}</h3>
                               <p className="body text-muted-foreground">{event.description}</p>
@@ -1001,51 +953,6 @@ const ClientDashboard = () => {
                             <div className="flex items-center gap-2">
                               <Globe className="h-4 w-4 text-muted-foreground" />
                               <span className="caption-2">Location: {event.location}</span>
-                            </div>
-                          </div>
-
-                          {/* Client Feedback Section */}
-                          <div className="mt-6 pt-4 border-t bg-muted/20 rounded-lg p-4">
-                            <div className="flex items-center gap-2 mb-3">
-                              <MessageSquare className="h-4 w-4 text-primary" />
-                              <h4 className="caption-1 font-medium text-primary">Client Feedback & Notes</h4>
-                            </div>
-                            <div className="space-y-3">
-                              <Textarea
-                                placeholder={
-                                  event.status === 'completed' 
-                                    ? "Share your thoughts on this completed task..."
-                                    : event.status === 'in-progress'
-                                    ? "Add your input or feedback for the current task..."
-                                    : "Add notes or requirements for this upcoming task..."
-                                }
-                                value={clientFeedback[index] || ''}
-                                onChange={(e) => handleFeedbackChange(index, e.target.value)}
-                                rows={2}
-                                className="resize-none"
-                              />
-                              <div className="flex gap-2">
-                                <Button 
-                                  size="sm" 
-                                  onClick={() => handleSubmitFeedback(index)}
-                                  disabled={!clientFeedback[index]?.trim()}
-                                >
-                                  <Send className="h-3 w-3 mr-1" />
-                                  Submit Feedback
-                                </Button>
-                                {event.status === 'in-progress' && (
-                                  <Button variant="outline" size="sm">
-                                    <AlertCircle className="h-3 w-3 mr-1" />
-                                    Request Update
-                                  </Button>
-                                )}
-                                {event.status === 'upcoming' && (
-                                  <Button variant="outline" size="sm">
-                                    <Calendar className="h-3 w-3 mr-1" />
-                                    Schedule Meeting
-                                  </Button>
-                                )}
-                              </div>
                             </div>
                           </div>
                         </CardContent>
