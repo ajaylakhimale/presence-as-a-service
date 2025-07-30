@@ -31,6 +31,7 @@ import Fitness from "./pages/industries/Fitness";
 import Marketing from "./pages/industries/Marketing";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
