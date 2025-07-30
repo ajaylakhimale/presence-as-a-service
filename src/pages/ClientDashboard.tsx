@@ -693,6 +693,340 @@ const ClientDashboard = () => {
     </div>
   );
 
+  const renderDetailedTimeline = () => {
+    const timelineEvents = [
+      {
+        date: "July 8, 2024",
+        time: "9:00 AM",
+        phase: "Project Initiation",
+        status: "completed",
+        title: "Project Kickoff Meeting",
+        description: "Initial consultation and requirement gathering session completed",
+        participants: ["Sarah Chen (PM)", "Ajay Kumar (Client)", "Design Team Lead"],
+        deliverables: ["Project brief", "Timeline overview"],
+        duration: "2 hours",
+        location: "Virtual Meeting"
+      },
+      {
+        date: "July 9, 2024",
+        time: "10:30 AM",
+        phase: "Discovery",
+        status: "completed",
+        title: "Stakeholder Interviews",
+        description: "Conducted interviews with key stakeholders to understand business goals",
+        participants: ["Sarah Chen (PM)", "Business Analyst", "Ajay Kumar"],
+        deliverables: ["Stakeholder requirements document"],
+        duration: "3 hours",
+        location: "Client Office"
+      },
+      {
+        date: "July 12, 2024",
+        time: "2:00 PM",
+        phase: "Design",
+        status: "completed",
+        title: "Wireframe Approval",
+        description: "Initial wireframes and site architecture approved by client",
+        participants: ["UX Designer", "Ajay Kumar", "Sarah Chen"],
+        deliverables: ["Approved wireframes", "Site map"],
+        duration: "1.5 hours",
+        location: "Virtual Meeting"
+      },
+      {
+        date: "July 15, 2024",
+        time: "11:00 AM",
+        phase: "Design",
+        status: "completed",
+        title: "Design System Creation",
+        description: "Brand guidelines and design system established",
+        participants: ["UI Designer", "Brand Strategist"],
+        deliverables: ["Design system", "Brand guidelines"],
+        duration: "4 hours",
+        location: "Design Studio"
+      },
+      {
+        date: "July 18, 2024",
+        time: "3:30 PM",
+        phase: "Design",
+        status: "completed",
+        title: "High-Fidelity Mockups",
+        description: "Complete visual designs for all pages delivered and approved",
+        participants: ["Design Team", "Ajay Kumar", "Sarah Chen"],
+        deliverables: ["Hi-fi mockups", "Design specifications"],
+        duration: "2 hours",
+        location: "Virtual Presentation"
+      },
+      {
+        date: "July 22, 2024",
+        time: "9:30 AM",
+        phase: "Development",
+        status: "completed",
+        title: "Development Environment Setup",
+        description: "Project structure and development environment configured",
+        participants: ["Lead Developer", "DevOps Engineer"],
+        deliverables: ["Development setup", "Git repository"],
+        duration: "3 hours",
+        location: "Development Office"
+      },
+      {
+        date: "July 24, 2024",
+        time: "2:00 PM",
+        phase: "Development",
+        status: "in-progress",
+        title: "Frontend Development - Phase 1",
+        description: "Core components and homepage implementation in progress",
+        participants: ["Frontend Team", "QA Tester"],
+        deliverables: ["Homepage build", "Component library"],
+        duration: "Ongoing",
+        location: "Development Office"
+      },
+      {
+        date: "July 26, 2024",
+        time: "4:00 PM",
+        phase: "Development",
+        status: "upcoming",
+        title: "Client Review Session",
+        description: "Review first development build and gather feedback",
+        participants: ["Ajay Kumar", "Development Team", "Sarah Chen"],
+        deliverables: ["Feedback report", "Change requests"],
+        duration: "1.5 hours",
+        location: "Virtual Meeting"
+      },
+      {
+        date: "July 29, 2024",
+        time: "10:00 AM",
+        phase: "Testing",
+        status: "upcoming",
+        title: "Quality Assurance Testing",
+        description: "Comprehensive testing across devices and browsers",
+        participants: ["QA Team", "Lead Developer"],
+        deliverables: ["Test report", "Bug fixes"],
+        duration: "2 days",
+        location: "Testing Lab"
+      },
+      {
+        date: "July 31, 2024",
+        time: "1:00 PM",
+        phase: "Review",
+        status: "upcoming",
+        title: "Final Client Approval",
+        description: "Final review and approval before deployment",
+        participants: ["Ajay Kumar", "Project Team", "Sarah Chen"],
+        deliverables: ["Approval sign-off", "Go-live checklist"],
+        duration: "1 hour",
+        location: "Virtual Meeting"
+      },
+      {
+        date: "August 2, 2024",
+        time: "9:00 AM",
+        phase: "Deployment",
+        status: "upcoming",
+        title: "Production Deployment",
+        description: "Deploy website to production environment",
+        participants: ["DevOps Team", "Lead Developer"],
+        deliverables: ["Live website", "Deployment report"],
+        duration: "4 hours",
+        location: "Data Center"
+      },
+      {
+        date: "August 5, 2024",
+        time: "11:00 AM",
+        phase: "Delivery",
+        status: "upcoming",
+        title: "Project Handover",
+        description: "Complete project documentation and training session",
+        participants: ["Sarah Chen", "Support Team", "Ajay Kumar"],
+        deliverables: ["Documentation", "Training materials", "Support access"],
+        duration: "2 hours",
+        location: "Virtual Meeting"
+      }
+    ];
+
+    const getStatusColor = (status: string) => {
+      switch (status) {
+        case 'completed':
+          return 'text-success bg-success/10 border-success/20';
+        case 'in-progress':
+          return 'text-accent bg-accent/10 border-accent/20';
+        case 'upcoming':
+          return 'text-muted-foreground bg-muted/10 border-muted/20';
+        default:
+          return 'text-muted-foreground bg-muted/10 border-muted/20';
+      }
+    };
+
+    const getStatusIcon = (status: string) => {
+      switch (status) {
+        case 'completed':
+          return <CheckCircle className="h-5 w-5" />;
+        case 'in-progress':
+          return <Clock className="h-5 w-5" />;
+        case 'upcoming':
+          return <Calendar className="h-5 w-5" />;
+        default:
+          return <Calendar className="h-5 w-5" />;
+      }
+    };
+
+    return (
+      <div className="space-y-6">
+        <Card className="dashboard-card">
+          <CardHeader>
+            <CardTitle className="title-2">Detailed Project Timeline</CardTitle>
+            <CardDescription>
+              Complete timeline of all project activities, meetings, and deliverables
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-6 top-0 bottom-0 w-px bg-border"></div>
+              
+              <div className="space-y-8">
+                {timelineEvents.map((event, index) => (
+                  <div key={index} className="relative flex gap-6">
+                    {/* Timeline dot */}
+                    <div className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 ${getStatusColor(event.status)}`}>
+                      {getStatusIcon(event.status)}
+                    </div>
+                    
+                    {/* Event content */}
+                    <div className="flex-1 pb-8">
+                      <Card className={`border ${getStatusColor(event.status)}`}>
+                        <CardContent className="p-6">
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <div className="flex items-center gap-3 mb-2">
+                                <Badge variant="outline" className="text-xs">
+                                  {event.phase}
+                                </Badge>
+                                <span className="caption-2 text-muted-foreground">
+                                  {event.date} • {event.time}
+                                </span>
+                              </div>
+                              <h3 className="title-3 mb-2">{event.title}</h3>
+                              <p className="body text-muted-foreground">{event.description}</p>
+                            </div>
+                            <Badge className={
+                              event.status === 'completed' ? 'status-completed' :
+                              event.status === 'in-progress' ? 'status-in-progress' :
+                              'status-pending'
+                            }>
+                              {event.status.replace('-', ' ')}
+                            </Badge>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div>
+                              <h4 className="caption-1 font-medium text-muted-foreground mb-2">Participants</h4>
+                              <div className="space-y-1">
+                                {event.participants.map((participant, idx) => (
+                                  <div key={idx} className="flex items-center gap-2">
+                                    <Avatar className="h-6 w-6">
+                                      <AvatarFallback className="text-xs">
+                                        {participant.split(' ').map(n => n[0]).join('')}
+                                      </AvatarFallback>
+                                    </Avatar>
+                                    <span className="caption-2">{participant}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <h4 className="caption-1 font-medium text-muted-foreground mb-2">Deliverables</h4>
+                              <div className="space-y-1">
+                                {event.deliverables.map((deliverable, idx) => (
+                                  <div key={idx} className="flex items-center gap-2">
+                                    <FileText className="h-4 w-4 text-muted-foreground" />
+                                    <span className="caption-2">{deliverable}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-6 mt-4 pt-4 border-t">
+                            <div className="flex items-center gap-2">
+                              <Clock className="h-4 w-4 text-muted-foreground" />
+                              <span className="caption-2">Duration: {event.duration}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Globe className="h-4 w-4 text-muted-foreground" />
+                              <span className="caption-2">Location: {event.location}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        {/* Timeline Summary Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <Card className="dashboard-card">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-success/10 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="h-4 w-4 text-success" />
+                </div>
+                <div>
+                  <div className="title-3">6</div>
+                  <div className="caption-2 text-muted-foreground">Completed</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="dashboard-card">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">
+                  <Clock className="h-4 w-4 text-accent" />
+                </div>
+                <div>
+                  <div className="title-3">1</div>
+                  <div className="caption-2 text-muted-foreground">In Progress</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="dashboard-card">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-muted/10 rounded-lg flex items-center justify-center">
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                </div>
+                <div>
+                  <div className="title-3">5</div>
+                  <div className="caption-2 text-muted-foreground">Upcoming</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="dashboard-card">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <span className="caption-1 font-bold text-primary">12</span>
+                </div>
+                <div>
+                  <div className="title-3">Total</div>
+                  <div className="caption-2 text-muted-foreground">Events</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  };
+
   const renderMainContent = () => {
     switch (activeTab) {
       case 'dashboard':
@@ -712,6 +1046,8 @@ const ClientDashboard = () => {
             </div>
           </div>
         );
+      case 'timeline':
+        return renderDetailedTimeline();
       case 'milestones':
         return renderMilestones();
       case 'files':
