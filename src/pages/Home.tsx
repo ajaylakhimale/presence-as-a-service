@@ -180,16 +180,15 @@ const Home = () => {
             
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
-                Pay-As-You-Need
+              Your Full-Time Dev Team
               </span>
               <span className="block text-2xl sm:text-4xl lg:text-5xl xl:text-6xl mt-4 text-muted-foreground font-medium">
-                Web Presence
+              Only When You Need It.
               </span>
             </h1>
             
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-              Professional websites and web applications delivered fast, with transparent pricing 
-              and no long-term contracts. Scale your web presence as your business grows.
+            Custom websites and web apps, delivered fast with transparent pricing and no long-term contracts. Pay only for what you use. Scale your digital presence, on your terms.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
@@ -202,7 +201,7 @@ const Home = () => {
               <Link to="/industries">
                 <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   <Play className="mr-3 h-6 w-6" />
-                  Industries We Serve
+                  Explore Solutions
                 </Button>
               </Link>
             </div>
