@@ -8,7 +8,7 @@ const CorporateEnterprise = () => {
   const examples = [
     {
       icon: Users,
-      title: "Employee Management System",
+      title: "employee Management System",
       description: "Comprehensive HR dashboard with employee profiles, performance tracking, and leave management.",
       features: ["Employee directory", "Performance reviews", "Time tracking", "Leave calendar"]
     },
@@ -53,23 +53,23 @@ const CorporateEnterprise = () => {
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_70%)]" />
-        
+
         <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8">
           <div className="flex items-center justify-center mb-6">
             <Building2 className="h-16 w-16 text-primary" />
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Corporate & Enterprise{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Solutions
             </span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl mx-auto">
             Transform your enterprise operations with custom web applications designed for scale, security, and efficiency.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
             <Button size="lg" asChild>
               <Link to="/onboarding">
@@ -95,7 +95,7 @@ const CorporateEnterprise = () => {
               Custom applications tailored to your enterprise needs
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {examples.map((example, index) => (
               <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-primary/10 hover:border-primary/20">
@@ -135,7 +135,7 @@ const CorporateEnterprise = () => {
               Built for the demands of modern enterprise environments
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-center space-x-3">
@@ -156,7 +156,7 @@ const CorporateEnterprise = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Let's discuss your specific requirements and build a solution that scales with your business.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link to="/onboarding">
