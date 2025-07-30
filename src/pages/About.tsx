@@ -93,28 +93,55 @@ const About = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-accent-brand/5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <Badge variant="outline" className="mb-6 text-primary border-primary/30">
-            More Than a Service — We're Your Tech Team
-          </Badge>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 animate-fade-in-up">
-            Your On-Demand
-            <span className="block text-primary">Product Team</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-fade-in-up">
-            We're not just developers. We are your <span className="font-semibold text-foreground">full-time tech team</span> — without the full-time cost.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up">
-            <Button size="lg" className="btn-primary">
-              Start Building Today
-            </Button>
-            <Button variant="outline" size="lg">
-              See How We Work
-            </Button>
+      <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 min-h-screen flex items-center">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
+        
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-24 sm:py-32 lg:px-8 relative z-10 w-full">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center rounded-full bg-primary/10 px-6 py-2 text-sm font-medium text-primary ring-1 ring-primary/20 mb-8 animate-fade-in-up">
+              <Users className="h-4 w-4 mr-2" />
+              More Than a Service — We're Your Tech Team
+            </div>
+            
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
+              <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
+                Your On-Demand
+              </span>
+              <span className="block text-primary">Product Team</span>
+            </h1>
+            
+            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
+              We're not just developers. We are your <span className="font-semibold text-foreground">full-time tech team</span> — without the full-time cost.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
+              <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                Start Building Today
+                <ArrowRight className="ml-3 h-6 w-6" />
+              </Button>
+              <Button variant="outline" className="text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                See How We Work
+              </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground animate-fade-in-up [animation-delay:0.4s] px-4">
+              <div className="flex items-center gap-2">
+                <Zap className="h-5 w-5 text-accent-brand" />
+                Ship Fast
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-success" />
+                14 Days Free Support
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-muted-foreground" />
+                Pay Per Update
+              </div>
+            </div>
           </div>
         </div>
       </section>
