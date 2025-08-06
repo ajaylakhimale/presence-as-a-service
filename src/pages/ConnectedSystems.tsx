@@ -1,6 +1,6 @@
-import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Smartphone, Monitor, Globe, Zap, RefreshCw, BarChart3, Workflow, Star, Users, TrendingUp, ChevronDown, ExternalLink, Play, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Smartphone, Monitor, Globe, Zap, RefreshCw, BarChart3, Workflow, Star, Users, TrendingUp, ExternalLink, Play, Sparkles, Crown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -9,7 +9,6 @@ import Layout from '@/components/layout/Layout';
 import { Helmet } from 'react-helmet-async';
 
 const ConnectedSystems = () => {
-  const [openPlan, setOpenPlan] = useState<string | null>(null);
 
   const systemParts = [
     {
@@ -75,9 +74,11 @@ const ConnectedSystems = () => {
     {
       id: 'launch',
       name: 'Launch',
-      price: '$2,999',
+      icon: Zap,
+      price: 'From $2,999',
       period: 'one-time',
       description: 'Perfect for startups and small businesses getting started',
+      color: 'border-primary',
       features: [
         'Web App (Progressive Web App)',
         'Mobile App (iOS & Android)',
@@ -88,14 +89,17 @@ const ConnectedSystems = () => {
         'App store submission',
         '30-day warranty'
       ],
+      deliveryTime: '4-6 weeks',
       popular: false
     },
     {
       id: 'pro',
       name: 'Pro',
-      price: '$7,999',
+      icon: Sparkles,
+      price: 'From $7,999',
       period: 'one-time',
       description: 'For growing businesses that need advanced features',
+      color: 'border-accent-brand',
       features: [
         'Everything in Launch',
         'Desktop App (Windows, Mac, Linux)',
@@ -108,14 +112,17 @@ const ConnectedSystems = () => {
         '90-day warranty',
         'Custom branding'
       ],
+      deliveryTime: '6-10 weeks',
       popular: true
     },
     {
       id: 'omni',
       name: 'OmniSuite',
-      price: 'Custom',
+      icon: Crown,
+      price: 'Custom Quote',
       period: 'pricing',
       description: 'Enterprise solution with unlimited possibilities',
+      color: 'border-purple-500',
       features: [
         'Everything in Pro',
         'Unlimited integrations',
@@ -128,6 +135,7 @@ const ConnectedSystems = () => {
         '1-year warranty',
         'Ongoing maintenance included'
       ],
+      deliveryTime: '10-16 weeks',
       popular: false
     }
   ];
@@ -388,50 +396,51 @@ const ConnectedSystems = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {plans.map((plan, index) => (
-              <Card key={plan.id} className={`card-elevated relative transition-all duration-300 hover:scale-105 animate-fade-in-up ${plan.popular ? 'ring-2 ring-primary' : ''}`} style={{ animationDelay: `${index * 0.1}s` }}>
-                {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground">Most Popular</Badge>
-                  </div>
-                )}
-                <CardHeader className="text-center">
-                  <CardTitle className="text-title-2">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    {plan.price}
-                    {plan.period !== 'pricing' && <span className="text-lg text-muted-foreground">/{plan.period}</span>}
-                  </div>
-                  <p className="text-body text-muted-foreground">{plan.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4 mb-6">
-                    <Button 
-                      variant="outline" 
-                      className="w-full flex items-center justify-between"
-                      onClick={() => setOpenPlan(openPlan === plan.id ? null : plan.id)}
-                    >
-                      View Features
-                      <ChevronDown className={`h-4 w-4 transition-transform ${openPlan === plan.id ? 'rotate-180' : ''}`} />
-                    </Button>
-                    {openPlan === plan.id && (
-                      <ul className="space-y-2 animate-fade-in">
-                        {plan.features.map((feature, i) => (
-                          <li key={i} className="flex items-center text-sm">
-                            <Check className="h-4 w-4 text-success mr-2 flex-shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <Link to="/onboarding">
-                    <Button className={plan.popular ? 'btn-primary w-full' : 'btn-secondary w-full'}>
-                      {plan.price === 'Custom' ? 'Get Quote' : 'Get Started'}
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+            {plans.map((plan, index) => {
+              const Icon = plan.icon;
+              return (
+                <Card 
+                  key={plan.id} 
+                  className={`card-elevated relative ${plan.popular ? 'ring-2 ring-accent-brand' : ''} animate-fade-in-up`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <Badge className="bg-accent-brand text-accent-brand-foreground">
+                        Most Popular
+                      </Badge>
+                    </div>
+                  )}
+                  <CardHeader className="text-center pb-4">
+                    <div className={`mx-auto w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 ${plan.color}`}>
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-title-3">{plan.name}</CardTitle>
+                    <div className="text-title-2 font-bold text-primary">{plan.price}</div>
+                    <p className="text-subhead text-muted-foreground">{plan.description}</p>
+                    <div className="text-callout text-accent-brand">
+                      ⚡ {plan.deliveryTime}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <ul className="space-y-3 mb-6">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex items-start space-x-3">
+                          <Check className="h-4 w-4 text-success mt-0.5 flex-shrink-0" />
+                          <span className="text-subhead">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link to="/onboarding">
+                      <Button className={plan.popular ? 'btn-primary w-full' : 'btn-secondary w-full'}>
+                        {plan.price === 'Custom Quote' ? 'Get Quote' : 'Start Project'}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
