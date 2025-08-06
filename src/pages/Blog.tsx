@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar, Clock, ArrowRight, TrendingUp, Users, Zap } from 'lucide-react';
 import { siteConfig } from '@/config/site';
+import ParticleEffect from '@/components/ParticleEffect';
 
 interface BlogPost {
   id: string;
@@ -153,6 +154,9 @@ const Blog = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10" />
+        
+        {/* Particle Effects */}
+        <ParticleEffect />
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="text-center">
             <div className="flex justify-center mb-6">

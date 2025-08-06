@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import Layout from '@/components/layout/Layout';
+import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
@@ -169,6 +170,9 @@ const Home = () => {
         {/* Background Elements */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
+        
+        {/* Particle Effects */}
+        <ParticleEffect />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-24 sm:py-32 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">

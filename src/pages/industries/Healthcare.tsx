@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
+import ParticleEffect from '@/components/ParticleEffect';
 import { Heart, Calendar, UserCheck, Video, BarChart3, Pill, ArrowRight, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -53,6 +54,9 @@ const Healthcare = () => {
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_70%)]" />
+        
+        {/* Particle Effects */}
+        <ParticleEffect />
         
         <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8">
           <div className="flex items-center justify-center mb-6">

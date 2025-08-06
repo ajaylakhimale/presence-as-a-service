@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import Layout from '@/components/layout/Layout';
+import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 
 const Testimonials = () => {
@@ -149,8 +150,11 @@ const Testimonials = () => {
         <meta name="twitter:image" content="https://macro-presence.dev/og-testimonials.jpg" />
       </Helmet>
       {/* Hero Section */}
-      <section className="bg-gradient-hero py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative bg-gradient-hero py-24 overflow-hidden">
+        {/* Particle Effects */}
+        <ParticleEffect />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-large-title mb-6">
               Client <span className="text-primary">Testimonials</span>

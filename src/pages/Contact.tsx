@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import Layout from '@/components/layout/Layout';
+import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
 
@@ -113,6 +114,9 @@ const Contact = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 pt-24 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
+        
+        {/* Particle Effects */}
+        <ParticleEffect />
         
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">

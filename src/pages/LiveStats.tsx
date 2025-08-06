@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import Layout from '@/components/layout/Layout';
+import ParticleEffect from '@/components/ParticleEffect';
 
 const LiveStats = () => {
   const [stats, setStats] = useState({
@@ -93,8 +94,11 @@ const LiveStats = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-gradient-hero py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="relative bg-gradient-hero py-24 overflow-hidden">
+        {/* Particle Effects */}
+        <ParticleEffect />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-large-title mb-6">
               Live <span className="text-primary">Statistics</span>
