@@ -187,45 +187,11 @@ interface AddOnPricing {
 - Session management
 - Password reset functionality
 
-### 2.2 Client Portal
-**Current State**: Basic localStorage authentication
-**Required Backend Features**:
-- Secure client authentication
-- Client dashboard
-- Project progress tracking
-- Document sharing
-- Communication system
-- Invoice management
-- Support ticket system
 
-**Data Structure**:
-```typescript
-interface Client {
-  id: string;
-  email: string;
-  name: string;
-  company: string;
-  phone?: string;
-  address?: Address;
-  projects: Project[];
-  invoices: Invoice[];
-  supportTickets: SupportTicket[];
-  createdAt: Date;
-  lastLoginAt?: Date;
-  status: 'active' | 'inactive' | 'suspended';
-}
-
-interface Project {
-  id: string;
-  name: string;
-  status: 'onboarding' | 'design' | 'development' | 'testing' | 'review' | 'deployed' | 'completed';
-  progress: number;
-  timeline: TimelineStep[];
-  milestones: Milestone[];
-  documents: Document[];
-  communications: Communication[];
-}
-```
+<!--
+### 2.2 Client Portal (Feature deferred)
+All requirements and data structures for client login and client dashboard are omitted for now.
+-->
 
 ## 3. Form Management & Lead Generation
 

@@ -66,7 +66,7 @@ const ClientSignup = () => {
                     />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -78,7 +78,7 @@ const ClientSignup = () => {
                     placeholder="john@example.com"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="password">Password</Label>
                   <Input
@@ -90,7 +90,7 @@ const ClientSignup = () => {
                     placeholder="••••••••"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword">Confirm Password</Label>
                   <Input
@@ -102,18 +102,18 @@ const ClientSignup = () => {
                     placeholder="••••••••"
                   />
                 </div>
-                
+
                 <Button type="submit" className="w-full btn-primary">
                   Create Account
                 </Button>
               </form>
-              
+
               <div className="mt-6 text-center space-y-2">
                 <p className="text-caption-2 text-muted-foreground">
                   Already have an account?{' '}
-                  <Link to="/client-login" className="text-primary hover:underline">
+                  {/* <Link to="/client-login" className="text-primary hover:underline">
                     Sign in
-                  </Link>
+                  </Link> */}
                 </p>
                 <Link to="/" className="text-caption-2 text-muted-foreground hover:text-foreground">
                   ← Back to Home

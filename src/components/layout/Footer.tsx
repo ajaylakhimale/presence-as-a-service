@@ -23,7 +23,7 @@ const Footer = () => {
     Support: [
       { name: 'Help Center', href: '/help' },
       { name: 'Testimonials', href: '/testimonials' },
-      { name: 'Client Login', href: '/auth/login' },
+      // { name: 'Client Login', href: '/auth/login' },
       { name: 'System Status', href: '/status' },
     ],
     Legal: [

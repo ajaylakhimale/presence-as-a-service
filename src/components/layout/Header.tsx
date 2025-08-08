@@ -54,12 +54,6 @@ const Header = () => {
 
         {/* Right: Desktop CTA */}
         <div className="hidden lg:flex items-center gap-4">
-          <Link
-            to="/client-login"
-            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-          >
-            Login
-          </Link>
           <Link to="/onboarding">
             <Button className="btn-primary">
               Get Started
@@ -82,44 +76,39 @@ const Header = () => {
       </nav>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="lg:hidden glassmorphism-mobile border-t border-white/20">
-          <div className="space-y-1 px-6 py-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${
-                  isActive(item.href)
+      {
+        isMenuOpen && (
+          <div className="lg:hidden glassmorphism-mobile border-t border-white/20">
+            <div className="space-y-1 px-6 py-4">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${isActive(item.href)
                     ? 'bg-primary text-primary-foreground'
                     : 'text-foreground hover:bg-white/20'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-4 space-y-2">
-              <Link
-                to="/client-login"
-                className="block px-3 py-2 text-base font-medium text-foreground hover:bg-white/20 rounded-lg"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Client Login
-              </Link>
-              <Link
-                to="/onboarding"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Button className="btn-primary w-full">
-                  Get Started
-                </Button>
-              </Link>
+                    }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="pt-4 space-y-2">
+                {/* Client Login link removed for now */}
+                <Link
+                  to="/onboarding"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Button className="btn-primary w-full">
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </header>
+        )
+      }
+    </header >
   );
 };
 

@@ -39,7 +39,7 @@ const Home = () => {
     const interval = setInterval(() => {
       currentStep++;
       const progress = currentStep / steps;
-      
+
       setStats({
         projects: Math.floor(targetStats.projects * progress),
         clients: Math.floor(targetStats.clients * progress),
@@ -170,31 +170,31 @@ const Home = () => {
         {/* Background Elements */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
-        
+
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-24 sm:py-32 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center rounded-full bg-primary/10 px-6 py-2 text-sm font-medium text-primary ring-1 ring-primary/20 mb-8 animate-fade-in-up">
               <Zap className="h-4 w-4 mr-2" />
-              Trusted by 250+ Businesses
+              Trusted Platform
             </div>
-            
+
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
-              Your Full-Time Dev Team
+                Your Full-Time Dev Team
               </span>
               <span className="block text-2xl sm:text-4xl lg:text-5xl xl:text-6xl mt-4 text-muted-foreground font-medium">
-              Only When You Need It.
+                Only When You Need It.
               </span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-            Custom websites and web apps, delivered fast with transparent pricing and no long-term contracts. Pay only for what you use. Scale your digital presence, on your terms.
+              Custom websites and web apps, delivered fast with transparent pricing and no long-term contracts. Pay only for what you use. Scale your digital presence, on your terms.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
               <Link to="/onboarding">
                 <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
@@ -209,7 +209,7 @@ const Home = () => {
                 </Button>
               </Link>
             </div>
-            
+
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground animate-fade-in-up [animation-delay:0.4s] px-4">
               <div className="flex items-center gap-2">
@@ -226,7 +226,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Enhanced Stats */}
           <div className="mt-24 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 animate-fade-in-up [animation-delay:0.5s] px-4">
             <div className="text-center group">
@@ -286,11 +286,11 @@ const Home = () => {
               Our streamlined process ensures fast delivery without compromising quality
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Connecting lines for desktop */}
             <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 z-0" />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-8 relative">
               {processSteps.map((step, index) => (
                 <div key={step.step} className="text-center animate-fade-in-up relative" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -352,7 +352,7 @@ const Home = () => {
               Join hundreds of satisfied clients who trust WPaaS for their web presence
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((testimonial, index) => (
               <Card key={testimonial.name} className="card-elevated animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -376,7 +376,7 @@ const Home = () => {
               </Card>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
             <Link to="/testimonials">
               <Button className="btn-secondary">
@@ -400,10 +400,10 @@ const Home = () => {
                 One Business. One Ecosystem. Every Platform.
               </h2>
               <p className="text-body text-muted-foreground mb-8 animate-fade-in-up [animation-delay:0.2s]">
-                We don't just build websites — we craft a presence that dominates the digital landscape. 
+                We don't just build websites — we craft a presence that dominates the digital landscape.
                 Get a unified system with web app, mobile app, desktop app, and powerful automations.
               </p>
-              
+
               <div className="grid grid-cols-2 gap-4 mb-8 animate-fade-in-up [animation-delay:0.3s]">
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -430,7 +430,7 @@ const Home = () => {
                   <span className="text-sm font-medium">Automations</span>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:0.4s]">
                 <Link to="/connected-systems">
                   <Button className="btn-primary">
@@ -445,7 +445,7 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div className="relative animate-fade-in-up [animation-delay:0.5s]">
               <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 hover:bg-card/70 transition-all duration-300">
                 <div className="grid grid-cols-2 gap-6">
@@ -491,7 +491,7 @@ const Home = () => {
               Everything you need to know about our services
             </p>
           </div>
-          
+
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="card-surface p-6">
@@ -511,11 +511,11 @@ const Home = () => {
       <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-accent-brand relative overflow-hidden">
         {/* Background overlay for better text contrast */}
         <div className="absolute inset-0 bg-background/5 backdrop-blur-sm" />
-        
+
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-title-1 mb-6 text-white font-bold drop-shadow-lg">Ready to Transform Your Web Presence?</h2>
           <p className="text-body mb-8 text-white/90 drop-shadow-md max-w-2xl mx-auto">
-            Join hundreds of businesses who trust WPaaS for their web development needs. 
+            Join hundreds of businesses who trust WPaaS for their web development needs.
             No contracts, no surprises – just great results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

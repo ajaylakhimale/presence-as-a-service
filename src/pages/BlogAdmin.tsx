@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+// import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
+import ReactQuill from 'react-quill';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
@@ -89,7 +92,7 @@ const BlogAdmin = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.title || !formData.excerpt || !formData.content || !formData.category) {
       toast({
         title: "Error",
@@ -131,7 +134,7 @@ const BlogAdmin = () => {
 
     setBlogPosts(updatedPosts);
     localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
-    
+
     // Reset form
     setFormData({
       title: '',
@@ -345,13 +348,22 @@ const BlogAdmin = () => {
 
                   <div className="space-y-2">
                     <Label htmlFor="content">Content *</Label>
-                    <Textarea
+                    <ReactQuill
                       id="content"
-                      value={formData.content}
-                      onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                      placeholder="Full blog post content"
-                      rows={10}
-                      required
+                      theme="snow"
+                      value={formData.content || ''}
+                      onChange={(value) => setFormData({ ...formData, content: value })}
+                      placeholder="Write your blog post here..."
+                      style={{ minHeight: '200px', background: 'white' }}
+                      modules={{
+                        toolbar: [
+                          [{ 'header': [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+                          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                          ['link', 'image'],
+                          ['clean']
+                        ]
+                      }}
                     />
                   </div>
 
