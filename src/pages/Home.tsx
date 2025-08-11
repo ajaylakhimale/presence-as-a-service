@@ -15,46 +15,12 @@ import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
-  const [stats, setStats] = useState({
-    projects: 0,
-    clients: 0,
-    avgDelivery: 0,
-    satisfaction: 0
-  });
-
-  // Animated counter effect
-  useEffect(() => {
-    const targetStats = {
-      projects: 247,
-      clients: 89,
-      avgDelivery: 7,
-      satisfaction: 98
-    };
-
-    const duration = 2000; // 2 seconds
-    const steps = 60;
-    const stepDuration = duration / steps;
-
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      currentStep++;
-      const progress = currentStep / steps;
-
-      setStats({
-        projects: Math.floor(targetStats.projects * progress),
-        clients: Math.floor(targetStats.clients * progress),
-        avgDelivery: Math.floor(targetStats.avgDelivery * progress),
-        satisfaction: Math.floor(targetStats.satisfaction * progress)
-      });
-
-      if (currentStep >= steps) {
-        setStats(targetStats);
-        clearInterval(interval);
-      }
-    }, stepDuration);
-
-    return () => clearInterval(interval);
-  }, []);
+  const stats = {
+    projects: 247,
+    clients: 89,
+    avgDelivery: 7,
+    satisfaction: 98
+  };
 
   const processSteps = [
     {

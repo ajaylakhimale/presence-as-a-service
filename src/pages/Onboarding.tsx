@@ -8,8 +8,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
-import { 
-  ChevronRight, 
+import {
+  ChevronRight,
   ChevronLeft,
   Building2,
   Globe,
@@ -179,7 +179,7 @@ const Onboarding = () => {
   ];
 
   const pageOptions = [
-    'Homepage', 'About Us', 'Services', 'Pricing', 'Contact', 
+    'Homepage', 'About Us', 'Services', 'Pricing', 'Contact',
     'FAQ', 'Blog', 'Product/Service Pages', 'Dashboard', 'Other'
   ];
 
@@ -206,7 +206,7 @@ const Onboarding = () => {
                   className="mt-2"
                 />
               </div>
-              
+
               <div>
                 <Label htmlFor="businessDescription" className="text-sm font-medium">Briefly describe your business *</Label>
                 <Textarea
@@ -217,7 +217,7 @@ const Onboarding = () => {
                   className="mt-2 min-h-[100px]"
                 />
               </div>
-              
+
               <div>
                 <Label htmlFor="websiteGoals" className="text-sm font-medium">What do you want to achieve with this website or app? *</Label>
                 <Textarea
@@ -228,7 +228,7 @@ const Onboarding = () => {
                   className="mt-2 min-h-[100px]"
                 />
               </div>
-              
+
               <div>
                 <Label className="text-sm font-medium mb-4 block">Do you already have a website or domain? *</Label>
                 <RadioGroup
@@ -274,11 +274,10 @@ const Onboarding = () => {
                           : [...formData.projectTypes, option.id];
                         updateFormData('projectTypes', updated);
                       }}
-                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
-                        isSelected
-                          ? 'border-primary bg-primary/5 shadow-md'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${isSelected
+                        ? 'border-primary bg-primary/5 shadow-md'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <div className="flex items-center gap-3">
                         <Icon className={`h-6 w-6 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
@@ -291,7 +290,7 @@ const Onboarding = () => {
                   );
                 })}
               </div>
-              
+
               {formData.projectTypes.includes('other') && (
                 <div className="mt-6">
                   <Label htmlFor="customProjectType" className="text-sm font-medium">Describe your custom project type</Label>
@@ -332,11 +331,10 @@ const Onboarding = () => {
                           : [...formData.features, feature.id];
                         updateFormData('features', updated);
                       }}
-                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all flex items-center gap-3 ${
-                        isSelected
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all flex items-center gap-3 ${isSelected
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <Icon className={`h-5 w-5 ${isSelected ? 'text-primary' : 'text-muted-foreground'}`} />
                       <span className={`text-sm font-medium ${isSelected ? 'text-primary' : ''}`}>
@@ -347,7 +345,7 @@ const Onboarding = () => {
                   );
                 })}
               </div>
-              
+
               {formData.features.includes('api') && (
                 <div>
                   <Label htmlFor="apiIntegration" className="text-sm font-medium">API Integration Details</Label>
@@ -360,7 +358,7 @@ const Onboarding = () => {
                   />
                 </div>
               )}
-              
+
               {formData.features.includes('custom') && (
                 <div>
                   <Label htmlFor="customFeature" className="text-sm font-medium">Custom Feature Description</Label>
@@ -396,7 +394,7 @@ const Onboarding = () => {
                   <input type="file" className="hidden" accept="image/*" />
                 </div>
               </div>
-              
+
               <div>
                 <Label className="text-sm font-medium mb-4 block">Style Theme *</Label>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -404,11 +402,10 @@ const Onboarding = () => {
                     <div
                       key={theme.id}
                       onClick={() => updateFormData('styleTheme', theme.id)}
-                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
-                        formData.styleTheme === theme.id
-                          ? 'border-primary bg-primary/5 shadow-md'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.styleTheme === theme.id
+                        ? 'border-primary bg-primary/5 shadow-md'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <div>
@@ -425,7 +422,7 @@ const Onboarding = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <Label htmlFor="inspirationLinks" className="text-sm font-medium">Links to websites you like (Optional)</Label>
                 <Textarea
@@ -436,7 +433,7 @@ const Onboarding = () => {
                   className="mt-2"
                 />
               </div>
-              
+
               <div>
                 <Label className="text-sm font-medium">Reference Files/Sketches (Optional)</Label>
                 <div className="mt-2 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
@@ -472,11 +469,10 @@ const Onboarding = () => {
                           : [...formData.pages, page];
                         updateFormData('pages', updated);
                       }}
-                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all text-center ${
-                        isSelected
-                          ? 'border-primary bg-primary/5'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all text-center ${isSelected
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <span className={`text-sm font-medium ${isSelected ? 'text-primary' : ''}`}>
                         {page}
@@ -488,7 +484,7 @@ const Onboarding = () => {
                   );
                 })}
               </div>
-              
+
               {formData.pages.includes('Other') && (
                 <div>
                   <Label htmlFor="customPages" className="text-sm font-medium">Describe other pages you need</Label>
@@ -523,11 +519,10 @@ const Onboarding = () => {
                     <div
                       key={option}
                       onClick={() => updateFormData('timeline', option)}
-                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all text-center ${
-                        formData.timeline === option
-                          ? 'border-primary bg-primary/5 shadow-md'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all text-center ${formData.timeline === option
+                        ? 'border-primary bg-primary/5 shadow-md'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <span className={`font-medium ${formData.timeline === option ? 'text-primary' : ''}`}>
                         {option}
@@ -539,7 +534,7 @@ const Onboarding = () => {
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <Label className="text-sm font-medium mb-4 block">Budget Range *</Label>
                 <div className="grid grid-cols-2 gap-4">
@@ -547,11 +542,10 @@ const Onboarding = () => {
                     <div
                       key={option}
                       onClick={() => updateFormData('budget', option)}
-                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all text-center ${
-                        formData.budget === option
-                          ? 'border-primary bg-primary/5 shadow-md'
-                          : 'border-border hover:border-primary/50'
-                      }`}
+                      className={`cursor-pointer p-4 rounded-xl border-2 transition-all text-center ${formData.budget === option
+                        ? 'border-primary bg-primary/5 shadow-md'
+                        : 'border-border hover:border-primary/50'
+                        }`}
                     >
                       <span className={`font-medium ${formData.budget === option ? 'text-primary' : ''}`}>
                         {option}
@@ -594,7 +588,7 @@ const Onboarding = () => {
                     {formData.businessName} - {formData.businessDescription.slice(0, 100)}...
                   </p>
                 </div>
-                
+
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium flex items-center gap-2">
@@ -611,7 +605,7 @@ const Onboarding = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium flex items-center gap-2">
@@ -631,7 +625,7 @@ const Onboarding = () => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="p-4 bg-muted/50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium flex items-center gap-2">
@@ -647,10 +641,10 @@ const Onboarding = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="border-t pt-6">
-                <Button 
-                  onClick={handleSubmit} 
+                <Button
+                  onClick={handleSubmit}
                   className="w-full h-12 text-lg font-medium"
                   size="lg"
                 >
@@ -718,7 +712,7 @@ const Onboarding = () => {
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
           {renderStep()}
-          
+
           {/* Navigation */}
           <div className="flex items-center justify-between mt-8">
             <Button
@@ -730,7 +724,7 @@ const Onboarding = () => {
               <ChevronLeft className="h-4 w-4" />
               Previous
             </Button>
-            
+
             {currentStep < totalSteps ? (
               <Button
                 onClick={handleNext}

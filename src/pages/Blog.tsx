@@ -230,12 +230,7 @@ const Blog = () => {
                         </Badge>
                       ))}
                     </div>
-                    <Link to={`/blog/${featuredPost.id}`}>
-                      <Button className="group">
-                        Read Full Article
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
+                    {/* Removed duplicate CTA button for featured post */}
                   </div>
                 </div>
               </Card>
@@ -317,31 +312,6 @@ const Blog = () => {
                 </Card>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Newsletter CTA */}
-        <section className="py-16 bg-gradient-to-r from-primary/10 via-background to-accent/10">
-          <div className="mx-auto max-w-4xl px-6 text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              Stay Ahead of the Digital Curve
-            </h2>
-            <p className="text-muted-foreground mb-8 text-lg">
-              Get weekly insights on digital transformation, web development trends, and strategies to grow your online presence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground"
-              />
-              <Button className="btn-primary">
-                Subscribe
-              </Button>
-            </div>
-            <p className="text-sm text-muted-foreground mt-4">
-              Join 1,000+ professionals who trust {siteConfig.company.name} for digital insights.
-            </p>
           </div>
         </section>
       </div>
