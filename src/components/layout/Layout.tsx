@@ -13,11 +13,11 @@ const Layout = ({ children, showFooter = true, showMobileTabBar = true }: Layout
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 overflow-x-hidden pt-16">
         {children}
       </main>
-      
+
       {showFooter && <Footer />}
       {showMobileTabBar && <MobileTabBar />}
     </div>

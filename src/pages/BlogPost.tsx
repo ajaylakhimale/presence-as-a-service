@@ -3,12 +3,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { 
-  Calendar, 
-  Clock, 
-  ArrowLeft, 
-  Share2, 
-  BookOpen, 
+import {
+  Calendar,
+  Clock,
+  ArrowLeft,
+  Share2,
+  BookOpen,
   TrendingUp,
   Users,
   Zap,
@@ -137,11 +137,11 @@ const BlogPost = () => {
               {blogPost.readTime}
             </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
             {blogPost.title}
           </h1>
-          
+
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
             {blogPost.excerpt}
           </p>
@@ -174,8 +174,8 @@ const BlogPost = () => {
         {/* Featured Image */}
         <div className="mx-auto max-w-4xl px-6 mb-12">
           <div className="aspect-video rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20">
-            <img 
-              src={blogPost.image} 
+            <img
+              src={blogPost.image}
               alt={blogPost.title}
               className="w-full h-full object-cover"
             />
@@ -187,7 +187,7 @@ const BlogPost = () => {
           <div className="grid lg:grid-cols-4 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-3">
-              <div 
+              <div
                 className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground"
                 dangerouslySetInnerHTML={{ __html: blogPost.content }}
               />
@@ -202,7 +202,7 @@ const BlogPost = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-6">
-                    Let {siteConfig.company.name} help you craft a powerful online identity that drives real business results. 
+                    Let {siteConfig.company.name} help you craft a powerful online identity that drives real business results.
                     Our expert team is ready to turn your digital vision into reality.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
@@ -212,9 +212,9 @@ const BlogPost = () => {
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </Link>
-                    <Link to="/showcase">
+                    <Link to="/pricing">
                       <Button variant="outline">
-                        View Our Work
+                        View Pricing
                       </Button>
                     </Link>
                   </div>

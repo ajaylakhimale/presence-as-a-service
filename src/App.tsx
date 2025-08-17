@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CustomCursor from "./components/CustomCursor";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Pricing from "./pages/Pricing";
@@ -17,6 +18,7 @@ import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import ConnectedSystems from "./pages/ConnectedSystems";
+import HowItWorks from "./pages/HowItWorks";
 import CorporateEnterprise from "./pages/industries/CorporateEnterprise";
 import Healthcare from "./pages/industries/Healthcare";
 import EcommerceRetail from "./pages/industries/EcommerceRetail";
@@ -33,6 +35,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BlogAdmin from "./pages/BlogAdmin";
 import Contact from "./pages/Contact";
+import ScheduleCall from "./pages/ScheduleCall";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from "./components/ScrollToTop";
@@ -43,6 +46,7 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <CustomCursor />
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -50,9 +54,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/showcase" element={<Showcase />} />
-            <Route path="/showcase/:id" element={<ProjectDetails />} />
+            {/* <Route path="/showcase" element={<Showcase />} /> */}
+            {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/tech-stack" element={<TechStack />} />
             <Route path="/stats" element={<LiveStats />} />
@@ -78,6 +83,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/blogAdmin" element={<BlogAdmin />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/schedule-call" element={<ScheduleCall />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

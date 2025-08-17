@@ -10,19 +10,15 @@ const Footer = () => {
   const footerLinks = {
     Product: [
       { name: 'Pricing', href: '/pricing' },
-      { name: 'Showcase', href: '/showcase' },
       { name: 'Tech Stack', href: '/tech-stack' },
-      { name: 'Live Stats', href: '/stats' },
     ],
     Company: [
       { name: 'About', href: '/about' },
-      { name: 'Blog', href: '/blog' },
       { name: 'Careers', href: '/careers' },
       { name: 'Contact', href: '/contact' },
     ],
     Support: [
       { name: 'Help Center', href: '/help' },
-      { name: 'Testimonials', href: '/testimonials' },
       // { name: 'Client Login', href: '/auth/login' },
       { name: 'System Status', href: '/status' },
     ],

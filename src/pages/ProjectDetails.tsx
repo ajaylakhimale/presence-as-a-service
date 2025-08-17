@@ -290,8 +290,8 @@ const ProjectDetails = () => {
         <div className="flex flex-col items-center justify-center min-h-screen">
           <h1 className="text-title-1 mb-4">Project Not Found</h1>
           <p className="text-body text-muted-foreground mb-8">The project you're looking for doesn't exist.</p>
-          <Button onClick={() => navigate('/showcase')} className="btn-primary">
-            Back to Showcase
+          <Button onClick={() => navigate('/')} className="btn-primary">
+            Back to Home
           </Button>
         </div>
       </Layout>
@@ -304,16 +304,16 @@ const ProjectDetails = () => {
       <section className="bg-gradient-hero py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <Button 
-              variant="ghost" 
-              onClick={() => navigate('/showcase')}
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/')}
               className="mb-6 hover:bg-surface"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Showcase
+              Back to Home
             </Button>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="flex items-center gap-2 mb-4">
@@ -321,15 +321,15 @@ const ProjectDetails = () => {
                 <Badge variant="outline">{project.type}</Badge>
                 <Badge variant="outline">{project.deliveryTime}</Badge>
               </div>
-              
+
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
                 {project.title}
               </h1>
-              
+
               <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
                 {project.fullDescription}
               </p>
-              
+
               <div className="flex flex-wrap gap-4 mb-8">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Calendar className="h-5 w-5" />
@@ -344,7 +344,7 @@ const ProjectDetails = () => {
                   <span>{project.team.length} team members</span>
                 </div>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button className="btn-primary" asChild>
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -359,11 +359,11 @@ const ProjectDetails = () => {
                 </Link>
               </div>
             </div>
-            
+
             <div className="relative">
               <div className="aspect-video bg-surface rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src={project.images[0]} 
+                <img
+                  src={project.images[0]}
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
@@ -380,8 +380,8 @@ const ProjectDetails = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {project.images.map((image: string, index: number) => (
               <div key={index} className="aspect-video bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt={`${project.title} - Image ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
@@ -398,7 +398,7 @@ const ProjectDetails = () => {
             {/* Main Content */}
             <div className="lg:col-span-2">
               <h2 className="text-title-1 mb-8">Project Overview</h2>
-              
+
               {/* Features */}
               <div className="mb-12">
                 <h3 className="text-title-2 mb-6 flex items-center gap-2">

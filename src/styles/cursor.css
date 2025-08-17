@@ -1,0 +1,68 @@
+/* Custom cursor styles - only for desktop devices */
+:root {
+    --color-cursor: 220, 90, 90;
+    --cursor-outline-shade: 0.3;
+    --cursor-size: 10px;
+    --cursor-outline-size: 30px;
+}
+
+/* Only apply custom cursor styles on desktop (screens larger than 1024px) */
+@media (min-width: 1024px) {
+
+    /* Hide default cursor */
+    html,
+    body,
+    * {
+        cursor: none !important;
+    }
+
+    /* Cursor dot styles */
+    #cursor-dot {
+        position: fixed;
+        width: var(--cursor-size);
+        height: var(--cursor-size);
+        background-color: rgb(var(--color-cursor));
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease-out, background-color 0.2s ease;
+        mix-blend-mode: difference;
+        display: block;
+    }
+
+    /* Cursor outline styles */
+    #cursor-dot-outline {
+        position: fixed;
+        width: var(--cursor-outline-size);
+        height: var(--cursor-outline-size);
+        background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: transform 0.2s ease-out, background-color 0.2s ease;
+        mix-blend-mode: difference;
+        display: block;
+    }
+
+    /* Special cursor states can be applied via JavaScript */
+    .cursor-large #cursor-dot {
+        transform: translate(-50%, -50%) scale(2);
+        background-color: white;
+    }
+
+    .cursor-large #cursor-dot-outline {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Hide cursor elements on mobile/tablet devices */
+@media (max-width: 1023px) {
+
+    #cursor-dot,
+    #cursor-dot-outline {
+        display: none !important;
+    }
+}

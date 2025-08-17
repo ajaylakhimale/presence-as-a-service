@@ -25,33 +25,43 @@ const Home = () => {
   const processSteps = [
     {
       step: '01',
-      title: 'Submit',
-      description: 'Tell us about your project through our guided onboarding process',
-      icon: '📝'
+      title: 'Discovery & Planning',
+      description: 'Requirements gathering, architecture design, and project planning using industry-standard methodologies',
+      icon: '🔍',
+      tools: ['Figma', 'Miro', 'Notion'],
+      duration: '2-3 days'
     },
     {
       step: '02',
-      title: 'Design',
-      description: 'We create wireframes and designs based on your requirements',
-      icon: '🎨'
+      title: 'Design & Prototyping',
+      description: 'UI/UX design, wireframing, and interactive prototypes with design system creation',
+      icon: '🎨',
+      tools: ['Figma', 'Adobe Creative Suite', 'Framer'],
+      duration: '3-5 days'
     },
     {
       step: '03',
-      title: 'Develop',
-      description: 'Our team builds your web presence using modern technologies',
-      icon: '⚡'
+      title: 'Development & Testing',
+      description: 'Agile development with CI/CD pipelines, automated testing, and code quality assurance',
+      icon: '⚡',
+      tools: ['React', 'TypeScript', 'GitHub Actions', 'Jest'],
+      duration: '5-10 days'
     },
     {
       step: '04',
-      title: 'Deliver',
-      description: 'We deploy your project and provide comprehensive handover',
-      icon: '🚀'
+      title: 'DevOps & Deployment',
+      description: 'Cloud infrastructure setup, automated deployment, monitoring, and performance optimization',
+      icon: '🚀',
+      tools: ['Vercel', 'AWS', 'Docker', 'Monitoring'],
+      duration: '1-2 days'
     },
     {
       step: '05',
-      title: 'Support',
-      description: 'Ongoing maintenance and updates as your business grows',
-      icon: '🔧'
+      title: 'Launch & Support',
+      description: 'Go-live support, performance monitoring, maintenance, and continuous improvement',
+      icon: '🔧',
+      tools: ['Analytics', 'Error Tracking', 'Support Tools'],
+      duration: 'Ongoing'
     }
   ];
 
@@ -193,53 +203,55 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Enhanced Stats */}
-          <div className="mt-24 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 animate-fade-in-up [animation-delay:0.5s] px-4">
-            <div className="text-center group">
-              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
-                <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent animate-count-up mb-2">
-                  {stats.projects}+
+          {/* Enhanced Stats - Hidden */}
+          {false && (
+            <div className="mt-24 grid grid-cols-2 gap-4 sm:gap-8 lg:grid-cols-4 animate-fade-in-up [animation-delay:0.5s] px-4">
+              <div className="text-center group">
+                <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
+                  <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent animate-count-up mb-2">
+                    {stats.projects}+
+                  </div>
+                  <div className="text-sm sm:text-lg text-muted-foreground font-medium">Projects Completed</div>
+                  <div className="mt-2 w-full bg-border/30 rounded-full h-1">
+                    <div className="bg-gradient-to-r from-primary to-primary/60 h-1 rounded-full w-4/5 transition-all duration-1000 delay-700"></div>
+                  </div>
                 </div>
-                <div className="text-sm sm:text-lg text-muted-foreground font-medium">Projects Completed</div>
-                <div className="mt-2 w-full bg-border/30 rounded-full h-1">
-                  <div className="bg-gradient-to-r from-primary to-primary/60 h-1 rounded-full w-4/5 transition-all duration-1000 delay-700"></div>
+              </div>
+              <div className="text-center group">
+                <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
+                  <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-accent-brand to-accent-brand/60 bg-clip-text text-transparent animate-count-up mb-2">
+                    {stats.clients}+
+                  </div>
+                  <div className="text-sm sm:text-lg text-muted-foreground font-medium">Happy Clients</div>
+                  <div className="mt-2 w-full bg-border/30 rounded-full h-1">
+                    <div className="bg-gradient-to-r from-accent-brand to-accent-brand/60 h-1 rounded-full w-3/5 transition-all duration-1000 delay-900"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-center group">
+                <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
+                  <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-success to-success/60 bg-clip-text text-transparent animate-count-up mb-2">
+                    {stats.avgDelivery}
+                  </div>
+                  <div className="text-sm sm:text-lg text-muted-foreground font-medium">Avg Delivery Days</div>
+                  <div className="mt-2 w-full bg-border/30 rounded-full h-1">
+                    <div className="bg-gradient-to-r from-success to-success/60 h-1 rounded-full w-1/3 transition-all duration-1000 delay-1100"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="text-center group">
+                <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
+                  <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent-brand bg-clip-text text-transparent animate-count-up mb-2">
+                    {stats.satisfaction}%
+                  </div>
+                  <div className="text-sm sm:text-lg text-muted-foreground font-medium">Satisfaction Rate</div>
+                  <div className="mt-2 w-full bg-border/30 rounded-full h-1">
+                    <div className="bg-gradient-to-r from-primary to-accent-brand h-1 rounded-full w-full transition-all duration-1000 delay-1300"></div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="text-center group">
-              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
-                <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-accent-brand to-accent-brand/60 bg-clip-text text-transparent animate-count-up mb-2">
-                  {stats.clients}+
-                </div>
-                <div className="text-sm sm:text-lg text-muted-foreground font-medium">Happy Clients</div>
-                <div className="mt-2 w-full bg-border/30 rounded-full h-1">
-                  <div className="bg-gradient-to-r from-accent-brand to-accent-brand/60 h-1 rounded-full w-3/5 transition-all duration-1000 delay-900"></div>
-                </div>
-              </div>
-            </div>
-            <div className="text-center group">
-              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
-                <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-success to-success/60 bg-clip-text text-transparent animate-count-up mb-2">
-                  {stats.avgDelivery}
-                </div>
-                <div className="text-sm sm:text-lg text-muted-foreground font-medium">Avg Delivery Days</div>
-                <div className="mt-2 w-full bg-border/30 rounded-full h-1">
-                  <div className="bg-gradient-to-r from-success to-success/60 h-1 rounded-full w-1/3 transition-all duration-1000 delay-1100"></div>
-                </div>
-              </div>
-            </div>
-            <div className="text-center group">
-              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-4 sm:p-8 hover:bg-card/70 transition-all duration-300 hover:scale-105">
-                <div className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-primary to-accent-brand bg-clip-text text-transparent animate-count-up mb-2">
-                  {stats.satisfaction}%
-                </div>
-                <div className="text-sm sm:text-lg text-muted-foreground font-medium">Satisfaction Rate</div>
-                <div className="mt-2 w-full bg-border/30 rounded-full h-1">
-                  <div className="bg-gradient-to-r from-primary to-accent-brand h-1 rounded-full w-full transition-all duration-1000 delay-1300"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -247,35 +259,68 @@ const Home = () => {
       <section className="py-24 bg-background">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-title-1 mb-4">How It Works</h2>
-            <p className="text-body text-muted-foreground max-w-2xl mx-auto">
+            <Badge className="mb-6 animate-fade-in-up">
+              <Workflow className="h-4 w-4 mr-2" />
+              Our Development Process
+            </Badge>
+            <h2 className="text-title-1 mb-4 animate-fade-in-up [animation-delay:0.1s]">
+              How It Works
+            </h2>
+            <p className="text-body text-muted-foreground max-w-2xl mx-auto animate-fade-in-up [animation-delay:0.2s]">
               Our streamlined process ensures fast delivery without compromising quality
             </p>
           </div>
 
           <div className="relative">
             {/* Connecting lines for desktop */}
-            <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 z-0" />
+            <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 z-0" />
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-8 relative">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-8 relative mb-12">
               {processSteps.map((step, index) => (
-                <div key={step.step} className="text-center animate-fade-in-up relative" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div key={step.step} className="text-center animate-fade-in-up relative group" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div className="relative">
-                    <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl mb-4 relative z-10 border-4 border-background">
+                    <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl mb-4 relative z-10 border-4 border-background group-hover:scale-110 transition-transform duration-300">
                       {step.icon}
                     </div>
                     <div className="text-caption-2 text-primary font-bold mb-2">{step.step}</div>
                     <h3 className="text-headline font-semibold mb-2">{step.title}</h3>
-                    <p className="text-subhead text-muted-foreground">{step.description}</p>
+                    <p className="text-subhead text-muted-foreground mb-3">{step.description}</p>
+
+                    {/* Duration and tools in subtle style */}
+                    <div className="space-y-2 opacity-75 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground">
+                        <Clock className="h-3 w-3" />
+                        {step.duration}
+                      </div>
+                      <div className="flex flex-wrap justify-center gap-1">
+                        {step.tools.slice(0, 2).map((tool, toolIndex) => (
+                          <span key={toolIndex} className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded">
+                            {tool}
+                          </span>
+                        ))}
+                        {step.tools.length > 2 && (
+                          <span className="text-xs text-muted-foreground">
+                            +{step.tools.length - 2}
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            <div className="text-center">
+              <Link to="/how-it-works">
+                <Button variant="outline" className="group animate-fade-in-up [animation-delay:0.6s]">
+                  Learn More About Our Process
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </section>
-
-      {/* Features Section */}
+      </section>      {/* Features Section */}
       <section className="py-24 bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
@@ -310,48 +355,50 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-title-1 mb-4">What Our Clients Say</h2>
-            <p className="text-body text-muted-foreground">
-              Join hundreds of satisfied clients who trust WPaaS for their web presence
-            </p>
-          </div>
+      {false && (
+        <section className="py-24 bg-background">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-title-1 mb-4">What Our Clients Say</h2>
+              <p className="text-body text-muted-foreground">
+                Join hundreds of satisfied clients who trust WPaaS for their web presence
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={testimonial.name} className="card-elevated animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-accent-brand fill-current" />
-                    ))}
-                  </div>
-                  <blockquote className="text-body mb-4">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="flex items-center">
-                    <div className="text-2xl mr-3">{testimonial.avatar}</div>
-                    <div>
-                      <div className="text-headline font-semibold">{testimonial.name}</div>
-                      <div className="text-subhead text-muted-foreground">{testimonial.company}</div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              {testimonials.map((testimonial, index) => (
+                <Card key={testimonial.name} className="card-elevated animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 text-accent-brand fill-current" />
+                      ))}
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <blockquote className="text-body mb-4">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    <div className="flex items-center">
+                      <div className="text-2xl mr-3">{testimonial.avatar}</div>
+                      <div>
+                        <div className="text-headline font-semibold">{testimonial.name}</div>
+                        <div className="text-subhead text-muted-foreground">{testimonial.company}</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
 
-          <div className="text-center mt-12">
-            <Link to="/testimonials">
-              <Button className="btn-secondary">
-                View All Testimonials
-              </Button>
-            </Link>
+            <div className="text-center mt-12">
+              <Link to="/testimonials">
+                <Button className="btn-secondary">
+                  View All Testimonials
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Connected Systems Feature Section */}
       <section className="py-24 bg-gradient-to-br from-primary/5 via-accent-brand/5 to-primary/10">

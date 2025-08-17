@@ -34,7 +34,8 @@ const TechStack = () => {
       icon: '⚛️',
       whyUsed: 'Fast, scalable, and maintainable. Large ecosystem and excellent developer experience.',
       caseStudies: ['Landing pages', 'Web applications', 'E-commerce sites'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://react.dev'
     },
     {
       name: 'TypeScript',
@@ -43,7 +44,8 @@ const TechStack = () => {
       icon: '📘',
       whyUsed: 'Catches errors early, improves code quality, and enhances developer productivity.',
       caseStudies: ['Large applications', 'Team projects', 'Complex business logic'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://www.typescriptlang.org'
     },
     {
       name: 'Tailwind CSS',
@@ -52,7 +54,8 @@ const TechStack = () => {
       icon: '🎨',
       whyUsed: 'Rapid development, consistent design system, and excellent mobile responsiveness.',
       caseStudies: ['All projects', 'Design systems', 'Responsive layouts'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://tailwindcss.com'
     },
     {
       name: 'Next.js',
@@ -61,7 +64,8 @@ const TechStack = () => {
       icon: '▲',
       whyUsed: 'SEO-friendly, fast loading, and excellent performance out of the box.',
       caseStudies: ['Marketing sites', 'Blogs', 'E-commerce platforms'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://nextjs.org'
     },
     {
       name: 'Framer Motion',
@@ -70,7 +74,8 @@ const TechStack = () => {
       icon: '🎬',
       whyUsed: 'Smooth animations, great user experience, and easy implementation.',
       caseStudies: ['Portfolio sites', 'Landing pages', 'Interactive experiences'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://www.framer.com/motion'
     },
 
     // Backend
@@ -81,7 +86,8 @@ const TechStack = () => {
       icon: '🚀',
       whyUsed: 'Fast, scalable, and uses the same language as frontend for full-stack development.',
       caseStudies: ['APIs', 'Real-time applications', 'Microservices'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://nodejs.org'
     },
     {
       name: 'PostgreSQL',
@@ -90,7 +96,8 @@ const TechStack = () => {
       icon: '🐘',
       whyUsed: 'Reliable, ACID compliant, and supports complex queries and data types.',
       caseStudies: ['E-commerce', 'User management', 'Analytics'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://www.postgresql.org'
     },
     {
       name: 'MongoDB',
@@ -99,7 +106,8 @@ const TechStack = () => {
       icon: '🍃',
       whyUsed: 'Flexible schema, horizontal scaling, and great for rapid development.',
       caseStudies: ['Content management', 'Real-time apps', 'Prototypes'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://www.mongodb.com'
     },
     {
       name: 'Prisma',
@@ -108,7 +116,8 @@ const TechStack = () => {
       icon: '🔺',
       whyUsed: 'Type-safe database access, automatic migrations, and great developer experience.',
       caseStudies: ['Database management', 'API development', 'Data modeling'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://www.prisma.io'
     },
 
     // Infrastructure
@@ -119,7 +128,8 @@ const TechStack = () => {
       icon: '▲',
       whyUsed: 'Easy deployment, excellent performance, and seamless integration with Next.js.',
       caseStudies: ['Frontend deployment', 'Static sites', 'Jamstack applications'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://vercel.com'
     },
     {
       name: 'Railway',
@@ -128,7 +138,8 @@ const TechStack = () => {
       icon: '🚂',
       whyUsed: 'Simple deployment, automatic scaling, and great for full-stack applications.',
       caseStudies: ['API hosting', 'Database hosting', 'Full-stack apps'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://railway.app'
     },
     {
       name: 'AWS',
@@ -137,7 +148,8 @@ const TechStack = () => {
       icon: '☁️',
       whyUsed: 'Comprehensive services, reliability, and scalability for enterprise needs.',
       caseStudies: ['Enterprise hosting', 'File storage', 'Complex infrastructure'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://aws.amazon.com'
     },
     {
       name: 'Cloudflare',
@@ -146,7 +158,8 @@ const TechStack = () => {
       icon: '⚡',
       whyUsed: 'CDN, security, and performance optimization for better user experience.',
       caseStudies: ['Performance optimization', 'Security', 'Global distribution'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://www.cloudflare.com'
     },
 
     // CMS
@@ -157,7 +170,8 @@ const TechStack = () => {
       icon: '📝',
       whyUsed: 'Flexible content modeling, real-time updates, and great developer experience.',
       caseStudies: ['Blogs', 'Portfolio sites', 'Content-heavy websites'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://www.sanity.io'
     },
     {
       name: 'Strapi',
@@ -166,7 +180,8 @@ const TechStack = () => {
       icon: '🛡️',
       whyUsed: 'Customizable, API-first, and self-hosted for better control.',
       caseStudies: ['Custom CMS needs', 'API development', 'Content management'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://strapi.io'
     },
 
     // DevOps
@@ -177,7 +192,8 @@ const TechStack = () => {
       icon: '⚙️',
       whyUsed: 'Integrated with GitHub, easy setup, and powerful automation capabilities.',
       caseStudies: ['Automated testing', 'Deployment pipelines', 'Code quality checks'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://github.com/features/actions'
     },
     {
       name: 'Docker',
@@ -186,7 +202,8 @@ const TechStack = () => {
       icon: '🐳',
       whyUsed: 'Consistent environments, easy deployment, and scalable architecture.',
       caseStudies: ['Microservices', 'Development environments', 'Production deployment'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://www.docker.com'
     },
 
     // APIs & Services
@@ -197,7 +214,8 @@ const TechStack = () => {
       icon: '💳',
       whyUsed: 'Secure, reliable, and comprehensive payment solutions with great documentation.',
       caseStudies: ['E-commerce', 'Subscriptions', 'Payment processing'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://stripe.com'
     },
     {
       name: 'Auth0',
@@ -206,7 +224,8 @@ const TechStack = () => {
       icon: '🔐',
       whyUsed: 'Secure authentication, multiple providers, and enterprise-grade security.',
       caseStudies: ['User authentication', 'SSO implementation', 'Security'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://auth0.com'
     },
     {
       name: 'SendGrid',
@@ -215,7 +234,8 @@ const TechStack = () => {
       icon: '📧',
       whyUsed: 'Reliable email delivery, analytics, and easy integration.',
       caseStudies: ['Transactional emails', 'Marketing campaigns', 'Notifications'],
-      popular: true
+      popular: true,
+      officialUrl: 'https://sendgrid.com'
     },
     {
       name: 'Mapbox',
@@ -224,12 +244,13 @@ const TechStack = () => {
       icon: '🗺️',
       whyUsed: 'Customizable maps, accurate location data, and great performance.',
       caseStudies: ['Real estate', 'Location-based apps', 'Store locators'],
-      popular: false
+      popular: false,
+      officialUrl: 'https://www.mapbox.com'
     },
   ];
 
-  const filteredTechnologies = selectedCategory === 'all' 
-    ? technologies 
+  const filteredTechnologies = selectedCategory === 'all'
+    ? technologies
     : technologies.filter(tech => tech.category === selectedCategory);
 
   const popularTechnologies = technologies.filter(tech => tech.popular);
@@ -244,7 +265,7 @@ const TechStack = () => {
               Our <span className="text-primary">Tech Stack</span>
             </h1>
             <p className="text-body text-muted-foreground mb-8 max-w-2xl mx-auto">
-              We use modern, battle-tested technologies to build fast, secure, and scalable web solutions. 
+              We use modern, battle-tested technologies to build fast, secure, and scalable web solutions.
               Every tool is chosen for reliability and developer experience.
             </p>
           </div>
@@ -260,7 +281,7 @@ const TechStack = () => {
               Our go-to tools for most projects
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {popularTechnologies.map((tech, index) => (
               <TooltipProvider key={tech.name}>
@@ -293,11 +314,10 @@ const TechStack = () => {
                 <Button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
-                  className={`${
-                    selectedCategory === category.id
-                      ? 'btn-primary'
-                      : 'btn-secondary'
-                  } flex items-center space-x-2`}
+                  className={`${selectedCategory === category.id
+                    ? 'btn-primary'
+                    : 'btn-secondary'
+                    } flex items-center space-x-2`}
                 >
                   <Icon className="h-4 w-4" />
                   <span>{category.name}</span>
@@ -331,14 +351,14 @@ const TechStack = () => {
                   <p className="text-body text-muted-foreground mb-4">
                     {tech.description}
                   </p>
-                  
+
                   <div className="mb-4">
                     <h4 className="text-callout font-semibold mb-2">Why we use it:</h4>
                     <p className="text-subhead text-muted-foreground">
                       {tech.whyUsed}
                     </p>
                   </div>
-                  
+
                   <div className="mb-4">
                     <h4 className="text-callout font-semibold mb-2">Use cases:</h4>
                     <div className="flex flex-wrap gap-1">
@@ -349,13 +369,18 @@ const TechStack = () => {
                       ))}
                     </div>
                   </div>
-                  
-                  <Link to={`/tech-stack/${tech.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}>
+
+                  <a
+                    href={tech.officialUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
                     <Button className="btn-secondary w-full">
                       Learn More
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
-                  </Link>
+                  </a>
                 </CardContent>
               </Card>
             ))}
@@ -372,7 +397,7 @@ const TechStack = () => {
               Our technology choices are driven by performance, security, maintainability, and developer experience
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="card-surface text-center">
               <CardContent className="p-6">
@@ -383,7 +408,7 @@ const TechStack = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="card-surface text-center">
               <CardContent className="p-6">
                 <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -393,7 +418,7 @@ const TechStack = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="card-surface text-center">
               <CardContent className="p-6">
                 <Code className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -403,7 +428,7 @@ const TechStack = () => {
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="card-surface text-center">
               <CardContent className="p-6">
                 <Cloud className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -418,21 +443,21 @@ const TechStack = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-primary text-primary-foreground">
+      <section className="py-24 bg-gradient-to-br from-primary/10 via-background to-accent-brand/5">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-title-1 mb-6">Ready to Build With Modern Tech?</h2>
-          <p className="text-body mb-8 opacity-90">
-            Let us build your next project with the latest technologies and best practices. 
+          <h2 className="text-title-1 mb-6 text-foreground">Ready to Build With Modern Tech?</h2>
+          <p className="text-body mb-8 text-muted-foreground max-w-2xl mx-auto">
+            Let us build your next project with the latest technologies and best practices.
             Fast, secure, and built to last.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
-              <Button className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 text-lg px-8 py-4">
+              <Button className="btn-primary text-lg px-8 py-4">
                 Start Your Project
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-4" variant="outline">
+            <Link to="/schedule-call">
+              <Button variant="outline" className="text-lg px-8 py-4">
                 Discuss Technology Needs
               </Button>
             </Link>
