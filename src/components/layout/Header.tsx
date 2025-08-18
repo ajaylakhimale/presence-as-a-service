@@ -18,7 +18,7 @@ const Header = () => {
   // Minimal set of primary navigation items (keeps header uncluttered per HIG)
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Connected System', href: '/connected-system' },
+    { name: 'Connected System', href: '/connected-systems' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Solutions', href: '/industries' },
     { name: 'About', href: '/about' },

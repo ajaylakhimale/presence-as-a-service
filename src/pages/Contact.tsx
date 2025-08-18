@@ -10,6 +10,8 @@ import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
+import { insertContactForm } from '@/lib/supabase';
+import FormSuccess from '@/components/ui/FormSuccess';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -22,6 +24,7 @@ const Contact = () => {
     projectType: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -35,12 +38,21 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      await insertContactForm({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+        project_type: formData.projectType
+      });
+
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you within 24 hours.",
       });
+
       setFormData({
         name: '',
         email: '',
@@ -49,8 +61,17 @@ const Contact = () => {
         message: '',
         projectType: ''
       });
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error sending message",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   const contactInfo = [
@@ -114,25 +135,25 @@ const Contact = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 pt-24 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
-        
+
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <Badge className="inline-flex items-center rounded-full bg-primary/10 px-6 py-2 text-sm font-medium text-primary ring-1 ring-primary/20 mb-6">
               <MessageSquare className="h-4 w-4 mr-2" />
               Let's Talk
             </Badge>
-            
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
                 Get in Touch
               </span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl text-muted-foreground mb-8 leading-relaxed">
-              Ready to bring your digital vision to life? Let's discuss your project and 
+              Ready to bring your digital vision to life? Let's discuss your project and
               create something amazing together.
             </p>
 
@@ -169,110 +190,120 @@ const Contact = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {isSubmitted ? (
+                    <FormSuccess
+                      title="Message Sent Successfully!"
+                      description="Thank you for reaching out. We'll get back to you within 24 hours."
+                      onReset={() => setIsSubmitted(false)}
+                      resetButtonText="Send Another Message"
+                      icon="send"
+                    />
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Name *
+                          </label>
+                          <Input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Your full name"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Email *
+                          </label>
+                          <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="your@email.com"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Company
+                          </label>
+                          <Input
+                            type="text"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleInputChange}
+                            placeholder="Your company name"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            Project Type
+                          </label>
+                          <select
+                            name="projectType"
+                            value={formData.projectType}
+                            onChange={handleInputChange}
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          >
+                            <option value="">Select project type</option>
+                            {projectTypes.map(type => (
+                              <option key={type} value={type}>{type}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-2">
-                          Name *
+                          Subject *
                         </label>
                         <Input
                           type="text"
-                          name="name"
-                          value={formData.name}
+                          name="subject"
+                          value={formData.subject}
                           onChange={handleInputChange}
-                          placeholder="Your full name"
+                          placeholder="Brief subject of your inquiry"
                           required
                         />
                       </div>
+
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-2">
-                          Email *
+                          Message *
                         </label>
-                        <Input
-                          type="email"
-                          name="email"
-                          value={formData.email}
+                        <Textarea
+                          name="message"
+                          value={formData.message}
                           onChange={handleInputChange}
-                          placeholder="your@email.com"
+                          placeholder="Tell us about your project, timeline, budget, and any specific requirements..."
+                          rows={6}
                           required
                         />
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
-                          Company
-                        </label>
-                        <Input
-                          type="text"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleInputChange}
-                          placeholder="Your company name"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
-                          Project Type
-                        </label>
-                        <select
-                          name="projectType"
-                          value={formData.projectType}
-                          onChange={handleInputChange}
-                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                        >
-                          <option value="">Select project type</option>
-                          {projectTypes.map(type => (
-                            <option key={type} value={type}>{type}</option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Subject *
-                      </label>
-                      <Input
-                        type="text"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        placeholder="Brief subject of your inquiry"
-                        required
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-foreground mb-2">
-                        Message *
-                      </label>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        placeholder="Tell us about your project, timeline, budget, and any specific requirements..."
-                        rows={6}
-                        required
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      className="btn-primary w-full" 
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        'Sending...'
-                      ) : (
-                        <>
-                          Send Message
-                          <Send className="ml-2 h-4 w-4" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
+                      <Button
+                        type="submit"
+                        className="btn-primary w-full"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          'Sending...'
+                        ) : (
+                          <>
+                            Send Message
+                            <Send className="ml-2 h-4 w-4" />
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -306,7 +337,7 @@ const Contact = () => {
                               {info.description}
                             </p>
                             {info.action !== '#' ? (
-                              <a 
+                              <a
                                 href={info.action}
                                 className="text-body text-primary hover:text-primary/80 transition-colors font-medium"
                               >

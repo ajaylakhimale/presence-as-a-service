@@ -18,6 +18,7 @@ import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import ConnectedSystems from "./pages/ConnectedSystems";
+import ConnectedSystemsQuote from "./pages/ConnectedSystemsQuote";
 import HowItWorks from "./pages/HowItWorks";
 import CorporateEnterprise from "./pages/industries/CorporateEnterprise";
 import Healthcare from "./pages/industries/Healthcare";
@@ -79,6 +80,7 @@ const App = () => (
             <Route path="/industries/fitness" element={<Fitness />} />
             <Route path="/industries/marketing" element={<Marketing />} />
             <Route path="/connected-systems" element={<ConnectedSystems />} />
+            <Route path="/connected-systems/quote" element={<ConnectedSystemsQuote />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/blogAdmin" element={<BlogAdmin />} />

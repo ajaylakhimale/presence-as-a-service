@@ -23,10 +23,15 @@ import { Checkbox } from '@/components/ui/checkbox';
 import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
+import { insertTestimonialForm } from '@/lib/supabase';
+import { useToast } from '@/hooks/use-toast';
 
 const Testimonials = () => {
+  const { toast } = useToast();
   const [filterPlan, setFilterPlan] = useState('all');
   const [filterIndustry, setFilterIndustry] = useState('all');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [testimonialForm, setTestimonialForm] = useState({
     name: '',
     company: '',
@@ -129,10 +134,48 @@ const Testimonials = () => {
     return matchesPlan && matchesIndustry;
   });
 
-  const handleSubmitTestimonial = (e: React.FormEvent) => {
+  const handleSubmitTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Testimonial submitted:', testimonialForm);
-    // Handle form submission here
+    setIsSubmitting(true);
+
+    try {
+      await insertTestimonialForm({
+        name: testimonialForm.name,
+        company: testimonialForm.company,
+        role: testimonialForm.role,
+        email: testimonialForm.email,
+        plan: testimonialForm.plan,
+        rating: testimonialForm.rating,
+        testimonial: testimonialForm.testimonial
+      });
+
+      setIsSubmitted(true);
+      toast({
+        title: "Testimonial submitted!",
+        description: "Thank you for sharing your experience with us.",
+      });
+
+      setTestimonialForm({
+        name: '',
+        company: '',
+        role: '',
+        email: '',
+        plan: '',
+        industry: '',
+        testimonial: '',
+        rating: 5,
+        consent: false
+      });
+    } catch (error) {
+      console.error('Error submitting testimonial:', error);
+      toast({
+        title: "Error submitting testimonial",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,17 +196,17 @@ const Testimonials = () => {
       <section className="relative bg-gradient-hero py-24 overflow-hidden">
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-large-title mb-6">
               Client <span className="text-primary">Testimonials</span>
             </h1>
             <p className="text-body text-muted-foreground mb-8 max-w-2xl mx-auto">
-              See what our clients say about working with WPaaS. Real feedback from real businesses 
+              See what our clients say about working with WPaaS. Real feedback from real businesses
               who trusted us with their web presence.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <div className="text-center">
                 <div className="text-title-1 font-bold text-primary">98%</div>
@@ -187,7 +230,7 @@ const Testimonials = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
             <h2 className="text-title-3">All Testimonials</h2>
-            
+
             <div className="flex gap-4">
               <Select value={filterPlan} onValueChange={setFilterPlan}>
                 <SelectTrigger className="w-40">
@@ -240,7 +283,7 @@ const Testimonials = () => {
                         required
                       />
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
                       <Input
                         placeholder="Your Role"
@@ -255,7 +298,7 @@ const Testimonials = () => {
                         required
                       />
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
                       <Select value={testimonialForm.plan} onValueChange={(value) => setTestimonialForm(prev => ({ ...prev, plan: value }))}>
                         <SelectTrigger>
@@ -267,7 +310,7 @@ const Testimonials = () => {
                           ))}
                         </SelectContent>
                       </Select>
-                      
+
                       <Select value={testimonialForm.industry} onValueChange={(value) => setTestimonialForm(prev => ({ ...prev, industry: value }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Industry" />
@@ -279,7 +322,7 @@ const Testimonials = () => {
                         </SelectContent>
                       </Select>
                     </div>
-                    
+
                     <div>
                       <label className="text-subhead mb-2 block">Rating</label>
                       <div className="flex space-x-1">
@@ -295,7 +338,7 @@ const Testimonials = () => {
                         ))}
                       </div>
                     </div>
-                    
+
                     <Textarea
                       placeholder="Share your experience with WPaaS..."
                       value={testimonialForm.testimonial}
@@ -303,9 +346,9 @@ const Testimonials = () => {
                       rows={4}
                       required
                     />
-                    
+
                     <div className="flex items-center space-x-2">
-                      <Checkbox 
+                      <Checkbox
                         id="consent"
                         checked={testimonialForm.consent}
                         onCheckedChange={(checked) => setTestimonialForm(prev => ({ ...prev, consent: checked as boolean }))}
@@ -314,7 +357,7 @@ const Testimonials = () => {
                         I consent to WPaaS using this testimonial for marketing purposes
                       </label>
                     </div>
-                    
+
                     <Button type="submit" className="btn-primary w-full" disabled={!testimonialForm.consent}>
                       Submit Testimonial
                     </Button>
@@ -335,7 +378,7 @@ const Testimonials = () => {
               Highlighted testimonials from our most successful projects
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {filteredTestimonials.filter(t => t.featured).map((testimonial, index) => (
               <Card key={testimonial.id} className="card-elevated animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
@@ -348,7 +391,7 @@ const Testimonials = () => {
                       <p className="text-subhead text-primary">{testimonial.company}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center mb-4">
                     <div className="flex mr-2">
                       {[...Array(testimonial.rating)].map((_, i) => (
@@ -363,12 +406,12 @@ const Testimonials = () => {
                       </Badge>
                     )}
                   </div>
-                  
+
                   <Quote className="h-8 w-8 text-primary mb-4" />
                   <blockquote className="text-body italic mb-4">
                     "{testimonial.text}"
                   </blockquote>
-                  
+
                   <Badge variant="secondary" className="text-xs">
                     {testimonial.industry}
                   </Badge>
@@ -383,7 +426,7 @@ const Testimonials = () => {
       <section className="py-24 bg-surface">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-title-2 mb-8 text-center">All Client Feedback</h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredTestimonials.filter(t => !t.featured).map((testimonial, index) => (
               <Card key={testimonial.id} className="card-surface animate-fade-in-up" style={{ animationDelay: `${index * 0.05}s` }}>
@@ -403,13 +446,13 @@ const Testimonials = () => {
                       )}
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 text-accent-brand fill-current" />
                     ))}
                   </div>
-                  
+
                   <blockquote className="text-body">
                     "{testimonial.text}"
                   </blockquote>
@@ -417,7 +460,7 @@ const Testimonials = () => {
               </Card>
             ))}
           </div>
-          
+
           {filteredTestimonials.length === 0 && (
             <div className="text-center py-16">
               <Filter className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
@@ -425,7 +468,7 @@ const Testimonials = () => {
               <p className="text-body text-muted-foreground mb-6">
                 Try adjusting your filters to see more testimonials
               </p>
-              <Button 
+              <Button
                 onClick={() => {
                   setFilterPlan('all');
                   setFilterIndustry('all');

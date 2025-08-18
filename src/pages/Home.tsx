@@ -168,7 +168,7 @@ const Home = () => {
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-              Custom websites and web apps, delivered fast with transparent pricing and no long-term contracts. Pay only for what you use. Scale your digital presence, on your terms.
+              Custom websites, web apps and mobile apps delivered fast with transparent pricing and no long-term contracts. Pay only for what you build. Scale your digital presence, on your terms.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">

@@ -218,17 +218,17 @@ const ConnectedSystems = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 min-h-screen flex items-center">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
-        
+
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-24 sm:py-32 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-5xl mx-auto">
             <Badge className="mb-8 animate-fade-in-up">
               <Sparkles className="h-4 w-4 mr-2" />
               Revolutionary Connected Ecosystem
             </Badge>
-            
+
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
                 One Business.
@@ -240,14 +240,14 @@ const ConnectedSystems = () => {
                 Every Platform.
               </span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s]">
-              Get a custom-built website, mobile app, and desktop app — all perfectly synchronized with 
+              Get a custom-built website, mobile app, and desktop app — all perfectly synchronized with
               backend services, automations, and analytics. From screen to screen, your brand stays strong.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
-              <Link to="/onboarding">
+              <Link to="/connected-systems/quote">
                 <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   Get a Quote
                   <ArrowRight className="ml-3 h-6 w-6" />
@@ -293,7 +293,7 @@ const ConnectedSystems = () => {
               You run the business. We build the system. Four integrated platforms working as one unified ecosystem.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {systemParts.map((part, index) => {
               const Icon = part.icon;
@@ -332,7 +332,7 @@ const ConnectedSystems = () => {
               See the difference our connected approach makes for your business
             </p>
           </div>
-          
+
           <div className="card-elevated overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -367,7 +367,7 @@ const ConnectedSystems = () => {
               Powerful benefits that transform how your business operates and grows
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
@@ -398,13 +398,13 @@ const ConnectedSystems = () => {
               Transparent pricing for every business size — from startup to enterprise
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {plans.map((plan, index) => {
               const Icon = plan.icon;
               return (
-                <Card 
-                  key={plan.id} 
+                <Card
+                  key={plan.id}
                   className={`card-elevated relative ${plan.popular ? 'ring-2 ring-accent-brand' : ''} animate-fade-in-up`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -435,7 +435,7 @@ const ConnectedSystems = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link to="/onboarding">
+                    <Link to={plan.price === 'Custom Quote' ? '/connected-systems/quote' : '/onboarding'}>
                       <Button className={plan.popular ? 'btn-primary w-full' : 'btn-secondary w-full'}>
                         {plan.price === 'Custom Quote' ? 'Get Quote' : 'Start Project'}
                         <ArrowRight className="ml-2 h-4 w-4" />
@@ -458,8 +458,8 @@ const ConnectedSystems = () => {
                 <Badge className="mb-4">Success Story</Badge>
                 <h3 className="text-title-2 mb-4">TechStart Inc. 3x'd Their Revenue</h3>
                 <p className="text-body text-muted-foreground mb-6">
-                  "MacroPresence built us a connected system that transformed our business. Our customers can now 
-                  access our platform on web, mobile, and desktop with perfect synchronization. Sales increased 
+                  "MacroPresence built us a connected system that transformed our business. Our customers can now
+                  access our platform on web, mobile, and desktop with perfect synchronization. Sales increased
                   300% in the first 6 months."
                 </p>
                 <div className="flex items-center space-x-4">
@@ -502,7 +502,7 @@ const ConnectedSystems = () => {
               Everything you need to know about connected systems
             </p>
           </div>
-          
+
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="card-surface p-6 rounded-2xl border">
@@ -527,11 +527,11 @@ const ConnectedSystems = () => {
             Let's build your connected system today.
           </h2>
           <p className="text-body text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join the revolution of businesses that don't just exist online — they dominate every platform 
+            Join the revolution of businesses that don't just exist online — they dominate every platform
             with seamless, synchronized experiences.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/onboarding">
+            <Link to="/connected-systems/quote">
               <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Get Free Quote
                 <ArrowRight className="ml-3 h-6 w-6" />

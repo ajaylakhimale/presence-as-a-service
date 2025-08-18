@@ -8,22 +8,24 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import ProjectInfoForm, { ProjectFormData } from '@/components/ProjectInfoForm';
 import { siteConfig } from '@/config/site';
-import { 
-  Bell, 
-  Calendar, 
-  CheckCircle, 
-  Clock, 
-  CreditCard, 
-  Download, 
-  FileText, 
-  Globe, 
-  HelpCircle, 
-  Home, 
-  LogOut, 
-  MessageSquare, 
-  Settings, 
-  Star, 
-  Upload, 
+import { insertProjectInfoForm } from '@/lib/supabase';
+import { useToast } from '@/hooks/use-toast';
+import {
+  Bell,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CreditCard,
+  Download,
+  FileText,
+  Globe,
+  HelpCircle,
+  Home,
+  LogOut,
+  MessageSquare,
+  Settings,
+  Star,
+  Upload,
   User,
   ChevronRight,
   AlertCircle,
@@ -40,21 +42,23 @@ import {
 import { Label } from '@/components/ui/label';
 
 const ClientDashboard = () => {
+  const { toast } = useToast();
   const [clientEmail, setClientEmail] = useState('');
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [projectFormData, setProjectFormData] = useState<ProjectFormData | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('clientLoggedIn');
     const email = localStorage.getItem('clientEmail');
-    
+
     if (!isLoggedIn) {
       navigate('/client-login');
       return;
     }
-    
+
     if (email) {
       setClientEmail(email);
     }
@@ -66,11 +70,40 @@ const ClientDashboard = () => {
     navigate('/');
   };
 
-  const handleProjectFormSubmit = (data: ProjectFormData) => {
-    setProjectFormData(data);
-    setShowProjectForm(false);
-    // Here you would typically send the data to your backend
-    console.log('Project form submitted:', data);
+  const handleProjectFormSubmit = async (data: ProjectFormData) => {
+    setIsSubmitting(true);
+
+    try {
+      await insertProjectInfoForm({
+        title: data.title,
+        description: data.description,
+        industry: data.industry,
+        type: data.type,
+        delivery_time: data.deliveryTime,
+        start_date: data.startDate,
+        budget: data.endDate, // Using endDate as budget field for now
+        features: data.features,
+        pages: data.technologies, // Using technologies as pages for now
+        contact_name: data.clientName,
+        contact_email: data.clientEmail
+      });
+
+      setProjectFormData(data);
+      setShowProjectForm(false);
+      toast({
+        title: "Project information submitted!",
+        description: "Thank you for providing your project details. We'll use this information to showcase your project.",
+      });
+    } catch (error) {
+      console.error('Error submitting project form:', error);
+      toast({
+        title: "Error submitting project information",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleProjectFormCancel = () => {
@@ -98,29 +131,29 @@ const ClientDashboard = () => {
   ];
 
   const milestones = [
-    { 
-      title: "Wireframes Ready", 
-      status: "completed", 
-      date: "July 15", 
-      description: "Initial site structure and layout approved" 
+    {
+      title: "Wireframes Ready",
+      status: "completed",
+      date: "July 15",
+      description: "Initial site structure and layout approved"
     },
-    { 
-      title: "Design Mockups", 
-      status: "completed", 
-      date: "July 20", 
-      description: "High-fidelity designs for all pages" 
+    {
+      title: "Design Mockups",
+      status: "completed",
+      date: "July 20",
+      description: "High-fidelity designs for all pages"
     },
-    { 
-      title: "First Development Build", 
-      status: "in-progress", 
-      date: "July 25", 
-      description: "Functional website with core features" 
+    {
+      title: "First Development Build",
+      status: "in-progress",
+      date: "July 25",
+      description: "Functional website with core features"
     },
-    { 
-      title: "Client Review", 
-      status: "pending", 
-      date: "July 29", 
-      description: "Final review and feedback collection" 
+    {
+      title: "Client Review",
+      status: "pending",
+      date: "July 29",
+      description: "Final review and feedback collection"
     }
   ];
 
@@ -132,21 +165,21 @@ const ClientDashboard = () => {
   ];
 
   const messages = [
-    { 
-      sender: "Sarah Chen (PM)", 
-      message: "Hi Ajay! The development team has completed the homepage. Please review and let us know your thoughts.", 
+    {
+      sender: "Sarah Chen (PM)",
+      message: "Hi Ajay! The development team has completed the homepage. Please review and let us know your thoughts.",
       time: "2 hours ago",
       needsReply: true
     },
-    { 
-      sender: "Ajay Kumar", 
-      message: "Looks great! Can we adjust the header font size slightly?", 
+    {
+      sender: "Ajay Kumar",
+      message: "Looks great! Can we adjust the header font size slightly?",
       time: "4 hours ago",
       needsReply: false
     },
-    { 
-      sender: "Mike Johnson (Developer)", 
-      message: "Sure thing! I've updated the header styling. Check it out on the staging link.", 
+    {
+      sender: "Mike Johnson (Developer)",
+      message: "Sure thing! I've updated the header styling. Check it out on the staging link.",
       time: "1 day ago",
       needsReply: false
     }
@@ -184,7 +217,7 @@ const ClientDashboard = () => {
           Need Help?
         </Button>
       </div>
-      
+
       <div className="bg-accent/10 border border-accent/20 rounded-xl p-4 mt-4">
         <div className="flex items-center gap-2">
           <Bell className="h-4 w-4 text-accent" />
@@ -202,15 +235,14 @@ const ClientDashboard = () => {
       </CardHeader>
       <CardContent>
         <Progress value={projectData.progress} className="mb-6" />
-        
+
         <div className="space-y-4">
           {timelineSteps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                step.status === 'completed' ? 'bg-success text-success-foreground' :
-                step.status === 'in-progress' ? 'bg-accent text-accent-foreground' :
-                'bg-muted text-muted-foreground'
-              }`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.status === 'completed' ? 'bg-success text-success-foreground' :
+                  step.status === 'in-progress' ? 'bg-accent text-accent-foreground' :
+                    'bg-muted text-muted-foreground'
+                }`}>
                 {step.status === 'completed' ? (
                   <CheckCircle className="h-4 w-4" />
                 ) : step.status === 'in-progress' ? (
@@ -219,16 +251,16 @@ const ClientDashboard = () => {
                   <span className="caption-1">{index + 1}</span>
                 )}
               </div>
-              
+
               <div className="flex-1">
                 <div className="headline">{step.name}</div>
                 <div className="caption-2">{step.duration} • {step.team}</div>
               </div>
-              
+
               <Badge className={
                 step.status === 'completed' ? 'status-completed' :
-                step.status === 'in-progress' ? 'status-in-progress' :
-                'status-pending'
+                  step.status === 'in-progress' ? 'status-in-progress' :
+                    'status-pending'
               }>
                 {step.status.replace('-', ' ')}
               </Badge>
@@ -255,13 +287,13 @@ const ClientDashboard = () => {
               </div>
               <Badge className={
                 milestone.status === 'completed' ? 'status-completed' :
-                milestone.status === 'in-progress' ? 'status-in-progress' :
-                'status-pending'
+                  milestone.status === 'in-progress' ? 'status-in-progress' :
+                    'status-pending'
               }>
                 {milestone.status.replace('-', ' ')}
               </Badge>
             </div>
-            
+
             <div className="flex justify-between items-center mt-3">
               <span className="subhead text-muted-foreground">Due: {milestone.date}</span>
               <div className="flex gap-2">
@@ -301,11 +333,10 @@ const ClientDashboard = () => {
         {files.map((file) => (
           <div key={file.name} className="flex items-center justify-between p-3 border border-border rounded-xl hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                file.type === 'design' ? 'bg-primary/10 text-primary' :
-                file.type === 'dev' ? 'bg-accent/10 text-accent' :
-                'bg-muted text-muted-foreground'
-              }`}>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${file.type === 'design' ? 'bg-primary/10 text-primary' :
+                  file.type === 'dev' ? 'bg-accent/10 text-accent' :
+                    'bg-muted text-muted-foreground'
+                }`}>
                 <FileText className="h-4 w-4" />
               </div>
               <div>
@@ -331,9 +362,8 @@ const ClientDashboard = () => {
       <CardContent>
         <div className="space-y-4 mb-4 max-h-64 overflow-y-auto">
           {messages.map((msg, index) => (
-            <div key={index} className={`p-3 rounded-xl ${
-              msg.needsReply ? 'bg-accent/10 border border-accent/20' : 'bg-muted/50'
-            }`}>
+            <div key={index} className={`p-3 rounded-xl ${msg.needsReply ? 'bg-accent/10 border border-accent/20' : 'bg-muted/50'
+              }`}>
               <div className="flex justify-between items-start mb-2">
                 <span className="caption-1 text-primary">{msg.sender}</span>
                 <span className="caption-2">{msg.time}</span>
@@ -347,7 +377,7 @@ const ClientDashboard = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="border-t pt-4">
           <div className="flex gap-2">
             <Textarea placeholder="Type your message..." className="resize-none" rows={2} />
@@ -432,7 +462,7 @@ const ClientDashboard = () => {
             <Badge className="status-completed">SSL Active</Badge>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div className="p-3 border border-border rounded-xl">
             <div className="caption-1 text-muted-foreground">Status</div>
@@ -443,7 +473,7 @@ const ClientDashboard = () => {
             <div className="headline">WPaaS Cloud</div>
           </div>
         </div>
-        
+
         <Button variant="outline" className="w-full">
           <ExternalLink className="h-4 w-4 mr-2" />
           Visit Live Site
@@ -478,7 +508,7 @@ const ClientDashboard = () => {
                   <div className="flex-1">
                     <h3 className="text-headline font-semibold mb-2">Share Your Project Story</h3>
                     <p className="text-body text-muted-foreground mb-4">
-                      By providing detailed information about your project, we can create a comprehensive showcase 
+                      By providing detailed information about your project, we can create a comprehensive showcase
                       that highlights the value we delivered and helps other potential clients understand our capabilities.
                     </p>
                     <div className="space-y-3">
@@ -513,7 +543,7 @@ const ClientDashboard = () => {
                     <p className="text-sm text-muted-foreground mb-4">
                       Provide comprehensive details about your project including features, challenges, and results
                     </p>
-                    <Button 
+                    <Button
                       onClick={() => setShowProjectForm(true)}
                       className="w-full"
                     >
@@ -571,16 +601,16 @@ const ClientDashboard = () => {
                       </div>
                     </div>
                     <div className="mt-4 flex gap-2">
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         onClick={() => setShowProjectForm(true)}
                       >
                         <Edit3 className="h-4 w-4 mr-2" />
                         Edit Information
                       </Button>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
                         onClick={() => setProjectFormData(null)}
                       >
@@ -607,7 +637,7 @@ const ClientDashboard = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Tell us about your experience working with WPaaS and how the project turned out
                 </p>
-                <Textarea 
+                <Textarea
                   placeholder="Share your thoughts about the project, our team, and the overall experience..."
                   rows={4}
                 />
@@ -646,23 +676,23 @@ const ClientDashboard = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <Label className="text-sm font-medium">What went well?</Label>
-                  <Textarea 
+                  <Textarea
                     placeholder="Tell us what you liked about our service..."
                     rows={3}
                   />
                 </div>
-                
+
                 <div>
                   <Label className="text-sm font-medium">What could we improve?</Label>
-                  <Textarea 
+                  <Textarea
                     placeholder="Share suggestions for improvement..."
                     rows={3}
                   />
                 </div>
-                
+
                 <div>
                   <Label className="text-sm font-medium">Would you recommend us to others?</Label>
                   <div className="flex gap-4 mt-2">
@@ -680,7 +710,7 @@ const ClientDashboard = () => {
                     </label>
                   </div>
                 </div>
-                
+
                 <Button className="w-full">
                   <Send className="h-4 w-4 mr-2" />
                   Submit Feedback
@@ -880,7 +910,7 @@ const ClientDashboard = () => {
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-6 top-0 bottom-0 w-px bg-border"></div>
-              
+
               <div className="space-y-8">
                 {timelineEvents.map((event, index) => (
                   <div key={index} className="relative flex gap-6">
@@ -888,7 +918,7 @@ const ClientDashboard = () => {
                     <div className={`relative z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 ${getStatusColor(event.status)}`}>
                       {getStatusIcon(event.status)}
                     </div>
-                    
+
                     {/* Event content */}
                     <div className="flex-1 pb-8">
                       <Card className={`border ${getStatusColor(event.status)}`}>
@@ -908,13 +938,13 @@ const ClientDashboard = () => {
                             </div>
                             <Badge className={
                               event.status === 'completed' ? 'status-completed' :
-                              event.status === 'in-progress' ? 'status-in-progress' :
-                              'status-pending'
+                                event.status === 'in-progress' ? 'status-in-progress' :
+                                  'status-pending'
                             }>
                               {event.status.replace('-', ' ')}
                             </Badge>
                           </div>
-                          
+
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                             <div>
                               <h4 className="caption-1 font-medium text-muted-foreground mb-2">Participants</h4>
@@ -931,7 +961,7 @@ const ClientDashboard = () => {
                                 ))}
                               </div>
                             </div>
-                            
+
                             <div>
                               <h4 className="caption-1 font-medium text-muted-foreground mb-2">Deliverables</h4>
                               <div className="space-y-1">
@@ -944,7 +974,7 @@ const ClientDashboard = () => {
                               </div>
                             </div>
                           </div>
-                          
+
                           <div className="flex items-center gap-6 mt-4 pt-4 border-t">
                             <div className="flex items-center gap-2">
                               <Clock className="h-4 w-4 text-muted-foreground" />
@@ -964,7 +994,7 @@ const ClientDashboard = () => {
             </div>
           </CardContent>
         </Card>
-        
+
         {/* Timeline Summary Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Card className="dashboard-card">
@@ -980,7 +1010,7 @@ const ClientDashboard = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -994,7 +1024,7 @@ const ClientDashboard = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -1008,7 +1038,7 @@ const ClientDashboard = () => {
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="dashboard-card">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -1084,7 +1114,7 @@ const ClientDashboard = () => {
               <p className="caption-2">{clientEmail}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-4">
             <Button variant="ghost" size="icon" className="hover:bg-white/20">
               <Bell className="h-5 w-5" />
@@ -1109,16 +1139,15 @@ const ClientDashboard = () => {
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
-                
+
                 return (
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${
-                      isActive 
-                        ? 'bg-primary text-primary-foreground shadow-sm' 
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${isActive
+                        ? 'bg-primary text-primary-foreground shadow-sm'
                         : 'hover:bg-white/20 text-muted-foreground hover:text-foreground'
-                    }`}
+                      }`}
                   >
                     <Icon className="h-5 w-5" />
                     <span className="subhead font-medium">{item.label}</span>
@@ -1141,14 +1170,13 @@ const ClientDashboard = () => {
           {navigationItems.slice(0, 4).map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
-            
+
             return (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex flex-col items-center justify-center py-2 transition-all duration-200 ${
-                  isActive ? 'text-primary' : 'text-muted-foreground'
-                }`}
+                className={`flex flex-col items-center justify-center py-2 transition-all duration-200 ${isActive ? 'text-primary' : 'text-muted-foreground'
+                  }`}
               >
                 <Icon className={`h-5 w-5 mb-1 ${isActive ? 'scale-110' : ''}`} />
                 <span className="caption-2 font-medium">{item.label}</span>

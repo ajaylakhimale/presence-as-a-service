@@ -148,7 +148,7 @@ const Pricing = () => {
       Pro: ['Custom Design', 'Responsive Layout', 'SEO Optimization', 'Contact Forms', 'Social Media Integration', 'Blog/CMS', 'E-commerce Ready', 'User Authentication', 'Database Integration', 'API Development', 'Analytics', 'Performance Monitoring', 'Security Hardening'],
       Enterprise: comparisonFeatures // All features
     };
-    
+
     return tierFeatureMap[tier]?.includes(feature);
   };
 
@@ -170,7 +170,7 @@ const Pricing = () => {
       <section className="relative bg-gradient-hero py-24 overflow-hidden">
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-large-title mb-6">
@@ -180,7 +180,7 @@ const Pricing = () => {
               No hidden fees, no surprises. Choose the plan that fits your needs and scale as you grow.
             </p>
             <div className="flex justify-center space-x-4">
-              <Button 
+              <Button
                 onClick={() => setShowComparison(!showComparison)}
                 className={showComparison ? 'btn-primary' : 'btn-secondary'}
               >
@@ -199,8 +199,8 @@ const Pricing = () => {
               {tiers.map((tier, index) => {
                 const Icon = tier.icon;
                 return (
-                  <Card 
-                    key={tier.name} 
+                  <Card
+                    key={tier.name}
                     className={`card-elevated relative ${tier.popular ? 'ring-2 ring-accent-brand' : ''} animate-fade-in-up`}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
@@ -313,7 +313,7 @@ const Pricing = () => {
                     </div>
                     <Slider
                       value={[costCalculator[key as keyof typeof costCalculator]]}
-                      onValueChange={(value) => 
+                      onValueChange={(value) =>
                         setCostCalculator(prev => ({ ...prev, [key]: value[0] }))
                       }
                       max={10}
@@ -322,7 +322,7 @@ const Pricing = () => {
                     />
                   </div>
                 ))}
-                
+
                 <div className="border-t border-border-subtle pt-6">
                   <div className="flex justify-between items-center text-title-2 font-bold">
                     <span>Total Estimated Cost:</span>
@@ -332,7 +332,7 @@ const Pricing = () => {
                     This is an estimate. Final pricing may vary based on project complexity.
                   </p>
                 </div>
-                
+
                 <Link to="/onboarding">
                   <Button className="btn-primary w-full text-lg">
                     Get Accurate Quote
@@ -354,33 +354,33 @@ const Pricing = () => {
               Common questions about our pricing model
             </p>
           </div>
-          
+
           <div className="space-y-8">
             <Card className="card-surface">
               <CardContent className="p-6">
                 <h3 className="text-headline font-semibold mb-2">Are there any hidden fees?</h3>
                 <p className="text-body text-muted-foreground">
-                  No hidden fees ever. All costs are transparent and agreed upon before work begins. 
+                  No hidden fees ever. All costs are transparent and agreed upon before work begins.
                   You'll receive a detailed quote for your project with clear pricing for each component.
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="card-surface">
               <CardContent className="p-6">
                 <h3 className="text-headline font-semibold mb-2">Can I upgrade my plan later?</h3>
                 <p className="text-body text-muted-foreground">
-                  Absolutely! You can add features to your existing project at any time. 
+                  Absolutely! You can add features to your existing project at any time.
                   We'll provide clear pricing for any additions or upgrades you need.
                 </p>
               </CardContent>
             </Card>
-            
+
             <Card className="card-surface">
               <CardContent className="p-6">
                 <h3 className="text-headline font-semibold mb-2">What's included in ongoing support?</h3>
                 <p className="text-body text-muted-foreground">
-                  Support includes bug fixes, security updates, content changes, and technical assistance. 
+                  Support includes bug fixes, security updates, content changes, and technical assistance.
                   You can purchase support credits as needed or choose a monthly support plan.
                 </p>
               </CardContent>

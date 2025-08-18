@@ -39,6 +39,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
+import { insertOnboardingForm } from '@/lib/supabase';
 
 interface FormData {
   // Step 1: Business Overview
@@ -76,6 +77,7 @@ interface FormData {
 const Onboarding = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     businessName: '',
     businessDescription: '',
@@ -130,14 +132,39 @@ const Onboarding = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', formData);
-    localStorage.removeItem('onboarding-form-data');
-    toast({
-      title: "Project Brief Submitted!",
-      description: "We'll review your requirements and get back to you within 24 hours.",
-    });
-    navigate('/client-dashboard');
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      await insertOnboardingForm({
+        business_name: formData.businessName,
+        business_description: formData.businessDescription,
+        website_goals: formData.websiteGoals,
+        has_existing_website: formData.hasExistingWebsite,
+        project_types: formData.projectTypes,
+        features: formData.features,
+        timeline: formData.timeline,
+        budget: formData.budget,
+        pages: formData.pages,
+        style_theme: formData.styleTheme
+      });
+
+      localStorage.removeItem('onboarding-form-data');
+      toast({
+        title: "Project Brief Submitted!",
+        description: "We'll review your requirements and get back to you within 24 hours.",
+      });
+      navigate('/client-dashboard');
+    } catch (error) {
+      console.error('Error submitting onboarding form:', error);
+      toast({
+        title: "Error submitting form",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const projectTypeOptions = [
@@ -647,9 +674,10 @@ const Onboarding = () => {
                   onClick={handleSubmit}
                   className="w-full h-12 text-lg font-medium"
                   size="lg"
+                  disabled={isSubmitting}
                 >
-                  Submit My Project Brief
-                  <ArrowRight className="h-5 w-5 ml-2" />
+                  {isSubmitting ? 'Submitting...' : 'Submit My Project Brief'}
+                  {!isSubmitting && <ArrowRight className="h-5 w-5 ml-2" />}
                 </Button>
                 <p className="text-center text-sm text-muted-foreground mt-4">
                   We'll review your requirements and get back to you within 24 hours

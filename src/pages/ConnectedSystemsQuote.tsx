@@ -6,6 +6,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Check, Globe, Smartphone, Monitor, Workflow } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
+import { insertConnectedSystemsQuote } from '@/lib/supabase';
+import { useToast } from '@/hooks/use-toast';
 
 // Requirements form state type
 interface RequirementsFormData {
@@ -17,6 +19,7 @@ interface RequirementsFormData {
 }
 
 const ConnectedSystemsQuote = () => {
+    const { toast } = useToast();
     const [formData, setFormData] = useState<RequirementsFormData>({
         platforms: [],
         features: '',
@@ -25,6 +28,7 @@ const ConnectedSystemsQuote = () => {
         company: '',
     });
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const platformOptions = [
         { id: 'web', label: 'Web App', icon: Globe },
@@ -47,10 +51,34 @@ const ConnectedSystemsQuote = () => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setFormSubmitted(true);
-        // Here you would send the form data to your backend or email service
+        setIsSubmitting(true);
+
+        try {
+            await insertConnectedSystemsQuote({
+                platforms: formData.platforms,
+                features: formData.features,
+                contact_name: formData.contactName,
+                contact_email: formData.contactEmail,
+                company: formData.company
+            });
+
+            setFormSubmitted(true);
+            toast({
+                title: "Quote request submitted!",
+                description: "We'll analyze your requirements and get back to you with a detailed quote within 24 hours.",
+            });
+        } catch (error) {
+            console.error('Error submitting quote request:', error);
+            toast({
+                title: "Error submitting request",
+                description: "Please try again or contact us directly.",
+                variant: "destructive"
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -138,7 +166,13 @@ const ConnectedSystemsQuote = () => {
                                         />
                                     </div>
                                     <div className="pt-4 text-center">
-                                        <Button type="submit" className="btn-primary px-10 py-4 text-lg">Submit Requirements</Button>
+                                        <Button
+                                            type="submit"
+                                            className="btn-primary px-10 py-4 text-lg"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting ? 'Submitting...' : 'Submit Requirements'}
+                                        </Button>
                                     </div>
                                 </form>
                             )}
