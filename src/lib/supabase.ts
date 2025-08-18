@@ -3,6 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co'
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key'
 
+// Debug logging
+console.log('Supabase URL:', supabaseUrl);
+console.log('Supabase Key exists:', !!supabaseAnonKey);
+console.log('Supabase Key length:', supabaseAnonKey.length);
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Database types for form submissions
@@ -74,56 +79,148 @@ export interface ProjectInfoForm {
 
 // Helper functions for database operations
 export const insertContactForm = async (data: ContactForm) => {
-    const { data: result, error } = await supabase
-        .from('contact_forms')
-        .insert([data])
-        .select()
-        .single()
+    try {
+        const { data: result, error } = await supabase
+            .from('contact_forms')
+            .insert([data])
+            .select()
+            .single()
 
-    if (error) throw error
-    return result
+        if (error) {
+            console.error('Supabase error:', error);
+
+            // Check if table doesn't exist
+            if (error.message.includes('relation "contact_forms" does not exist')) {
+                throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard. Check SUPABASE_SETUP.md for instructions.');
+            }
+
+            // Check for permission errors
+            if (error.message.includes('permission denied') || error.message.includes('RLS')) {
+                throw new Error('Database permission denied. Please check your RLS policies in Supabase.');
+            }
+
+            throw error;
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error in insertContactForm:', error);
+        throw error;
+    }
 }
 
 export const insertOnboardingForm = async (data: OnboardingForm) => {
-    const { data: result, error } = await supabase
-        .from('onboarding_forms')
-        .insert([data])
-        .select()
-        .single()
+    try {
+        const { data: result, error } = await supabase
+            .from('onboarding_forms')
+            .insert([data])
+            .select()
+            .single()
 
-    if (error) throw error
-    return result
+        if (error) {
+            console.error('Supabase error:', error);
+
+            if (error.message.includes('relation "onboarding_forms" does not exist')) {
+                throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
+            }
+
+            if (error.message.includes('permission denied') || error.message.includes('RLS')) {
+                throw new Error('Database permission denied. Please check your RLS policies in Supabase.');
+            }
+
+            throw error;
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error in insertOnboardingForm:', error);
+        throw error;
+    }
 }
 
 export const insertConnectedSystemsQuote = async (data: ConnectedSystemsQuote) => {
-    const { data: result, error } = await supabase
-        .from('connected_systems_quotes')
-        .insert([data])
-        .select()
-        .single()
+    try {
+        const { data: result, error } = await supabase
+            .from('connected_systems_quotes')
+            .insert([data])
+            .select()
+            .single()
 
-    if (error) throw error
-    return result
+        if (error) {
+            console.error('Supabase error:', error);
+
+            if (error.message.includes('relation "connected_systems_quotes" does not exist')) {
+                throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
+            }
+
+            if (error.message.includes('permission denied') || error.message.includes('RLS')) {
+                throw new Error('Database permission denied. Please check your RLS policies in Supabase.');
+            }
+
+            throw error;
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error in insertConnectedSystemsQuote:', error);
+        throw error;
+    }
 }
 
 export const insertTestimonialForm = async (data: TestimonialForm) => {
-    const { data: result, error } = await supabase
-        .from('testimonial_forms')
-        .insert([data])
-        .select()
-        .single()
+    try {
+        const { data: result, error } = await supabase
+            .from('testimonial_forms')
+            .insert([data])
+            .select()
+            .single()
 
-    if (error) throw error
-    return result
+        if (error) {
+            console.error('Supabase error:', error);
+
+            if (error.message.includes('relation "testimonial_forms" does not exist')) {
+                throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
+            }
+
+            if (error.message.includes('permission denied') || error.message.includes('RLS')) {
+                throw new Error('Database permission denied. Please check your RLS policies in Supabase.');
+            }
+
+            throw error;
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error in insertTestimonialForm:', error);
+        throw error;
+    }
 }
 
 export const insertProjectInfoForm = async (data: ProjectInfoForm) => {
-    const { data: result, error } = await supabase
-        .from('project_info_forms')
-        .insert([data])
-        .select()
-        .single()
+    try {
+        const { data: result, error } = await supabase
+            .from('project_info_forms')
+            .insert([data])
+            .select()
+            .single()
 
-    if (error) throw error
-    return result
+        if (error) {
+            console.error('Supabase error:', error);
+
+            if (error.message.includes('relation "project_info_forms" does not exist')) {
+                throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
+            }
+
+            if (error.message.includes('permission denied') || error.message.includes('RLS')) {
+                throw new Error('Database permission denied. Please check your RLS policies in Supabase.');
+            }
+
+            throw error;
+        }
+
+        return result;
+    } catch (error) {
+        console.error('Error in insertProjectInfoForm:', error);
+        throw error;
+    }
 }

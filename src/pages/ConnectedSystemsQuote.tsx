@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Check, Globe, Smartphone, Monitor, Workflow } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import { insertConnectedSystemsQuote } from '@/lib/supabase';
+import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
 import { useToast } from '@/hooks/use-toast';
 
 // Requirements form state type
@@ -56,26 +57,56 @@ const ConnectedSystemsQuote = () => {
         setIsSubmitting(true);
 
         try {
-            await insertConnectedSystemsQuote({
-                platforms: formData.platforms,
-                features: formData.features,
-                contact_name: formData.contactName,
-                contact_email: formData.contactEmail,
-                company: formData.company
-            });
+            const result = await submitFormSafely(
+                'connected_systems_quotes',
+                {
+                    platforms: formData.platforms,
+                    features: formData.features,
+                    contact_name: formData.contactName,
+                    contact_email: formData.contactEmail,
+                    company: formData.company
+                },
+                insertConnectedSystemsQuote
+            );
 
-            setFormSubmitted(true);
-            toast({
-                title: "Quote request submitted!",
-                description: "We'll analyze your requirements and get back to you with a detailed quote within 24 hours.",
-            });
+            if (result.success) {
+                setFormSubmitted(true);
+                toast({
+                    title: "Quote request submitted!",
+                    description: "We'll analyze your requirements and get back to you with a detailed quote within 24 hours.",
+                });
+            } else {
+                throw new Error(result.error);
+            }
         } catch (error) {
-            console.error('Error submitting quote request:', error);
-            toast({
-                title: "Error submitting request",
-                description: "Please try again or contact us directly.",
-                variant: "destructive"
-            });
+            console.error('Form submission failed, trying fallback...', error);
+
+            try {
+                const fallbackResult = await submitFormFallback('connected-systems-quote', {
+                    platforms: formData.platforms,
+                    features: formData.features,
+                    contact_name: formData.contactName,
+                    contact_email: formData.contactEmail,
+                    company: formData.company
+                });
+
+                if (fallbackResult.success) {
+                    setFormSubmitted(true);
+                    toast({
+                        title: "Quote request received!",
+                        description: "Your request has been saved. We'll get back to you once our database is fully set up.",
+                    });
+                } else {
+                    throw new Error('Both database and fallback submission failed');
+                }
+            } catch (fallbackError) {
+                console.error('Fallback submission also failed:', fallbackError);
+                toast({
+                    title: "Error submitting quote request",
+                    description: "Please try again later or contact us directly.",
+                    variant: "destructive"
+                });
+            }
         } finally {
             setIsSubmitting(false);
         }

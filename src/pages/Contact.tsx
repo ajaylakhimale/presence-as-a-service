@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, MessageSquare, Users, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,8 +10,11 @@ import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
-import { insertContactForm } from '@/lib/supabase';
+import { insertContactForm, supabase } from '@/lib/supabase';
+import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
 import FormSuccess from '@/components/ui/FormSuccess';
+import DatabaseStatus from '@/components/DatabaseStatus';
+import PendingSubmissions from '@/components/PendingSubmissions';
 
 const Contact = () => {
   const { toast } = useToast();
@@ -25,6 +28,30 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDatabaseConnected, setIsDatabaseConnected] = useState(false);
+
+  // Test Supabase connection on component mount
+  useEffect(() => {
+    const testConnection = async () => {
+      try {
+        console.log('Testing Supabase connection...');
+        const { data, error } = await supabase
+          .from('contact_forms')
+          .select('count', { count: 'exact' })
+          .limit(0);
+
+        if (error) {
+          console.error('Supabase connection test failed:', error);
+        } else {
+          console.log('Supabase connection test successful');
+        }
+      } catch (error) {
+        console.error('Supabase connection test error:', error);
+      }
+    };
+
+    testConnection();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -39,36 +66,83 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      await insertContactForm({
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        subject: formData.subject,
-        message: formData.message,
-        project_type: formData.projectType
-      });
+      console.log('Submitting form data:', formData);
 
-      toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
-      });
+      // Use the enhanced form submission handler
+      const result = await submitFormSafely(
+        'contact_forms',
+        {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          subject: formData.subject,
+          message: formData.message,
+          project_type: formData.projectType
+        },
+        insertContactForm
+      );
 
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        subject: '',
-        message: '',
-        projectType: ''
-      });
-      setIsSubmitted(true);
+      if (result.success) {
+        console.log('Form submission successful:', result.data);
+
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you within 24 hours.",
+        });
+
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          subject: '',
+          message: '',
+          projectType: ''
+        });
+        setIsSubmitted(true);
+      } else {
+        throw new Error(result.error);
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      toast({
-        title: "Error sending message",
-        description: "Please try again or contact us directly.",
-        variant: "destructive"
-      });
+      console.error('Form submission failed, trying fallback...', error);
+
+      // Try fallback method if database isn't set up
+      try {
+        const fallbackResult = await submitFormFallback('contact', {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          subject: formData.subject,
+          message: formData.message,
+          project_type: formData.projectType
+        });
+
+        if (fallbackResult.success) {
+          toast({
+            title: "Message received!",
+            description: "Your message has been saved. We'll get back to you once our database is fully set up.",
+          });
+
+          setFormData({
+            name: '',
+            email: '',
+            company: '',
+            subject: '',
+            message: '',
+            projectType: ''
+          });
+          setIsSubmitted(true);
+        } else {
+          throw new Error('Both database and fallback submission failed');
+        }
+      } catch (fallbackError) {
+        console.error('Fallback submission also failed:', fallbackError);
+
+        toast({
+          title: "Error sending message",
+          description: "Please try again later or contact us directly via email.",
+          variant: "destructive"
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -190,6 +264,14 @@ const Contact = () => {
                   </p>
                 </CardHeader>
                 <CardContent>
+                  {/* Pending Submissions Alert */}
+                  <PendingSubmissions />
+
+                  {/* Database Status Check */}
+                  <div className="mb-6">
+                    <DatabaseStatus onStatusChange={setIsDatabaseConnected} />
+                  </div>
+
                   {isSubmitted ? (
                     <FormSuccess
                       title="Message Sent Successfully!"
