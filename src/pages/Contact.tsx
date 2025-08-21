@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '@/config/site';
 import { insertContactForm, supabase } from '@/lib/supabase';
 import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
+import CookieManager from '@/lib/cookie-manager';
 import FormSuccess from '@/components/ui/FormSuccess';
 import DatabaseStatus from '@/components/DatabaseStatus';
 import PendingSubmissions from '@/components/PendingSubmissions';
@@ -53,6 +54,14 @@ const Contact = () => {
     testConnection();
   }, []);
 
+  // Check for existing submission on mount
+  useEffect(() => {
+    const existingSubmission = CookieManager.getFormSubmission();
+    if (existingSubmission && existingSubmission.type === 'contact') {
+      setIsSubmitted(true);
+    }
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -84,6 +93,17 @@ const Contact = () => {
 
       if (result.success) {
         console.log('Form submission successful:', result.data);
+
+        // Store submission in cookies
+        CookieManager.setFormSubmission({
+          id: `contact_${Date.now()}`,
+          type: 'contact',
+          status: 'success',
+          message: "We'll get back to you within 24 hours.",
+          contactName: formData.name,
+          contactEmail: formData.email,
+          submittedAt: new Date().toISOString()
+        });
 
         toast({
           title: "Message sent successfully!",
@@ -117,6 +137,17 @@ const Contact = () => {
         });
 
         if (fallbackResult.success) {
+          // Store submission in cookies
+          CookieManager.setFormSubmission({
+            id: `contact_fallback_${Date.now()}`,
+            type: 'contact',
+            status: 'success',
+            message: "Your message has been saved. We'll get back to you once our database is fully set up.",
+            contactName: formData.name,
+            contactEmail: formData.email,
+            submittedAt: new Date().toISOString()
+          });
+
           toast({
             title: "Message received!",
             description: "Your message has been saved. We'll get back to you once our database is fully set up.",
@@ -136,6 +167,17 @@ const Contact = () => {
         }
       } catch (fallbackError) {
         console.error('Fallback submission also failed:', fallbackError);
+
+        // Store failed submission in cookies
+        CookieManager.setFormSubmission({
+          id: `contact_failed_${Date.now()}`,
+          type: 'contact',
+          status: 'failed',
+          message: "Please try again later or contact us directly via email.",
+          contactName: formData.name,
+          contactEmail: formData.email,
+          submittedAt: new Date().toISOString()
+        });
 
         toast({
           title: "Error sending message",
@@ -276,7 +318,10 @@ const Contact = () => {
                     <FormSuccess
                       title="Message Sent Successfully!"
                       description="Thank you for reaching out. We'll get back to you within 24 hours."
-                      onReset={() => setIsSubmitted(false)}
+                      onReset={() => {
+                        setIsSubmitted(false);
+                        CookieManager.clearFormSubmission();
+                      }}
                       resetButtonText="Send Another Message"
                       icon="send"
                     />

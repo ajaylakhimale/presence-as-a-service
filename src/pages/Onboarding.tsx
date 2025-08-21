@@ -42,6 +42,7 @@ import { toast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
 import { insertOnboardingForm } from '@/lib/supabase';
 import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
+import CookieManager from '@/lib/cookie-manager';
 
 interface FormData {
   // Step 1: Business Overview
@@ -123,6 +124,15 @@ const Onboarding = () => {
     const savedData = localStorage.getItem('onboarding-form-data');
     if (savedData) {
       setFormData(JSON.parse(savedData));
+    }
+  }, []);
+
+  // Check for existing submission on mount
+  useEffect(() => {
+    const existingSubmission = CookieManager.getFormSubmission();
+    if (existingSubmission && existingSubmission.type === 'onboarding') {
+      setSubmissionStatus(existingSubmission.status);
+      setSubmissionMessage(existingSubmission.message);
     }
   }, []);
 
@@ -245,6 +255,18 @@ const Onboarding = () => {
       if (result.success) {
         console.log('Onboarding form submission successful:', result.data);
 
+        // Store submission in cookies
+        CookieManager.setFormSubmission({
+          id: `onboarding_${Date.now()}`,
+          type: 'onboarding',
+          status: 'success',
+          message: "We'll review your requirements and get back to you within 24 hours.",
+          projectName: formData.businessName,
+          contactName: formData.contactName,
+          contactEmail: formData.contactEmail,
+          submittedAt: new Date().toISOString()
+        });
+
         localStorage.removeItem('onboarding-form-data');
         setSubmissionStatus('success');
         setSubmissionMessage("We'll review your requirements and get back to you within 24 hours.");
@@ -276,6 +298,18 @@ const Onboarding = () => {
         });
 
         if (fallbackResult.success) {
+          // Store submission in cookies
+          CookieManager.setFormSubmission({
+            id: `onboarding_fallback_${Date.now()}`,
+            type: 'onboarding',
+            status: 'success',
+            message: "Your project brief has been saved. We'll get back to you once our database is fully set up.",
+            projectName: formData.businessName,
+            contactName: formData.contactName,
+            contactEmail: formData.contactEmail,
+            submittedAt: new Date().toISOString()
+          });
+
           localStorage.removeItem('onboarding-form-data');
           setSubmissionStatus('success');
           setSubmissionMessage("Your project brief has been saved. We'll get back to you once our database is fully set up.");
@@ -288,6 +322,18 @@ const Onboarding = () => {
         }
       } catch (fallbackError) {
         console.error('Fallback submission also failed:', fallbackError);
+
+        // Store failed submission in cookies
+        CookieManager.setFormSubmission({
+          id: `onboarding_failed_${Date.now()}`,
+          type: 'onboarding',
+          status: 'failed',
+          message: "Please try again later or contact us directly via email.",
+          projectName: formData.businessName,
+          contactName: formData.contactName,
+          contactEmail: formData.contactEmail,
+          submittedAt: new Date().toISOString()
+        });
 
         setSubmissionStatus('failed');
         setSubmissionMessage("Please try again later or contact us directly via email.");
@@ -387,6 +433,7 @@ const Onboarding = () => {
                 onClick={() => {
                   setSubmissionStatus('idle');
                   setCurrentStep(1);
+                  CookieManager.clearFormSubmission();
                   setFormData({
                     businessName: '',
                     businessDescription: '',
