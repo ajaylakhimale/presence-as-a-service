@@ -18,6 +18,8 @@ import ClientDashboard from "./pages/ClientDashboard";
 import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import ConnectedSystems from "./pages/ConnectedSystems";
+// Import database test
+import './lib/database-test';
 import ConnectedSystemsQuote from "./pages/ConnectedSystemsQuote";
 import HowItWorks from "./pages/HowItWorks";
 import CorporateEnterprise from "./pages/industries/CorporateEnterprise";
@@ -40,59 +42,78 @@ import ScheduleCall from "./pages/ScheduleCall";
 import NotFound from "./pages/NotFound";
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from "./components/ScrollToTop";
+import { useEffect } from 'react';
+import { autoRetryPendingSubmissions } from './lib/pending-submissions';
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <CustomCursor />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="/pricing" element={<Pricing />} />
-            {/* <Route path="/showcase" element={<Showcase />} /> */}
-            {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/tech-stack" element={<TechStack />} />
-            <Route path="/stats" element={<LiveStats />} />
-            <Route path="/client-login" element={<ClientLogin />} />
-            <Route path="/client-signup" element={<ClientSignup />} />
-            <Route path="/client-dashboard" element={<ClientDashboard />} />
-            <Route path="/onboarding" element={<Onboarding />} />
-            <Route path="/industries" element={<Industries />} />
-            <Route path="/industries/corporate-enterprise" element={<CorporateEnterprise />} />
-            <Route path="/industries/healthcare" element={<Healthcare />} />
-            <Route path="/industries/ecommerce-retail" element={<EcommerceRetail />} />
-            <Route path="/industries/education" element={<Education />} />
-            <Route path="/industries/logistics" element={<Logistics />} />
-            <Route path="/industries/food-hospitality" element={<FoodHospitality />} />
-            <Route path="/industries/real-estate" element={<RealEstate />} />
-            <Route path="/industries/finance" element={<Finance />} />
-            <Route path="/industries/startups-saas" element={<StartupsSaaS />} />
-            <Route path="/industries/events" element={<Events />} />
-            <Route path="/industries/fitness" element={<Fitness />} />
-            <Route path="/industries/marketing" element={<Marketing />} />
-            <Route path="/connected-systems" element={<ConnectedSystems />} />
-            <Route path="/connected-systems/quote" element={<ConnectedSystemsQuote />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/blogAdmin" element={<BlogAdmin />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/schedule-call" element={<ScheduleCall />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+const App = () => {
+  // Auto-retry pending submissions on app load and periodically
+  useEffect(() => {
+    // Initial retry attempt
+    setTimeout(() => {
+      autoRetryPendingSubmissions();
+    }, 5000); // Wait 5 seconds after app loads
+
+    // Set up periodic retry (every 2 minutes)
+    const interval = setInterval(() => {
+      autoRetryPendingSubmissions();
+    }, 120000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <CustomCursor />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/pricing" element={<Pricing />} />
+              {/* <Route path="/showcase" element={<Showcase />} /> */}
+              {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/tech-stack" element={<TechStack />} />
+              <Route path="/stats" element={<LiveStats />} />
+              <Route path="/client-login" element={<ClientLogin />} />
+              <Route path="/client-signup" element={<ClientSignup />} />
+              <Route path="/client-dashboard" element={<ClientDashboard />} />
+              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/industries/corporate-enterprise" element={<CorporateEnterprise />} />
+              <Route path="/industries/healthcare" element={<Healthcare />} />
+              <Route path="/industries/ecommerce-retail" element={<EcommerceRetail />} />
+              <Route path="/industries/education" element={<Education />} />
+              <Route path="/industries/logistics" element={<Logistics />} />
+              <Route path="/industries/food-hospitality" element={<FoodHospitality />} />
+              <Route path="/industries/real-estate" element={<RealEstate />} />
+              <Route path="/industries/finance" element={<Finance />} />
+              <Route path="/industries/startups-saas" element={<StartupsSaaS />} />
+              <Route path="/industries/events" element={<Events />} />
+              <Route path="/industries/fitness" element={<Fitness />} />
+              <Route path="/industries/marketing" element={<Marketing />} />
+              <Route path="/connected-systems" element={<ConnectedSystems />} />
+              <Route path="/connected-systems/quote" element={<ConnectedSystemsQuote />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/blogAdmin" element={<BlogAdmin />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/schedule-call" element={<ScheduleCall />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+};
 
 export default App;

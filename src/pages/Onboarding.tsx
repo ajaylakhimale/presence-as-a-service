@@ -34,12 +34,17 @@ import {
   Plus,
   Edit,
   Check,
-  ArrowRight
+  ArrowRight,
+  XCircle
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
 import { insertOnboardingForm } from '@/lib/supabase';
+import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
+import { testSupabaseConnection, debugSupabaseConfig } from '@/lib/supabase-debug';
+import DatabaseStatus from '@/components/DatabaseStatus';
+import PendingSubmissions from '@/components/PendingSubmissions';
 
 interface FormData {
   // Step 1: Business Overview
@@ -78,6 +83,8 @@ const Onboarding = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'failed'>('idle');
+  const [submissionMessage, setSubmissionMessage] = useState('');
   const [formData, setFormData] = useState<FormData>({
     businessName: '',
     businessDescription: '',
@@ -120,6 +127,50 @@ const Onboarding = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // Check file size (10MB = 10 * 1024 * 1024 bytes)
+      if (file.size > 10 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Please select a file smaller than 10MB.",
+          variant: "destructive"
+        });
+        return;
+      }
+      updateFormData('logo', file);
+      toast({
+        title: "Logo uploaded",
+        description: `${file.name} has been selected.`,
+      });
+    }
+  };
+
+  const handleReferenceFilesUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    if (files.length > 0) {
+      // Check each file size
+      const oversizedFiles = files.filter(file => file.size > 10 * 1024 * 1024);
+      if (oversizedFiles.length > 0) {
+        toast({
+          title: "Files too large",
+          description: `${oversizedFiles.length} file(s) are larger than 10MB. Please select smaller files.`,
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Add to existing reference files
+      const updatedFiles = [...formData.referenceFiles, ...files];
+      updateFormData('referenceFiles', updatedFiles);
+      toast({
+        title: "Files uploaded",
+        description: `${files.length} file(s) have been added.`,
+      });
+    }
+  };
+
   const handleNext = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
@@ -136,32 +187,79 @@ const Onboarding = () => {
     setIsSubmitting(true);
 
     try {
-      await insertOnboardingForm({
-        business_name: formData.businessName,
-        business_description: formData.businessDescription,
-        website_goals: formData.websiteGoals,
-        has_existing_website: formData.hasExistingWebsite,
-        project_types: formData.projectTypes,
-        features: formData.features,
-        timeline: formData.timeline,
-        budget: formData.budget,
-        pages: formData.pages,
-        style_theme: formData.styleTheme
-      });
+      console.log('Submitting onboarding form data:', formData);
 
-      localStorage.removeItem('onboarding-form-data');
-      toast({
-        title: "Project Brief Submitted!",
-        description: "We'll review your requirements and get back to you within 24 hours.",
-      });
-      navigate('/client-dashboard');
+      // Use the enhanced form submission handler
+      const result = await submitFormSafely(
+        'onboarding_forms',
+        {
+          business_name: formData.businessName,
+          business_description: formData.businessDescription,
+          website_goals: formData.websiteGoals,
+          has_existing_website: formData.hasExistingWebsite,
+          project_types: formData.projectTypes,
+          features: formData.features,
+          timeline: formData.timeline,
+          budget: formData.budget,
+          pages: formData.pages,
+          style_theme: formData.styleTheme
+        },
+        insertOnboardingForm
+      );
+
+      if (result.success) {
+        console.log('Onboarding form submission successful:', result.data);
+
+        localStorage.removeItem('onboarding-form-data');
+        setSubmissionStatus('success');
+        setSubmissionMessage("We'll review your requirements and get back to you within 24 hours.");
+        toast({
+          title: "Project Brief Submitted!",
+          description: "We'll review your requirements and get back to you within 24 hours.",
+        });
+      } else {
+        throw new Error(result.error);
+      }
     } catch (error) {
-      console.error('Error submitting onboarding form:', error);
-      toast({
-        title: "Error submitting form",
-        description: "Please try again or contact us directly.",
-        variant: "destructive"
-      });
+      console.error('Onboarding form submission failed, trying fallback...', error);
+
+      // Try fallback method if database isn't set up
+      try {
+        const fallbackResult = await submitFormFallback('onboarding', {
+          business_name: formData.businessName,
+          business_description: formData.businessDescription,
+          website_goals: formData.websiteGoals,
+          has_existing_website: formData.hasExistingWebsite,
+          project_types: formData.projectTypes,
+          features: formData.features,
+          timeline: formData.timeline,
+          budget: formData.budget,
+          pages: formData.pages,
+          style_theme: formData.styleTheme
+        });
+
+        if (fallbackResult.success) {
+          localStorage.removeItem('onboarding-form-data');
+          setSubmissionStatus('success');
+          setSubmissionMessage("Your project brief has been saved. We'll get back to you once our database is fully set up.");
+          toast({
+            title: "Project Brief Received!",
+            description: "Your project brief has been saved. We'll get back to you once our database is fully set up.",
+          });
+        } else {
+          throw new Error('Both database and fallback submission failed');
+        }
+      } catch (fallbackError) {
+        console.error('Fallback submission also failed:', fallbackError);
+
+        setSubmissionStatus('failed');
+        setSubmissionMessage("Please try again later or contact us directly via email.");
+        toast({
+          title: "Error submitting project brief",
+          description: "Please try again later or contact us directly via email.",
+          variant: "destructive"
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -211,6 +309,127 @@ const Onboarding = () => {
   ];
 
   const renderStep = () => {
+    // Show success UI
+    if (submissionStatus === 'success') {
+      return (
+        <Card className="border-2 border-green-200 shadow-lg bg-green-50">
+          <CardHeader className="text-center pb-8">
+            <div className="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+              <CheckCircle className="h-12 w-12 text-green-600" />
+            </div>
+            <CardTitle className="text-3xl font-bold text-green-800 mb-4">Project Brief Submitted!</CardTitle>
+            <p className="text-green-700 text-lg">{submissionMessage}</p>
+          </CardHeader>
+          <CardContent className="text-center space-y-6">
+            <div className="bg-white p-6 rounded-lg border border-green-200">
+              <h3 className="font-semibold text-green-800 mb-2">What happens next?</h3>
+              <ul className="text-green-700 space-y-2 text-left">
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  Our team will review your requirements
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  We'll prepare a detailed proposal
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  You'll receive our response within 24 hours
+                </li>
+              </ul>
+            </div>
+            <div className="flex gap-4 justify-center">
+              <Button
+                onClick={() => navigate('/')}
+                variant="outline"
+                className="border-green-300 text-green-700 hover:bg-green-100"
+              >
+                Back to Home
+              </Button>
+              <Button
+                onClick={() => {
+                  setSubmissionStatus('idle');
+                  setCurrentStep(1);
+                  setFormData({
+                    businessName: '',
+                    businessDescription: '',
+                    websiteGoals: '',
+                    hasExistingWebsite: '',
+                    projectTypes: [],
+                    customProjectType: '',
+                    features: [],
+                    customFeature: '',
+                    apiIntegration: '',
+                    logo: null,
+                    colorPalette: [],
+                    fontPreference: '',
+                    styleTheme: '',
+                    inspirationLinks: '',
+                    referenceFiles: [],
+                    pages: [],
+                    customPages: '',
+                    timeline: '',
+                    budget: ''
+                  });
+                }}
+                className="bg-green-600 hover:bg-green-700"
+              >
+                Submit Another Project
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    // Show failure UI
+    if (submissionStatus === 'failed') {
+      return (
+        <Card className="border-2 border-red-200 shadow-lg bg-red-50">
+          <CardHeader className="text-center pb-8">
+            <div className="mx-auto w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-6">
+              <XCircle className="h-12 w-12 text-red-600" />
+            </div>
+            <CardTitle className="text-3xl font-bold text-red-800 mb-4">Submission Failed</CardTitle>
+            <p className="text-red-700 text-lg">{submissionMessage}</p>
+          </CardHeader>
+          <CardContent className="text-center space-y-6">
+            <div className="bg-white p-6 rounded-lg border border-red-200">
+              <h3 className="font-semibold text-red-800 mb-2">Need help?</h3>
+              <p className="text-red-700 mb-4">Don't worry, your form data is saved locally. You can try again or contact us directly.</p>
+              <div className="text-left space-y-2">
+                <p className="text-red-700 flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email: support@macro-presence.dev
+                </p>
+                <p className="text-red-700 flex items-center gap-2">
+                  <MessageCircle className="h-4 w-4" />
+                  We'll respond within 2 hours
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-4 justify-center">
+              <Button
+                onClick={() => navigate('/contact')}
+                variant="outline"
+                className="border-red-300 text-red-700 hover:bg-red-100"
+              >
+                Contact Us Directly
+              </Button>
+              <Button
+                onClick={() => {
+                  setSubmissionStatus('idle');
+                }}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                Try Again
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
     switch (currentStep) {
       case 1:
         return (
@@ -415,10 +634,20 @@ const Onboarding = () => {
             <CardContent className="space-y-6">
               <div>
                 <Label className="text-sm font-medium">Upload Your Logo (Optional)</Label>
-                <div className="mt-2 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
+                <div className="mt-2 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer"
+                  onClick={() => document.getElementById('logo-upload')?.click()}>
                   <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
-                  <p className="text-sm text-muted-foreground">Drag & drop or click to upload</p>
-                  <input type="file" className="hidden" accept="image/*" />
+                  <p className="text-sm text-muted-foreground">
+                    {formData.logo ? `Selected: ${formData.logo.name}` : 'Drag & drop or click to upload'}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">Max size: 10MB</p>
+                  <input
+                    id="logo-upload"
+                    type="file"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                  />
                 </div>
               </div>
 
@@ -463,11 +692,43 @@ const Onboarding = () => {
 
               <div>
                 <Label className="text-sm font-medium">Reference Files/Sketches (Optional)</Label>
-                <div className="mt-2 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
+                <div className="mt-2 border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer"
+                  onClick={() => document.getElementById('reference-files-upload')?.click()}>
                   <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
-                  <p className="text-sm text-muted-foreground">Upload wireframes, sketches, or design references</p>
-                  <input type="file" className="hidden" multiple accept="image/*,.pdf,.doc,.docx" />
+                  <p className="text-sm text-muted-foreground">
+                    {formData.referenceFiles.length > 0
+                      ? `${formData.referenceFiles.length} file(s) selected`
+                      : 'Upload wireframes, sketches, or design references'
+                    }
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">Max size per file: 10MB</p>
+                  <input
+                    id="reference-files-upload"
+                    type="file"
+                    className="hidden"
+                    multiple
+                    accept="image/*,.pdf,.doc,.docx"
+                    onChange={handleReferenceFilesUpload}
+                  />
                 </div>
+                {formData.referenceFiles.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    {formData.referenceFiles.map((file, index) => (
+                      <div key={index} className="flex items-center justify-between text-xs bg-muted p-2 rounded">
+                        <span>{file.name}</span>
+                        <button
+                          onClick={() => {
+                            const updatedFiles = formData.referenceFiles.filter((_, i) => i !== index);
+                            updateFormData('referenceFiles', updatedFiles);
+                          }}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -732,6 +993,43 @@ const Onboarding = () => {
               <span className="text-sm text-muted-foreground">{Math.round(progress)}% Complete</span>
             </div>
             <Progress value={progress} className="h-2" />
+          </div>
+        </div>
+      </div>
+
+      {/* Database Status and Pending Submissions */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="max-w-2xl mx-auto">
+          <DatabaseStatus />
+          <PendingSubmissions />
+
+          {/* Debug Section - Remove after fixing */}
+          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <h3 className="text-sm font-medium text-yellow-800 mb-2">Debug Tools</h3>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={async () => {
+                  debugSupabaseConfig();
+                  const result = await testSupabaseConnection();
+                  if (result.success) {
+                    toast({
+                      title: "✅ Connection Successful",
+                      description: "Database test passed!",
+                    });
+                  } else {
+                    toast({
+                      title: "❌ Connection Failed",
+                      description: result.error,
+                      variant: "destructive"
+                    });
+                  }
+                }}
+              >
+                Test DB Connection
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -12,7 +12,34 @@ It looks like your Supabase database tables haven't been created yet. Follow the
 ### Step 2: Create Database Tables
 1. Click on **"SQL Editor"** in the left sidebar
 2. Click **"New Query"**
-3. Copy and paste this entire script:
+3. Copy and paste the contents of `supabase-setup.sql`
+
+### Step 3: Diagnose Issues (If Needed)
+If you're experiencing form submission errors:
+1. Run the contents of `database-diagnostic.sql` first
+2. This will show you exactly what's wrong
+
+### Step 4: Fix RLS Policies
+**IMPORTANT:** Run the comprehensive RLS fix:
+1. Copy and paste the contents of `comprehensive-rls-fix.sql`
+2. This fixes all RLS policy violations that prevent form submissions
+
+### Step 5: Verify Setup
+After running the scripts:
+- The app will show "Database Connected" status
+- Forms should submit without errors
+- No more "RLS policy violation" errors
+
+## Common Issues
+
+### "new row violates row-level security policy"
+**Solution:** Run `comprehensive-rls-fix.sql` - this is the most common issue!
+
+### "permission denied for table"
+**Solution:** The comprehensive fix includes proper permissions
+
+### Database connection fails
+**Solution:** Check your `.env` file has correct SUPABASE_URL and SUPABASE_ANON_KEY
 
 ```sql
 -- Contact Forms Table
