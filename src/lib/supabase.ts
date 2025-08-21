@@ -3,30 +3,13 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co'
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key'
 
-// Debug logging
-console.log('Supabase URL:', supabaseUrl);
-console.log('Supabase Key exists:', !!supabaseAnonKey);
-console.log('Supabase Key length:', supabaseAnonKey.length);
-console.log('Supabase Key preview:', supabaseAnonKey.substring(0, 50) + '...');
-
-// Validate environment variables
-if (!supabaseUrl || supabaseUrl === 'https://your-project.supabase.co') {
-    console.error('❌ VITE_SUPABASE_URL is not set or is using default value');
-}
-
-if (!supabaseAnonKey || supabaseAnonKey === 'your-anon-key') {
-    console.error('❌ VITE_SUPABASE_ANON_KEY is not set or is using default value');
-}
-
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
         autoRefreshToken: false,
         persistSession: false,
         detectSessionInUrl: false
     }
-})
-
-// Database types for form submissions
+})// Database types for form submissions
 export interface ContactForm {
     id?: string
     name: string
@@ -96,22 +79,11 @@ export interface ProjectInfoForm {
 // Helper functions for database operations
 export const insertContactForm = async (data: ContactForm) => {
     try {
-        console.log('🔍 Attempting to insert contact form data:', data);
-
-        // Use the same approach as the working onboarding form
         const { data: result, error } = await supabase
             .from('contact_forms')
             .insert([data])
 
         if (error) {
-            console.error('❌ Supabase error:', error);
-            console.error('Error details:', {
-                message: error.message,
-                code: error.code,
-                details: error.details,
-                hint: error.hint
-            });
-
             if (error.message.includes('relation "contact_forms" does not exist')) {
                 throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
             }
@@ -127,32 +99,20 @@ export const insertContactForm = async (data: ContactForm) => {
             throw error;
         }
 
-        console.log('✅ Contact form inserted successfully:', result);
         return result;
     } catch (error) {
-        console.error('❌ Error in insertContactForm:', error);
+        console.error('Error in insertContactForm:', error);
         throw error;
     }
 }
 
 export const insertOnboardingForm = async (data: OnboardingForm) => {
     try {
-        console.log('🔍 Attempting to insert onboarding form data:', data);
-
-        // First, let's try a simple insert without .select() to avoid the complex URL
         const { data: result, error } = await supabase
             .from('onboarding_forms')
             .insert([data])
 
         if (error) {
-            console.error('❌ Supabase error:', error);
-            console.error('Error details:', {
-                message: error.message,
-                code: error.code,
-                details: error.details,
-                hint: error.hint
-            });
-
             if (error.message.includes('relation "onboarding_forms" does not exist')) {
                 throw new Error('Database tables not found. Please run the setup SQL script in your Supabase dashboard.');
             }
@@ -168,10 +128,9 @@ export const insertOnboardingForm = async (data: OnboardingForm) => {
             throw error;
         }
 
-        console.log('✅ Onboarding form inserted successfully:', result);
         return result;
     } catch (error) {
-        console.error('❌ Error in insertOnboardingForm:', error);
+        console.error('Error in insertOnboardingForm:', error);
         throw error;
     }
 }

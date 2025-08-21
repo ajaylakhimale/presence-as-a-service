@@ -42,9 +42,6 @@ import { toast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
 import { insertOnboardingForm } from '@/lib/supabase';
 import { submitFormSafely, submitFormFallback } from '@/lib/form-handler';
-import { testSupabaseConnection, debugSupabaseConfig } from '@/lib/supabase-debug';
-import DatabaseStatus from '@/components/DatabaseStatus';
-import PendingSubmissions from '@/components/PendingSubmissions';
 
 interface FormData {
   // Step 1: Business Overview
@@ -77,6 +74,10 @@ interface FormData {
   // Step 6: Timeline & Budget
   timeline: string;
   budget: string;
+
+  // Step 7: Contact Information
+  contactName: string;
+  contactEmail: string;
 }
 
 const Onboarding = () => {
@@ -104,10 +105,12 @@ const Onboarding = () => {
     pages: [],
     customPages: '',
     timeline: '',
-    budget: ''
+    budget: '',
+    contactName: '',
+    contactEmail: ''
   });
 
-  const totalSteps = 7;
+  const totalSteps = 8;
   const progress = (currentStep / totalSteps) * 100;
 
   // Auto-save to localStorage
@@ -172,6 +175,36 @@ const Onboarding = () => {
   };
 
   const handleNext = () => {
+    // Validation for step 7 (Contact Information)
+    if (currentStep === 7) {
+      if (!formData.contactName.trim()) {
+        toast({
+          title: "Name Required",
+          description: "Please enter your name to continue.",
+          variant: "destructive"
+        });
+        return;
+      }
+      if (!formData.contactEmail.trim()) {
+        toast({
+          title: "Email Required",
+          description: "Please enter your email address to continue.",
+          variant: "destructive"
+        });
+        return;
+      }
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.contactEmail)) {
+        toast({
+          title: "Invalid Email",
+          description: "Please enter a valid email address.",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     }
@@ -202,7 +235,9 @@ const Onboarding = () => {
           timeline: formData.timeline,
           budget: formData.budget,
           pages: formData.pages,
-          style_theme: formData.styleTheme
+          style_theme: formData.styleTheme,
+          contact_name: formData.contactName,
+          contact_email: formData.contactEmail
         },
         insertOnboardingForm
       );
@@ -235,7 +270,9 @@ const Onboarding = () => {
           timeline: formData.timeline,
           budget: formData.budget,
           pages: formData.pages,
-          style_theme: formData.styleTheme
+          style_theme: formData.styleTheme,
+          contact_name: formData.contactName,
+          contact_email: formData.contactEmail
         });
 
         if (fallbackResult.success) {
@@ -369,7 +406,9 @@ const Onboarding = () => {
                     pages: [],
                     customPages: '',
                     timeline: '',
-                    budget: ''
+                    budget: '',
+                    contactName: '',
+                    contactEmail: ''
                   });
                 }}
                 className="bg-green-600 hover:bg-green-700"
@@ -854,6 +893,53 @@ const Onboarding = () => {
           <Card className="border-2 border-primary/20 shadow-lg">
             <CardHeader className="text-center pb-8">
               <div className="mx-auto w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+                <Mail className="h-8 w-8 text-primary" />
+              </div>
+              <CardTitle className="text-2xl font-bold">Contact Information</CardTitle>
+              <p className="text-muted-foreground">Let us know how to reach you about this project</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <Label htmlFor="contactName" className="text-sm font-medium">
+                  Your Name *
+                </Label>
+                <Input
+                  id="contactName"
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={formData.contactName}
+                  onChange={(e) => updateFormData('contactName', e.target.value)}
+                  className="mt-2"
+                  required
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="contactEmail" className="text-sm font-medium">
+                  Email Address *
+                </Label>
+                <Input
+                  id="contactEmail"
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={formData.contactEmail}
+                  onChange={(e) => updateFormData('contactEmail', e.target.value)}
+                  className="mt-2"
+                  required
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  We'll use this email to send you project updates and our proposal
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        );
+
+      case 8:
+        return (
+          <Card className="border-2 border-primary/20 shadow-lg">
+            <CardHeader className="text-center pb-8">
+              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
                 <CheckCircle className="h-8 w-8 text-primary" />
               </div>
               <CardTitle className="text-2xl font-bold">Review & Submit</CardTitle>
@@ -928,6 +1014,21 @@ const Onboarding = () => {
                     Timeline: {formData.timeline} | Budget: {formData.budget}
                   </p>
                 </div>
+
+                <div className="p-4 bg-muted/50 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-medium flex items-center gap-2">
+                      <Mail className="h-4 w-4" />
+                      Contact Information
+                    </h4>
+                    <Button variant="ghost" size="sm" onClick={() => setCurrentStep(7)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {formData.contactName} - {formData.contactEmail}
+                  </p>
+                </div>
               </div>
 
               <div className="border-t pt-6">
@@ -997,49 +1098,10 @@ const Onboarding = () => {
         </div>
       </div>
 
-      {/* Database Status and Pending Submissions */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="max-w-2xl mx-auto">
-          <DatabaseStatus />
-          <PendingSubmissions />
-
-          {/* Debug Section - Remove after fixing */}
-          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <h3 className="text-sm font-medium text-yellow-800 mb-2">Debug Tools</h3>
-            <div className="flex gap-2">
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={async () => {
-                  debugSupabaseConfig();
-                  const result = await testSupabaseConnection();
-                  if (result.success) {
-                    toast({
-                      title: "✅ Connection Successful",
-                      description: "Database test passed!",
-                    });
-                  } else {
-                    toast({
-                      title: "❌ Connection Failed",
-                      description: result.error,
-                      variant: "destructive"
-                    });
-                  }
-                }}
-              >
-                Test DB Connection
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">
-          {renderStep()}
-
-          {/* Navigation */}
+          {renderStep()}          {/* Navigation */}
           <div className="flex items-center justify-between mt-8">
             <Button
               variant="outline"
