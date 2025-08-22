@@ -1,0 +1,850 @@
+{
+    "currency": "INR",
+    "fx": {
+        "USD": 0.012,
+        "EUR": 0.011,
+        "GBP": 0.0095
+    },
+    "rounding": {
+        "strategy": "psychological",
+        "endings": [
+            9,
+            99,
+            999
+        ]
+    },
+    "discounts": {
+        "annual_percent": 20,
+        "nonprofit_percent": 15,
+        "education_percent": 25,
+        "startup_percent": 10,
+        "launch": {
+            "active": true,
+            "percent": 15,
+            "until": "2025-12-31"
+        }
+    },
+    "global_addons": [
+        {
+            "id": "extra_language",
+            "label": "Additional Language",
+            "description": "Full website translation and localization",
+            "unit": "each",
+            "price_monthly": 2999,
+            "setup_cost": 8999,
+            "category": "localization"
+        },
+        {
+            "id": "extra_integration",
+            "label": "Third-party Integration",
+            "description": "Custom API integration with external services",
+            "unit": "each",
+            "price_monthly": 1999,
+            "setup_cost": 9999,
+            "category": "integration"
+        },
+        {
+            "id": "priority_support",
+            "label": "Priority Support",
+            "description": "24/7 priority support with 2-hour response time",
+            "unit": "month",
+            "price_monthly": 4999,
+            "setup_cost": 0,
+            "category": "support"
+        },
+        {
+            "id": "advanced_analytics",
+            "label": "Advanced Analytics",
+            "description": "Custom analytics dashboard with detailed insights",
+            "unit": "month",
+            "price_monthly": 3999,
+            "setup_cost": 12999,
+            "category": "analytics"
+        },
+        {
+            "id": "white_label",
+            "label": "White Label Solution",
+            "description": "Complete branding removal and custom styling",
+            "unit": "month",
+            "price_monthly": 7999,
+            "setup_cost": 19999,
+            "category": "branding"
+        },
+        {
+            "id": "mobile_app",
+            "label": "Mobile Application",
+            "description": "Native iOS and Android app (both platforms)",
+            "unit": "one-time",
+            "price_monthly": 0,
+            "setup_cost": 199999,
+            "category": "mobile"
+        },
+        {
+            "id": "advanced_seo",
+            "label": "Advanced SEO Package",
+            "description": "Comprehensive SEO optimization and ongoing management",
+            "unit": "month",
+            "price_monthly": 5999,
+            "setup_cost": 14999,
+            "category": "marketing"
+        },
+        {
+            "id": "ssl_certificate",
+            "label": "SSL Certificate",
+            "description": "Premium SSL certificate for enhanced security",
+            "unit": "year",
+            "price_monthly": 499,
+            "setup_cost": 2999,
+            "category": "security"
+        }
+    ],
+    "types": [
+        {
+            "id": "business_website",
+            "label": "Business Website",
+            "category": "Business & Corporate",
+            "description": "Professional company presence with services, about, and contact information",
+            "scale": {
+                "base": {
+                    "monthly_visits": 10000,
+                    "pages": 10,
+                    "admins": 2,
+                    "storage_gb": 5
+                },
+                "modifiers": [
+                    {
+                        "metric": "monthly_visits",
+                        "step": 10000,
+                        "price_add_monthly": 999
+                    },
+                    {
+                        "metric": "pages",
+                        "step": 5,
+                        "price_add_monthly": 1999
+                    },
+                    {
+                        "metric": "admins",
+                        "step": 1,
+                        "price_add_monthly": 799
+                    },
+                    {
+                        "metric": "storage_gb",
+                        "step": 5,
+                        "price_add_monthly": 499
+                    }
+                ]
+            },
+            "tiers": {
+                "essential": {
+                    "label": "Essential",
+                    "base_price_monthly": 4999,
+                    "setup_cost": 29999,
+                    "delivery_days": 14,
+                    "features": [
+                        "Responsive design for all devices",
+                        "Up to 10 pages",
+                        "Contact form with email notifications",
+                        "Basic SEO optimization",
+                        "Google Analytics integration",
+                        "Social media links",
+                        "1 year domain included",
+                        "SSL certificate",
+                        "3 months support"
+                    ],
+                    "limits": {
+                        "pages": 10,
+                        "monthly_visits": 10000,
+                        "admins": 1,
+                        "integrations_included": 2,
+                        "languages_included": 1,
+                        "storage_gb": 5,
+                        "support_response_hours": 48
+                    }
+                },
+                "professional": {
+                    "label": "Professional",
+                    "badge": "Most Popular",
+                    "base_price_monthly": 9999,
+                    "setup_cost": 59999,
+                    "delivery_days": 21,
+                    "features": [
+                        "Everything in Essential",
+                        "Up to 25 pages",
+                        "Advanced contact forms",
+                        "Blog/News section",
+                        "Advanced SEO optimization",
+                        "Google Analytics + Search Console",
+                        "Social media integration",
+                        "Newsletter signup",
+                        "Content management system",
+                        "6 months support"
+                    ],
+                    "limits": {
+                        "pages": 25,
+                        "monthly_visits": 50000,
+                        "admins": 3,
+                        "integrations_included": 5,
+                        "languages_included": 2,
+                        "storage_gb": 20,
+                        "support_response_hours": 24
+                    }
+                },
+                "ultimate": {
+                    "label": "Ultimate",
+                    "base_price_monthly": 19999,
+                    "setup_cost": 99999,
+                    "delivery_days": 35,
+                    "features": [
+                        "Everything in Professional",
+                        "Unlimited pages",
+                        "Custom functionality development",
+                        "Advanced CMS with workflow",
+                        "Multi-language support",
+                        "Advanced analytics dashboard",
+                        "API integrations",
+                        "Priority support",
+                        "Performance optimization",
+                        "12 months support"
+                    ],
+                    "limits": {
+                        "pages": -1,
+                        "monthly_visits": 200000,
+                        "admins": -1,
+                        "integrations_included": -1,
+                        "languages_included": 3,
+                        "storage_gb": 100,
+                        "support_response_hours": 4
+                    }
+                }
+            },
+            "addons": [
+                {
+                    "id": "advanced_cms",
+                    "label": "Advanced Content Management",
+                    "description": "Custom CMS with workflow and approval system",
+                    "price_monthly": 2999,
+                    "setup_cost": 14999
+                },
+                {
+                    "id": "lead_generation",
+                    "label": "Lead Generation Tools",
+                    "description": "Advanced forms, pop-ups, and lead tracking",
+                    "price_monthly": 1999,
+                    "setup_cost": 7999
+                },
+                {
+                    "id": "live_chat",
+                    "label": "Live Chat Integration",
+                    "description": "Real-time customer support chat",
+                    "price_monthly": 1499,
+                    "setup_cost": 4999
+                }
+            ]
+        },
+        {
+            "id": "ecommerce_store",
+            "label": "E-commerce Store",
+            "category": "E-commerce & Retail",
+            "description": "Complete online store with product catalog, cart, checkout, and payment processing",
+            "scale": {
+                "base": {
+                    "monthly_visits": 25000,
+                    "products": 100,
+                    "orders_monthly": 50,
+                    "admins": 2,
+                    "storage_gb": 10
+                },
+                "modifiers": [
+                    {
+                        "metric": "monthly_visits",
+                        "step": 25000,
+                        "price_add_monthly": 1999
+                    },
+                    {
+                        "metric": "products",
+                        "step": 100,
+                        "price_add_monthly": 1499
+                    },
+                    {
+                        "metric": "orders_monthly",
+                        "step": 50,
+                        "price_add_monthly": 999
+                    },
+                    {
+                        "metric": "admins",
+                        "step": 1,
+                        "price_add_monthly": 1299
+                    },
+                    {
+                        "metric": "storage_gb",
+                        "step": 10,
+                        "price_add_monthly": 799
+                    }
+                ]
+            },
+            "tiers": {
+                "essential": {
+                    "label": "Essential",
+                    "base_price_monthly": 12999,
+                    "setup_cost": 79999,
+                    "delivery_days": 28,
+                    "features": [
+                        "Responsive e-commerce design",
+                        "Product catalog (up to 100 products)",
+                        "Shopping cart and checkout",
+                        "Payment gateway integration (1 gateway)",
+                        "Order management system",
+                        "Basic inventory tracking",
+                        "Customer accounts",
+                        "Order confirmation emails",
+                        "SSL certificate",
+                        "3 months support"
+                    ],
+                    "limits": {
+                        "products": 100,
+                        "monthly_visits": 25000,
+                        "orders_monthly": 50,
+                        "admins": 2,
+                        "payment_gateways": 1,
+                        "integrations_included": 2,
+                        "languages_included": 1,
+                        "storage_gb": 10,
+                        "support_response_hours": 48
+                    }
+                },
+                "professional": {
+                    "label": "Professional",
+                    "badge": "Most Popular",
+                    "base_price_monthly": 24999,
+                    "setup_cost": 149999,
+                    "delivery_days": 42,
+                    "features": [
+                        "Everything in Essential",
+                        "Product catalog (up to 500 products)",
+                        "Advanced product variants",
+                        "Multiple payment gateways",
+                        "Abandoned cart recovery",
+                        "Discount codes and promotions",
+                        "Advanced inventory management",
+                        "Customer reviews and ratings",
+                        "Analytics dashboard",
+                        "Email marketing integration",
+                        "6 months support"
+                    ],
+                    "limits": {
+                        "products": 500,
+                        "monthly_visits": 100000,
+                        "orders_monthly": 200,
+                        "admins": 5,
+                        "payment_gateways": 3,
+                        "integrations_included": 8,
+                        "languages_included": 2,
+                        "storage_gb": 50,
+                        "support_response_hours": 24
+                    }
+                },
+                "ultimate": {
+                    "label": "Ultimate",
+                    "base_price_monthly": 49999,
+                    "setup_cost": 299999,
+                    "delivery_days": 56,
+                    "features": [
+                        "Everything in Professional",
+                        "Unlimited products",
+                        "Multi-vendor marketplace features",
+                        "Advanced analytics and reporting",
+                        "Custom integrations",
+                        "Multi-language and multi-currency",
+                        "Advanced SEO optimization",
+                        "API access",
+                        "White-label options",
+                        "Priority support",
+                        "Performance optimization",
+                        "12 months support"
+                    ],
+                    "limits": {
+                        "products": -1,
+                        "monthly_visits": 500000,
+                        "orders_monthly": 1000,
+                        "admins": -1,
+                        "payment_gateways": -1,
+                        "integrations_included": -1,
+                        "languages_included": 5,
+                        "storage_gb": 200,
+                        "support_response_hours": 4
+                    }
+                }
+            },
+            "addons": [
+                {
+                    "id": "multi_vendor",
+                    "label": "Multi-vendor Marketplace",
+                    "description": "Allow multiple vendors to sell on your platform",
+                    "price_monthly": 9999,
+                    "setup_cost": 49999
+                },
+                {
+                    "id": "subscription_billing",
+                    "label": "Subscription Management",
+                    "description": "Recurring billing and subscription management",
+                    "price_monthly": 7999,
+                    "setup_cost": 39999
+                },
+                {
+                    "id": "advanced_shipping",
+                    "label": "Advanced Shipping",
+                    "description": "Multi-carrier shipping with real-time rates",
+                    "price_monthly": 3999,
+                    "setup_cost": 19999
+                },
+                {
+                    "id": "pos_integration",
+                    "label": "POS Integration",
+                    "description": "Point of sale system integration",
+                    "price_monthly": 5999,
+                    "setup_cost": 29999
+                }
+            ]
+        },
+        {
+            "id": "saas_marketing",
+            "label": "SaaS Marketing Site",
+            "category": "SaaS & Web Applications",
+            "description": "Marketing website for software products with features, pricing, demos, and customer acquisition",
+            "scale": {
+                "base": {
+                    "monthly_visits": 50000,
+                    "leads_monthly": 100,
+                    "admins": 3,
+                    "storage_gb": 15
+                },
+                "modifiers": [
+                    {
+                        "metric": "monthly_visits",
+                        "step": 50000,
+                        "price_add_monthly": 2999
+                    },
+                    {
+                        "metric": "leads_monthly",
+                        "step": 100,
+                        "price_add_monthly": 1999
+                    },
+                    {
+                        "metric": "admins",
+                        "step": 1,
+                        "price_add_monthly": 1499
+                    },
+                    {
+                        "metric": "storage_gb",
+                        "step": 10,
+                        "price_add_monthly": 699
+                    }
+                ]
+            },
+            "tiers": {
+                "essential": {
+                    "label": "Essential",
+                    "base_price_monthly": 7999,
+                    "setup_cost": 49999,
+                    "delivery_days": 21,
+                    "features": [
+                        "Modern SaaS landing page design",
+                        "Feature showcase pages",
+                        "Pricing page with plans",
+                        "Contact and demo request forms",
+                        "Blog section",
+                        "Customer testimonials",
+                        "Basic analytics",
+                        "Lead capture forms",
+                        "Email integration",
+                        "3 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 50000,
+                        "leads_monthly": 100,
+                        "admins": 2,
+                        "integrations_included": 3,
+                        "languages_included": 1,
+                        "storage_gb": 15,
+                        "support_response_hours": 48
+                    }
+                },
+                "professional": {
+                    "label": "Professional",
+                    "badge": "Most Popular",
+                    "base_price_monthly": 16999,
+                    "setup_cost": 89999,
+                    "delivery_days": 35,
+                    "features": [
+                        "Everything in Essential",
+                        "Interactive product demos",
+                        "Advanced lead generation",
+                        "A/B testing capabilities",
+                        "Customer success stories",
+                        "Resource library",
+                        "Advanced analytics dashboard",
+                        "CRM integration",
+                        "Marketing automation",
+                        "Help center/documentation",
+                        "6 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 200000,
+                        "leads_monthly": 500,
+                        "admins": 5,
+                        "integrations_included": 8,
+                        "languages_included": 2,
+                        "storage_gb": 50,
+                        "support_response_hours": 24
+                    }
+                },
+                "ultimate": {
+                    "label": "Ultimate",
+                    "base_price_monthly": 34999,
+                    "setup_cost": 179999,
+                    "delivery_days": 49,
+                    "features": [
+                        "Everything in Professional",
+                        "Custom interactive demos",
+                        "Advanced personalization",
+                        "Multi-language support",
+                        "Enterprise integrations",
+                        "Custom analytics and reporting",
+                        "API documentation portal",
+                        "Partner/affiliate portal",
+                        "Advanced security features",
+                        "Priority support",
+                        "Performance optimization",
+                        "12 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 1000000,
+                        "leads_monthly": 2000,
+                        "admins": -1,
+                        "integrations_included": -1,
+                        "languages_included": 5,
+                        "storage_gb": 200,
+                        "support_response_hours": 4
+                    }
+                }
+            },
+            "addons": [
+                {
+                    "id": "interactive_demos",
+                    "label": "Interactive Product Demos",
+                    "description": "Custom interactive demos and product tours",
+                    "price_monthly": 4999,
+                    "setup_cost": 24999
+                },
+                {
+                    "id": "marketing_automation",
+                    "label": "Marketing Automation",
+                    "description": "Advanced lead nurturing and email automation",
+                    "price_monthly": 6999,
+                    "setup_cost": 34999
+                },
+                {
+                    "id": "api_documentation",
+                    "label": "API Documentation Portal",
+                    "description": "Interactive API docs with testing capabilities",
+                    "price_monthly": 3999,
+                    "setup_cost": 19999
+                }
+            ]
+        },
+        {
+            "id": "lms",
+            "label": "Learning Management System",
+            "category": "Education & Learning",
+            "description": "Comprehensive online learning platform with courses, assessments, and progress tracking",
+            "scale": {
+                "base": {
+                    "monthly_visits": 15000,
+                    "students": 100,
+                    "courses": 10,
+                    "instructors": 5,
+                    "storage_gb": 50
+                },
+                "modifiers": [
+                    {
+                        "metric": "monthly_visits",
+                        "step": 15000,
+                        "price_add_monthly": 1999
+                    },
+                    {
+                        "metric": "students",
+                        "step": 100,
+                        "price_add_monthly": 2999
+                    },
+                    {
+                        "metric": "courses",
+                        "step": 10,
+                        "price_add_monthly": 1499
+                    },
+                    {
+                        "metric": "instructors",
+                        "step": 5,
+                        "price_add_monthly": 2499
+                    },
+                    {
+                        "metric": "storage_gb",
+                        "step": 50,
+                        "price_add_monthly": 1999
+                    }
+                ]
+            },
+            "tiers": {
+                "essential": {
+                    "label": "Essential",
+                    "base_price_monthly": 19999,
+                    "setup_cost": 129999,
+                    "delivery_days": 42,
+                    "features": [
+                        "Course creation and management",
+                        "Video hosting and streaming",
+                        "Student enrollment system",
+                        "Basic quizzes and assessments",
+                        "Progress tracking",
+                        "Certificate generation",
+                        "Discussion forums",
+                        "Basic reporting",
+                        "Mobile responsive design",
+                        "3 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 15000,
+                        "students": 100,
+                        "courses": 10,
+                        "instructors": 5,
+                        "storage_gb": 50,
+                        "integrations_included": 3,
+                        "languages_included": 1,
+                        "support_response_hours": 48
+                    }
+                },
+                "professional": {
+                    "label": "Professional",
+                    "badge": "Most Popular",
+                    "base_price_monthly": 39999,
+                    "setup_cost": 249999,
+                    "delivery_days": 56,
+                    "features": [
+                        "Everything in Essential",
+                        "Advanced course builder",
+                        "Live class integration",
+                        "Advanced assessments and grading",
+                        "Student analytics dashboard",
+                        "Payment and subscription management",
+                        "Email automation",
+                        "Advanced reporting",
+                        "Integrations (Zoom, payment gateways)",
+                        "Gamification features",
+                        "6 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 75000,
+                        "students": 500,
+                        "courses": 50,
+                        "instructors": 25,
+                        "storage_gb": 200,
+                        "integrations_included": 10,
+                        "languages_included": 3,
+                        "support_response_hours": 24
+                    }
+                },
+                "ultimate": {
+                    "label": "Ultimate",
+                    "base_price_monthly": 79999,
+                    "setup_cost": 499999,
+                    "delivery_days": 84,
+                    "features": [
+                        "Everything in Professional",
+                        "White-label platform",
+                        "Advanced analytics and AI insights",
+                        "Multi-language support",
+                        "Custom integrations and APIs",
+                        "Advanced user management",
+                        "Corporate training features",
+                        "Advanced security and compliance",
+                        "Dedicated support team",
+                        "Custom feature development",
+                        "12 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 500000,
+                        "students": -1,
+                        "courses": -1,
+                        "instructors": -1,
+                        "storage_gb": 1000,
+                        "integrations_included": -1,
+                        "languages_included": -1,
+                        "support_response_hours": 4
+                    }
+                }
+            },
+            "addons": [
+                {
+                    "id": "live_streaming",
+                    "label": "Live Streaming Platform",
+                    "description": "Integrated live streaming for classes and webinars",
+                    "price_monthly": 9999,
+                    "setup_cost": 49999
+                },
+                {
+                    "id": "ai_proctoring",
+                    "label": "AI Proctoring System",
+                    "description": "Automated exam monitoring and anti-cheating",
+                    "price_monthly": 7999,
+                    "setup_cost": 39999
+                },
+                {
+                    "id": "mobile_app",
+                    "label": "Mobile Learning App",
+                    "description": "Native iOS and Android learning apps",
+                    "price_monthly": 12999,
+                    "setup_cost": 199999
+                }
+            ]
+        },
+        {
+            "id": "portfolio",
+            "label": "Portfolio Website",
+            "category": "Portfolio & Creative",
+            "description": "Professional showcase website for creative professionals and agencies",
+            "scale": {
+                "base": {
+                    "monthly_visits": 5000,
+                    "projects": 20,
+                    "admins": 1,
+                    "storage_gb": 10
+                },
+                "modifiers": [
+                    {
+                        "metric": "monthly_visits",
+                        "step": 5000,
+                        "price_add_monthly": 499
+                    },
+                    {
+                        "metric": "projects",
+                        "step": 20,
+                        "price_add_monthly": 999
+                    },
+                    {
+                        "metric": "admins",
+                        "step": 1,
+                        "price_add_monthly": 799
+                    },
+                    {
+                        "metric": "storage_gb",
+                        "step": 10,
+                        "price_add_monthly": 699
+                    }
+                ]
+            },
+            "tiers": {
+                "essential": {
+                    "label": "Essential",
+                    "base_price_monthly": 2999,
+                    "setup_cost": 19999,
+                    "delivery_days": 10,
+                    "features": [
+                        "Modern portfolio design",
+                        "Project gallery (up to 20 projects)",
+                        "About page",
+                        "Contact form",
+                        "Responsive design",
+                        "Basic SEO optimization",
+                        "Social media links",
+                        "SSL certificate",
+                        "3 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 5000,
+                        "projects": 20,
+                        "admins": 1,
+                        "integrations_included": 2,
+                        "languages_included": 1,
+                        "storage_gb": 10,
+                        "support_response_hours": 48
+                    }
+                },
+                "professional": {
+                    "label": "Professional",
+                    "badge": "Most Popular",
+                    "base_price_monthly": 5999,
+                    "setup_cost": 39999,
+                    "delivery_days": 14,
+                    "features": [
+                        "Everything in Essential",
+                        "Project gallery (up to 100 projects)",
+                        "Case study pages",
+                        "Client testimonials",
+                        "Blog section",
+                        "Advanced animations",
+                        "Custom contact forms",
+                        "Analytics integration",
+                        "6 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 25000,
+                        "projects": 100,
+                        "admins": 2,
+                        "integrations_included": 5,
+                        "languages_included": 2,
+                        "storage_gb": 50,
+                        "support_response_hours": 24
+                    }
+                },
+                "ultimate": {
+                    "label": "Ultimate",
+                    "base_price_monthly": 11999,
+                    "setup_cost": 79999,
+                    "delivery_days": 21,
+                    "features": [
+                        "Everything in Professional",
+                        "Unlimited projects",
+                        "Client portal access",
+                        "E-commerce integration",
+                        "Advanced SEO optimization",
+                        "Custom animations and interactions",
+                        "Multi-language support",
+                        "Priority support",
+                        "12 months support"
+                    ],
+                    "limits": {
+                        "monthly_visits": 100000,
+                        "projects": -1,
+                        "admins": 5,
+                        "integrations_included": -1,
+                        "languages_included": 3,
+                        "storage_gb": 200,
+                        "support_response_hours": 12
+                    }
+                }
+            },
+            "addons": [
+                {
+                    "id": "client_portal",
+                    "label": "Client Portal",
+                    "description": "Private client area for project collaboration",
+                    "price_monthly": 1999,
+                    "setup_cost": 9999
+                },
+                {
+                    "id": "online_store",
+                    "label": "Online Store Integration",
+                    "description": "Sell prints, services, or digital products",
+                    "price_monthly": 2999,
+                    "setup_cost": 14999
+                },
+                {
+                    "id": "booking_system",
+                    "label": "Appointment Booking",
+                    "description": "Online booking for consultations and sessions",
+                    "price_monthly": 1799,
+                    "setup_cost": 8999
+                }
+            ]
+        }
+    ]
+}

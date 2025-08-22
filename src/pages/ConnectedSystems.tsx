@@ -73,71 +73,67 @@ const ConnectedSystems = () => {
 
   const plans = [
     {
-      id: 'launch',
-      name: 'Launch',
+      id: 'connected-launch',
+      name: 'Launch Package',
       icon: Zap,
-      price: 'From $2,999',
-      period: 'one-time',
-      description: 'Perfect for startups and small businesses getting started',
+      price: '₹1,49,999',
+      description: 'Complete connected system for startups and small businesses',
       color: 'border-primary',
       features: [
         'Web App (Progressive Web App)',
         'Mobile App (iOS & Android)',
-        'Basic integrations (3 included)',
-        'User authentication',
+        'Basic admin dashboard',
+        'User authentication & management',
+        '3 third-party integrations',
         'Basic analytics',
-        'Standard support',
         'App store submission',
-        '30-day warranty'
+        '3 months support'
       ],
-      deliveryTime: '4-6 weeks',
+      deliveryTime: '6-8 weeks',
       popular: false
     },
     {
-      id: 'pro',
-      name: 'Pro',
+      id: 'connected-pro',
+      name: 'Pro Suite',
       icon: Sparkles,
-      price: 'From $7,999',
-      period: 'one-time',
-      description: 'For growing businesses that need advanced features',
+      price: '₹2,99,999',
+      description: 'Advanced features for growing businesses',
       color: 'border-accent-brand',
       features: [
-        'Everything in Launch',
+        'Everything in Launch Package',
         'Desktop App (Windows, Mac, Linux)',
-        'Advanced integrations (10 included)',
-        'Admin dashboard',
+        'Advanced admin dashboard',
         'Advanced analytics & reporting',
+        '10 third-party integrations',
         'Push notifications',
         'API access',
-        'Priority support',
-        '90-day warranty',
-        'Custom branding'
+        'Custom branding',
+        '6 months priority support'
       ],
-      deliveryTime: '6-10 weeks',
+      deliveryTime: '8-12 weeks',
       popular: true
     },
     {
-      id: 'omni',
-      name: 'OmniSuite',
+      id: 'connected-enterprise',
+      name: 'Enterprise',
       icon: Crown,
       price: 'Custom Quote',
-      period: 'pricing',
-      description: 'Enterprise solution with unlimited possibilities',
+      description: 'Fully customized enterprise solution',
       color: 'border-purple-500',
       features: [
-        'Everything in Pro',
+        'Everything in Pro Suite',
         'Unlimited integrations',
         'Custom workflows & automations',
         'White-label solution',
-        'Enterprise security',
+        'Enterprise security & compliance',
         'Dedicated account manager',
-        'Custom training',
+        'Custom training & documentation',
         'SLA guarantee',
-        '1-year warranty',
-        'Ongoing maintenance included'
+        '1 year premium support'
       ],
-      deliveryTime: '10-16 weeks',
-      popular: false
+      deliveryTime: '12-16 weeks',
+      popular: false,
+      custom: true
     }
   ];
 
@@ -156,7 +152,7 @@ const ConnectedSystems = () => {
     },
     {
       question: 'How much does it cost to launch?',
-      answer: 'Our Launch package starts at $2,999 for a complete connected system including web and mobile apps. Pricing varies based on features and complexity. Enterprise solutions are custom-priced.'
+      answer: 'Our Launch Package starts at ₹1,49,999 for a complete connected system including web and mobile apps. Pricing varies based on features and complexity. Enterprise solutions are custom-priced based on your specific requirements.'
     },
     {
       question: 'How long does development take?',
@@ -204,14 +200,14 @@ const ConnectedSystems = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Connected Systems — Web + App + Automation | MacroPresence</title>
-        <meta name="description" content="Build fully connected platforms — website, mobile, desktop — integrated with automations and analytics. Start your ecosystem today." />
-        <meta property="og:title" content="Connected Systems — Web + App + Automation | MacroPresence" />
-        <meta property="og:description" content="Build fully connected platforms — website, mobile, desktop — integrated with automations and analytics. Start your ecosystem today." />
+        <title>Connected Systems Pricing — One-Time Development Cost | MacroPresence</title>
+        <meta name="description" content="Simple one-time pricing for complete connected systems. Web + Mobile + Desktop apps starting at ₹1,49,999. No recurring fees, own your system forever." />
+        <meta property="og:title" content="Connected Systems Pricing — One-Time Development Cost | MacroPresence" />
+        <meta property="og:description" content="Simple one-time pricing for complete connected systems. Web + Mobile + Desktop apps starting at ₹1,49,999. No recurring fees, own your system forever." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Connected Systems — Web + App + Automation" />
-        <meta name="twitter:description" content="Build fully connected platforms — website, mobile, desktop — integrated with automations and analytics. Start your ecosystem today." />
+        <meta name="twitter:title" content="Connected Systems Pricing — One-Time Development Cost" />
+        <meta name="twitter:description" content="Simple one-time pricing for complete connected systems. Web + Mobile + Desktop apps starting at ₹1,49,999. No recurring fees, own your system forever." />
       </Helmet>
 
       {/* Hero Section */}
@@ -253,7 +249,7 @@ const ConnectedSystems = () => {
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
               </Link>
-              <Link to="/onboarding">
+              <Link to="/pricing">
                 <Button className="btn-accent text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                   Start My Project
                   <Play className="ml-3 h-6 w-6" />
@@ -393,9 +389,9 @@ const ConnectedSystems = () => {
       <section className="py-24 bg-surface">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-title-1 mb-4">Choose Your Connected System</h2>
+            <h2 className="text-title-1 mb-4">Simple Development Packages</h2>
             <p className="text-body text-muted-foreground">
-              Transparent pricing for every business size — from startup to enterprise
+              One-time development cost. Pay once, own your complete connected system forever.
             </p>
           </div>
 
@@ -420,7 +416,14 @@ const ConnectedSystems = () => {
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
                     <CardTitle className="text-title-3">{plan.name}</CardTitle>
-                    <div className="text-title-2 font-bold text-primary">{plan.price}</div>
+                    <div className="text-title-2 font-bold text-primary">
+                      {plan.price}
+                      {!plan.custom && (
+                        <span className="text-sm font-normal text-muted-foreground block">
+                          one-time development cost
+                        </span>
+                      )}
+                    </div>
                     <p className="text-subhead text-muted-foreground">{plan.description}</p>
                     <div className="text-callout text-accent-brand">
                       ⚡ {plan.deliveryTime}
@@ -435,9 +438,9 @@ const ConnectedSystems = () => {
                         </li>
                       ))}
                     </ul>
-                    <Link to={plan.price === 'Custom Quote' ? '/connected-systems/quote' : '/onboarding'}>
+                    <Link to={plan.custom ? '/connected-systems/quote' : `/plan-onboarding?plan=${plan.id}`}>
                       <Button className={plan.popular ? 'btn-primary w-full' : 'btn-secondary w-full'}>
-                        {plan.price === 'Custom Quote' ? 'Get Quote' : 'Start Project'}
+                        {plan.custom ? 'Get Custom Quote' : 'Start Project'}
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>
                     </Link>
@@ -537,9 +540,9 @@ const ConnectedSystems = () => {
                 <ArrowRight className="ml-3 h-6 w-6" />
               </Button>
             </Link>
-            <Link to="/onboarding">
+            <Link to="/pricing">
               <Button className="btn-secondary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                Start Now
+                View Pricing
                 <ExternalLink className="ml-3 h-6 w-6" />
               </Button>
             </Link>

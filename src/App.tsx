@@ -7,7 +7,9 @@ import CustomCursor from "./components/CustomCursor";
 import CookieConsentBanner from "./components/CookieConsentBanner";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Pricing from "./pages/Pricing";
+import CleanPricing from "./pages/CleanPricing";
+import PlanOnboarding from "./pages/PlanOnboarding";
+import ThankYou from "./pages/ThankYou";
 import Showcase from "./pages/Showcase";
 import ProjectDetails from "./pages/ProjectDetails";
 import Testimonials from "./pages/Testimonials";
@@ -16,7 +18,6 @@ import LiveStats from "./pages/LiveStats";
 import ClientLogin from "./pages/ClientLogin";
 import ClientSignup from "./pages/ClientSignup";
 import ClientDashboard from "./pages/ClientDashboard";
-import Onboarding from "./pages/Onboarding";
 import Industries from "./pages/Industries";
 import ConnectedSystems from "./pages/ConnectedSystems";
 // Import database test
@@ -78,7 +79,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/pricing" element={<CleanPricing />} />
               {/* <Route path="/showcase" element={<Showcase />} /> */}
               {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
               <Route path="/testimonials" element={<Testimonials />} />
@@ -87,7 +88,8 @@ const App = () => {
               <Route path="/client-login" element={<ClientLogin />} />
               <Route path="/client-signup" element={<ClientSignup />} />
               <Route path="/client-dashboard" element={<ClientDashboard />} />
-              <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/plan-onboarding" element={<PlanOnboarding />} />
+              <Route path="/thank-you" element={<ThankYou />} />
               <Route path="/industries" element={<Industries />} />
               <Route path="/industries/corporate-enterprise" element={<CorporateEnterprise />} />
               <Route path="/industries/healthcare" element={<Healthcare />} />

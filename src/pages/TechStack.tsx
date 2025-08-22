@@ -451,7 +451,7 @@ const TechStack = () => {
             Fast, secure, and built to last.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/onboarding">
+            <Link to="/pricing">
               <Button className="btn-primary text-lg px-8 py-4">
                 Start Your Project
               </Button>
