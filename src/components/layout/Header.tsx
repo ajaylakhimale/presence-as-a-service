@@ -79,7 +79,7 @@ const Header = () => {
           {/* Right: Utility actions */}
           <div className="flex items-center justify-end flex-1 gap-3">
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/onboarding">
+              <Link to="/modern-onboarding">
                 <Button className="btn-primary" aria-label="Get started">
                   Get Started
                 </Button>
@@ -132,7 +132,7 @@ const Header = () => {
                   </li>
                 ))}
                 <li className="pt-2">
-                  <Link to="/onboarding" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/modern-onboarding" onClick={() => setIsMenuOpen(false)}>
                     <Button className="btn-primary w-full">Get Started</Button>
                   </Link>
                 </li>

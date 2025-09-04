@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/Layout";
 import ParticleEffect from '@/components/ParticleEffect';
+import { Link } from 'react-router-dom';
 import {
   Users,
   Zap,
@@ -16,81 +17,99 @@ import {
   Monitor,
   Server,
   HeadphonesIcon,
-  ArrowRight
+  ArrowRight,
+  Globe,
+  Code,
+  Database,
+  Layers,
+  Target,
+  Award,
+  Lightbulb,
+  Rocket,
+  Building,
+  Star
 } from "lucide-react";
 import { Helmet } from 'react-helmet-async';
+import { siteConfig } from '@/config/site';
 
 const About = () => {
-  const benefits = [
+  const stats = [
+    { label: 'Years Experience', value: '5+', icon: <Target className="h-6 w-6 text-primary" /> },
+    { label: 'Technologies Mastered', value: '20+', icon: <Award className="h-6 w-6 text-success" /> },
+    { label: 'Delivery Guarantee', value: '7 Days', icon: <Clock className="h-6 w-6 text-accent-brand" /> },
+    { label: 'Code Quality', value: '100%', icon: <Star className="h-6 w-6 text-warning" /> }
+  ];
+
+  const services = [
     {
-      icon: <Users className="h-6 w-6 text-primary" />,
-      title: "Full-Time Tech Team",
-      description: "Complete development capabilities without the full-time cost"
+      icon: <Globe className="h-8 w-8 text-primary" />,
+      title: "Modern Web Applications",
+      description: "Progressive web apps, interactive dashboards, and scalable business platforms built with React and TypeScript"
     },
     {
-      icon: <Zap className="h-6 w-6 text-accent-brand" />,
-      title: "Ship Fast",
-      description: "We deliver your vision quickly with reliable maintenance"
+      icon: <Smartphone className="h-8 w-8 text-success" />,
+      title: "Mobile-First Design",
+      description: "Responsive designs that work perfectly on all devices, optimized for mobile user experience"
     },
     {
-      icon: <Shield className="h-6 w-6 text-success" />,
-      title: "14 Days Free Support",
-      description: "Comprehensive post-launch support included"
+      icon: <Database className="h-8 w-8 text-accent-brand" />,
+      title: "Backend & APIs",
+      description: "Robust backend systems, RESTful APIs, and database architecture that scales with your business"
     },
     {
-      icon: <DollarSign className="h-6 w-6 text-muted-foreground" />,
-      title: "Pay Per Update",
-      description: "No monthly retainers or bloated plans"
+      icon: <Code className="h-8 w-8 text-warning" />,
+      title: "Custom Development",
+      description: "Fully custom solutions tailored to your unique business requirements and workflows"
     }
   ];
 
-  const platforms = [
+  const advantages = [
     {
-      icon: <Monitor className="h-8 w-8 text-primary" />,
-      title: "Progressive Web Apps",
-      description: "Fast, responsive web applications that work like native apps"
+      icon: <Rocket className="h-6 w-6 text-primary" />,
+      title: "7-Day Delivery Guarantee",
+      description: "Your web application goes live in 7 days or less, with no compromises on quality"
     },
     {
-      icon: <Globe className="h-8 w-8 text-primary" />,
-      title: "Admin Dashboards",
-      description: "Powerful web-based management interfaces"
+      icon: <DollarSign className="h-6 w-6 text-success" />,
+      title: "Transparent Pricing",
+      description: "No hidden costs, no monthly retainers. Pay upfront for what you need, nothing more"
     },
     {
-      icon: <Smartphone className="h-8 w-8 text-primary" />,
-      title: "Mobile Responsive",
-      description: "Perfect experience on all screen sizes and devices"
+      icon: <Shield className="h-6 w-6 text-accent-brand" />,
+      title: "Post-Launch Support",
+      description: "15-30 days of free support after launch, plus ongoing maintenance options"
     },
     {
-      icon: <Server className="h-8 w-8 text-primary" />,
-      title: "Backends",
-      description: "Scalable backend systems and APIs"
+      icon: <TrendingUp className="h-6 w-6 text-warning" />,
+      title: "Business-Focused",
+      description: "We build solutions that drive growth, increase conversions, and solve real business problems"
     }
   ];
 
   const values = [
     {
-      title: "Outcome-Focused",
-      description: "We care about your results as much as you do. Your growth is our success."
+      title: "Quality First",
+      description: "We use modern technologies and best practices to ensure your application is fast, secure, and maintainable. Every project includes automated testing, code reviews, and performance optimization."
     },
     {
-      title: "Connected Systems",
-      description: "We build complete, integrated solutions that work seamlessly together."
+      title: "Client Partnership",
+      description: "We're not just developers — we're your technology partners. We understand your business goals and provide strategic guidance to help you succeed in the digital landscape."
     },
     {
-      title: "On-Demand Scaling",
-      description: "Scale your development capacity up or down based on your needs."
+      title: "Scalable Solutions",
+      description: "Whether you're a startup or an enterprise, we build applications that grow with you. Our architecture is designed to handle increased traffic and feature expansion."
     },
     {
-      title: "Long-Term Partnership",
-      description: "We're committed to your growth journey, not just project completion."
+      title: "Continuous Innovation",
+      description: "We stay current with the latest technologies and trends, ensuring your application leverages the best tools available for optimal performance and user experience."
     }
   ];
 
   return (
     <Layout>
       <Helmet>
-        <title>About Us - WPaaS | Your On-Demand Product Team</title>
-        <meta name="description" content="We're not just developers. We are your full-time tech team — without the full-time cost. Building complete, connected systems for startups and businesses." />
+        <title>About {siteConfig.name} - Building Powerful Web Applications for Modern Businesses</title>
+        <meta name="description" content="Learn about macro presence - your trusted partner for building modern web applications. We deliver high-quality, scalable solutions with our 7-day delivery guarantee." />
       </Helmet>
 
       {/* Hero Section */}
@@ -106,161 +125,148 @@ const About = () => {
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center rounded-full bg-primary/10 px-6 py-2 text-sm font-medium text-primary ring-1 ring-primary/20 mb-8 animate-fade-in-up">
-              <Users className="h-4 w-4 mr-2" />
-              More Than a Service — We're Your Tech Team
+              <Building className="h-4 w-4 mr-2" />
+              Building Powerful Web Applications Since 2024
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
-                Your On-Demand
+                About {siteConfig.name}
               </span>
-              <span className="block text-primary">Product Team</span>
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-              We're not just developers. We are your <span className="font-semibold text-foreground">full-time tech team</span> — without the full-time cost.
+              We specialize in creating <span className="font-semibold text-foreground">modern web applications</span> that drive business growth. With our 7-day delivery guarantee and transparent pricing, we make professional web development accessible to businesses of all sizes.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
-              <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                Start Building Today
-                <ArrowRight className="ml-3 h-6 w-6" />
-              </Button>
-              <Button variant="outline" className="text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                See How We Work
-              </Button>
+              <Link to="/modern-onboarding">
+                <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                  Start Your Project
+                  <ArrowRight className="ml-3 h-6 w-6" />
+                </Button>
+              </Link>
+              <Link to="/pricing">
+                <Button variant="outline" className="text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                  View Our Plans
+                </Button>
+              </Link>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground animate-fade-in-up [animation-delay:0.4s] px-4">
-              <div className="flex items-center gap-2">
-                <Zap className="h-5 w-5 text-accent-brand" />
-                Ship Fast
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-success" />
-                14 Days Free Support
-              </div>
-              <div className="flex items-center gap-2">
-                <DollarSign className="h-5 w-5 text-muted-foreground" />
-                Pay Per Update
-              </div>
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up [animation-delay:0.4s]">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="flex justify-center mb-2">
+                    {stat.icon}
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* What We Are For You */}
+      {/* What We Do */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              What We Are for You
+              What We Do
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              A tech ally, growth partner, and full-scale on-demand product team that delivers outcomes, not just code.
+              We build modern web applications that solve real business problems and drive growth.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-                We Build Complete, Connected Systems
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-success mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">Web, mobile, and desktop apps</span> that work together seamlessly
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-success mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">Robust backends and APIs</span> that scale with your growth
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-success mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">Integrated solutions</span> that solve real business problems
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {platforms.map((platform, index) => (
-                <Card key={index} className="card-surface p-6 text-center hover:shadow-lg transition-all duration-300">
-                  <div className="mb-4 flex justify-center">
-                    {platform.icon}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {services.map((service, index) => (
+              <Card key={index} className="card-surface p-8 hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    {service.icon}
                   </div>
-                  <h4 className="font-semibold text-foreground mb-2">{platform.title}</h4>
-                  <p className="text-sm text-muted-foreground">{platform.description}</p>
-                </Card>
-              ))}
-            </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <div className="grid grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <Card key={index} className="card-surface p-6 text-center hover:shadow-lg transition-all duration-300">
-                    <div className="mb-4 flex justify-center">
-                      {benefit.icon}
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2 text-sm">{benefit.title}</h4>
-                    <p className="text-xs text-muted-foreground">{benefit.description}</p>
-                  </Card>
-                ))}
-              </div>
+          <div className="text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-8">
+              Our Technology Stack
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
+              {['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS', 'Vercel', 'Tailwind CSS', 'Next.js'].map((tech, index) => (
+                <Badge key={index} variant="secondary" className="text-sm px-4 py-2">
+                  {tech}
+                </Badge>
+              ))}
             </div>
-
-            <div className="order-1 md:order-2">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-                How We Work With You
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <Zap className="h-6 w-6 text-accent-brand mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">Ship your vision fast</span> with reliable maintenance and scaling
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <HeadphonesIcon className="h-6 w-6 text-success mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">14 days of free post-launch support</span> to ensure everything works perfectly
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <DollarSign className="h-6 w-6 text-muted-foreground mt-1 flex-shrink-0" />
-                  <p className="text-lg text-muted-foreground">
-                    <span className="font-semibold text-foreground">No monthly retainers or bloated plans</span> — just pay per update, per fix, or per feature
-                  </p>
-                </div>
-              </div>
-            </div>
+            <Link to="/tech-stack">
+              <Button variant="outline">
+                View Full Tech Stack
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* Why Choose Us */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              We Care About the Outcome as Much as You Do
+              Why Choose macro presence?
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              When you grow, we grow with you. We're truly aligned with your vision and committed to long-term growth.
+              We combine speed, quality, and transparency to deliver exceptional web applications that drive business growth.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {advantages.map((advantage, index) => (
+              <div key={index} className="bg-card rounded-2xl p-8 border border-border-subtle hover:shadow-lg transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 p-3 bg-primary/10 rounded-lg">
+                    {advantage.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      {advantage.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {advantage.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+              Our Core Values
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              These principles guide everything we do, from initial consultation to post-launch support.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="bg-card rounded-2xl p-8 border border-border-subtle hover:shadow-lg transition-all duration-300">
+              <div key={index} className="bg-gradient-to-br from-card to-card/50 rounded-2xl p-8 border border-border-subtle hover:shadow-lg transition-all duration-300">
                 <h3 className="text-xl font-semibold text-foreground mb-4">
                   {value.title}
                 </h3>
@@ -273,55 +279,74 @@ const About = () => {
         </div>
       </section>
 
-      {/* Outcome Promise */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* Our Process Preview */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-surface">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-primary/10 to-accent-brand/10 rounded-3xl p-8 md:p-12">
-            <Heart className="h-12 w-12 text-primary mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Your Product Team — Available On Demand
-            </h2>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-              We're not just another development service. We're your dedicated product team,
-              aligned with your vision and committed to your success. Available when you need us,
-              scaling with your growth, and always focused on delivering real outcomes.
-            </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            How We Work
+          </h2>
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Our proven 5-phase process ensures your project is delivered on time, on budget, and exceeds expectations.
+          </p>
 
-            <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mb-8">
-              <div className="flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-success" />
-                <span>Growth-Focused</span>
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-12">
+            {['Discovery', 'Design', 'Development', 'Deploy', 'Support'].map((phase, index) => (
+              <div key={index} className="bg-card rounded-lg p-6 border border-border-subtle">
+                <div className="text-2xl font-bold text-primary mb-2">0{index + 1}</div>
+                <div className="text-sm font-medium text-foreground">{phase}</div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-accent-brand" />
-                <span>Always Available</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-primary" />
-                <span>Reliable Partner</span>
-              </div>
-            </div>
-
-            <p className="text-lg font-semibold text-foreground">
-              Ready to see what's possible when you have the right tech team on your side?
-            </p>
+            ))}
           </div>
+
+          <Link to="/how-it-works">
+            <Button variant="outline" size="lg">
+              Learn More About Our Process
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 via-background to-accent-brand/5">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Let's Build Something Amazing Together
-          </h2>
-          <p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
-            Your vision deserves a team that cares about the outcome. Let's discuss how we can help you grow.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="btn-primary">
-              Start Your Project
-            </Button>
+          <div className="bg-gradient-to-br from-primary/10 to-accent-brand/10 rounded-3xl p-8 md:p-12">
+            <Lightbulb className="h-12 w-12 text-primary mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+              Ready to Build Something Amazing?
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto">
+              Whether you're a startup looking to launch your first product or an established business needing a powerful web application, we're here to help you succeed.
+            </p>
+
+            <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mb-8">
+              <div className="flex items-center gap-2">
+                <Rocket className="h-5 w-5 text-success" />
+                <span>7-Day Delivery</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-accent-brand" />
+                <span>Quality Guaranteed</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-warning" />
+                <span>Transparent Pricing</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/modern-onboarding">
+                <Button size="lg" className="btn-primary">
+                  Start Your Project Today
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button size="lg" variant="outline">
+                  Get in Touch
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

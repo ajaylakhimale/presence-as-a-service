@@ -10,6 +10,7 @@ import About from "./pages/About";
 import CleanPricing from "./pages/CleanPricing";
 import Onboarding from "./pages/Onboarding";
 import PlanOnboarding from "./pages/PlanOnboarding";
+import ModernOnboarding from "./pages/ModernOnboarding";
 import ThankYou from "./pages/ThankYou";
 import Testimonials from "./pages/Testimonials";
 import TechStack from "./pages/TechStack";
@@ -64,6 +65,7 @@ const App = () => {
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/pricing" element={<CleanPricing />} />
               <Route path="/onboarding" element={<Onboarding />} />
+              <Route path="/modern-onboarding" element={<ModernOnboarding />} />
               {/* <Route path="/showcase" element={<Showcase />} /> */}
               {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
               <Route path="/testimonials" element={<Testimonials />} />

@@ -15,7 +15,8 @@ import {
     Briefcase,
     ShoppingCart,
     MousePointer,
-    Layers
+    Layers,
+    X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,6 +27,7 @@ import { Helmet } from 'react-helmet-async';
 
 const CleanPricing = () => {
     const [selectedCategory, setSelectedCategory] = useState<'starter' | 'professional' | 'enterprise'>('professional');
+    const [showAddonsHint, setShowAddonsHint] = useState(true);
 
     const pricingPlans = {
         starter: {
@@ -168,7 +170,15 @@ const CleanPricing = () => {
         { name: "Custom Integration", price: 9999, description: "Third-party API or service integration" },
         { name: "Admin Dashboard", price: 14999, description: "Custom admin panel for content management" },
         { name: "Multi-language Support", price: 7999, description: "Multiple language versions of your site" },
-        { name: "Payments Integration", price: 19999, description: "Integration with popular payment gateways" }
+        { name: "Payments Integration", price: 19999, description: "Integration with popular payment gateways" },
+        { name: "Redesign Existing Site", price: 24999, description: "Complete visual redesign of your current website with modern UI/UX" },
+        { name: "Enhance Existing Site", price: 14999, description: "Add new features and functionality to your existing website" },
+        { name: "SEO Optimization", price: 7999, description: "Complete SEO setup with meta tags, sitemap, and search engine optimization" },
+        { name: "Performance Optimization", price: 5999, description: "Speed optimization, image compression, and performance improvements" },
+        { name: "Database Integration", price: 12999, description: "Custom database setup with CRUD operations and data management" },
+        { name: "Email Marketing Setup", price: 4999, description: "Newsletter signup, email automation, and marketing integrations" },
+        { name: "Analytics & Tracking", price: 3999, description: "Google Analytics, conversion tracking, and detailed reporting setup" },
+        { name: "Security Hardening", price: 6999, description: "SSL certificates, security headers, and vulnerability protection" }
     ];
 
     const formatPrice = (price: number) => {
@@ -330,7 +340,7 @@ const CleanPricing = () => {
                                                     variant={plan.popular ? "default" : "outline"}
                                                     asChild
                                                 >
-                                                    <Link to={plan.custom ? "/contact" : `/plan-onboarding?plan=${plan.id}`}>
+                                                    <Link to={plan.custom ? "/contact" : `/modern-onboarding?plan=${plan.id}&category=${selectedCategory}`}>
                                                         {plan.custom ? "Get Custom Quote" : "Get Started"}
                                                         <ArrowRight className="w-4 h-4 ml-2" />
                                                     </Link>
@@ -350,9 +360,31 @@ const CleanPricing = () => {
                         <div className="max-w-4xl mx-auto">
                             <div className="text-center mb-12">
                                 <h2 className="text-3xl font-bold text-foreground mb-4">Optional Add-ons</h2>
-                                <p className="text-muted-foreground">
+                                <p className="text-muted-foreground mb-4">
                                     Enhance your project with these optional features
                                 </p>
+                                {showAddonsHint && (
+                                    <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 max-w-2xl mx-auto relative">
+                                        <button
+                                            onClick={() => setShowAddonsHint(false)}
+                                            className="absolute top-2 right-2 p-1 rounded-full hover:bg-amber-500/20 transition-colors"
+                                            aria-label="Dismiss hint"
+                                        >
+                                            <X className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                                        </button>
+                                        <div className="flex items-start space-x-3 pr-8">
+                                            <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                                <span className="text-white text-xs font-bold">💡</span>
+                                            </div>
+                                            <div className="text-left">
+                                                <h4 className="font-semibold text-amber-700 dark:text-amber-300 mb-1">Standalone Services Available</h4>
+                                                <p className="text-sm text-amber-700 dark:text-amber-300">
+                                                    You don't need to purchase any plan to get these add-ons. These services can be added to your existing websites or purchased independently.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -387,6 +419,12 @@ const CleanPricing = () => {
                                         Every project is unique. Let's discuss your specific requirements and create a solution that fits your budget and timeline.
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                        <Button size="lg" asChild>
+                                            <Link to="/modern-onboarding">
+                                                Start Your Project
+                                                <ArrowRight className="w-4 h-4 ml-2" />
+                                            </Link>
+                                        </Button>
                                         <Button size="lg" variant="outline" asChild>
                                             <Link to="/contact">
                                                 Ask Questions
