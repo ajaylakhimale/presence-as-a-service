@@ -71,13 +71,13 @@
             "category": "branding"
         },
         {
-            "id": "mobile_app",
-            "label": "Mobile Application",
-            "description": "Native iOS and Android app (both platforms)",
+            "id": "pwa_features",
+            "label": "Progressive Web App Features",
+            "description": "Enhanced PWA features including offline mode and push notifications",
             "unit": "one-time",
             "price_monthly": 0,
-            "setup_cost": 199999,
-            "category": "mobile"
+            "setup_cost": 29999,
+            "category": "web"
         },
         {
             "id": "advanced_seo",
@@ -698,11 +698,11 @@
                     "setup_cost": 39999
                 },
                 {
-                    "id": "mobile_app",
-                    "label": "Mobile Learning App",
-                    "description": "Native iOS and Android learning apps",
+                    "id": "advanced_analytics",
+                    "label": "Advanced Learning Analytics",
+                    "description": "Detailed student performance analytics and insights",
                     "price_monthly": 12999,
-                    "setup_cost": 199999
+                    "setup_cost": 49999
                 }
             ]
         },

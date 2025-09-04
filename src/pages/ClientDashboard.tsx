@@ -8,7 +8,6 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import ProjectInfoForm, { ProjectFormData } from '@/components/ProjectInfoForm';
 import { siteConfig } from '@/config/site';
-import { insertProjectInfoForm } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 import {
   Bell,
@@ -74,19 +73,8 @@ const ClientDashboard = () => {
     setIsSubmitting(true);
 
     try {
-      await insertProjectInfoForm({
-        title: data.title,
-        description: data.description,
-        industry: data.industry,
-        type: data.type,
-        delivery_time: data.deliveryTime,
-        start_date: data.startDate,
-        budget: data.endDate, // Using endDate as budget field for now
-        features: data.features,
-        pages: data.technologies, // Using technologies as pages for now
-        contact_name: data.clientName,
-        contact_email: data.clientEmail
-      });
+      // Simulate form submission delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       setProjectFormData(data);
       setShowProjectForm(false);
@@ -95,7 +83,6 @@ const ClientDashboard = () => {
         description: "Thank you for providing your project details. We'll use this information to showcase your project.",
       });
     } catch (error) {
-      console.error('Error submitting project form:', error);
       toast({
         title: "Error submitting project information",
         description: "Please try again later.",
@@ -240,8 +227,8 @@ const ClientDashboard = () => {
           {timelineSteps.map((step, index) => (
             <div key={step.name} className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.status === 'completed' ? 'bg-success text-success-foreground' :
-                  step.status === 'in-progress' ? 'bg-accent text-accent-foreground' :
-                    'bg-muted text-muted-foreground'
+                step.status === 'in-progress' ? 'bg-accent text-accent-foreground' :
+                  'bg-muted text-muted-foreground'
                 }`}>
                 {step.status === 'completed' ? (
                   <CheckCircle className="h-4 w-4" />
@@ -334,8 +321,8 @@ const ClientDashboard = () => {
           <div key={file.name} className="flex items-center justify-between p-3 border border-border rounded-xl hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${file.type === 'design' ? 'bg-primary/10 text-primary' :
-                  file.type === 'dev' ? 'bg-accent/10 text-accent' :
-                    'bg-muted text-muted-foreground'
+                file.type === 'dev' ? 'bg-accent/10 text-accent' :
+                  'bg-muted text-muted-foreground'
                 }`}>
                 <FileText className="h-4 w-4" />
               </div>
@@ -1145,8 +1132,8 @@ const ClientDashboard = () => {
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 ${isActive
-                        ? 'bg-primary text-primary-foreground shadow-sm'
-                        : 'hover:bg-white/20 text-muted-foreground hover:text-foreground'
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'hover:bg-white/20 text-muted-foreground hover:text-foreground'
                       }`}
                   >
                     <Icon className="h-5 w-5" />

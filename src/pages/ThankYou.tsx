@@ -21,7 +21,7 @@ const ThankYou = () => {
                         "Our team will review your application within 24 hours",
                         "We'll prepare a detailed project proposal based on your requirements",
                         "You'll receive an email with next steps and project timeline",
-                        "We'll schedule a consultation call to discuss your project in detail"
+                        "We'll contact you to discuss your project in detail"
                     ]
                 };
             case 'contact':

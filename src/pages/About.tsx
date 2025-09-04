@@ -3,10 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/layout/Layout";
 import ParticleEffect from '@/components/ParticleEffect';
-import { 
-  Users, 
-  Zap, 
-  Shield, 
+import {
+  Users,
+  Zap,
+  Shield,
   Heart,
   CheckCircle,
   Clock,
@@ -47,18 +47,18 @@ const About = () => {
   const platforms = [
     {
       icon: <Monitor className="h-8 w-8 text-primary" />,
-      title: "Web Apps",
-      description: "Responsive, fast web applications"
+      title: "Progressive Web Apps",
+      description: "Fast, responsive web applications that work like native apps"
+    },
+    {
+      icon: <Globe className="h-8 w-8 text-primary" />,
+      title: "Admin Dashboards",
+      description: "Powerful web-based management interfaces"
     },
     {
       icon: <Smartphone className="h-8 w-8 text-primary" />,
-      title: "Mobile Apps",
-      description: "Native and cross-platform mobile solutions"
-    },
-    {
-      icon: <Monitor className="h-8 w-8 text-primary" />,
-      title: "Desktop Apps",
-      description: "Powerful desktop applications"
+      title: "Mobile Responsive",
+      description: "Perfect experience on all screen sizes and devices"
     },
     {
       icon: <Server className="h-8 w-8 text-primary" />,
@@ -98,10 +98,10 @@ const About = () => {
         {/* Background Elements */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--accent-brand))_0%,transparent_50%)] opacity-10" />
-        
+
         {/* Particle Effects */}
         <ParticleEffect />
-        
+
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-24 sm:py-32 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
@@ -109,18 +109,18 @@ const About = () => {
               <Users className="h-4 w-4 mr-2" />
               More Than a Service — We're Your Tech Team
             </div>
-            
+
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
                 Your On-Demand
               </span>
               <span className="block text-primary">Product Team</span>
             </h1>
-            
+
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
               We're not just developers. We are your <span className="font-semibold text-foreground">full-time tech team</span> — without the full-time cost.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
               <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Start Building Today
@@ -130,7 +130,7 @@ const About = () => {
                 See How We Work
               </Button>
             </div>
-            
+
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground animate-fade-in-up [animation-delay:0.4s] px-4">
               <div className="flex items-center gap-2">
@@ -188,7 +188,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
               {platforms.map((platform, index) => (
                 <Card key={index} className="card-surface p-6 text-center hover:shadow-lg transition-all duration-300">
@@ -216,7 +216,7 @@ const About = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="order-1 md:order-2">
               <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
                 How We Work With You
@@ -257,7 +257,7 @@ const About = () => {
               When you grow, we grow with you. We're truly aligned with your vision and committed to long-term growth.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             {values.map((value, index) => (
               <div key={index} className="bg-card rounded-2xl p-8 border border-border-subtle hover:shadow-lg transition-all duration-300">
@@ -282,11 +282,11 @@ const About = () => {
               Your Product Team — Available On Demand
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-              We're not just another development service. We're your dedicated product team, 
-              aligned with your vision and committed to your success. Available when you need us, 
+              We're not just another development service. We're your dedicated product team,
+              aligned with your vision and committed to your success. Available when you need us,
               scaling with your growth, and always focused on delivering real outcomes.
             </p>
-            
+
             <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mb-8">
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5 text-success" />
@@ -301,7 +301,7 @@ const About = () => {
                 <span>Reliable Partner</span>
               </div>
             </div>
-            
+
             <p className="text-lg font-semibold text-foreground">
               Ready to see what's possible when you have the right tech team on your side?
             </p>
@@ -321,9 +321,6 @@ const About = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="btn-primary">
               Start Your Project
-            </Button>
-            <Button size="lg" variant="outline">
-              Schedule a Call
             </Button>
           </div>
         </div>

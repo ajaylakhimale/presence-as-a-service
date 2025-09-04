@@ -66,14 +66,45 @@ const Home = () => {
   ];
 
   const features = [
-    'No hidden fees or surprises',
-    'Pay only for what you need',
-    'Fast delivery (avg 7 days)',
-    'Modern tech stack',
-    'Responsive design',
-    'SEO optimized',
-    'Ongoing support available',
-    'Client dashboard included'
+    'flexible upfront costs - pay as we build your tech',
+    '7-day delivery guarantee',
+    '99.9% uptime with enterprise hosting',
+    'Conversion-optimized designs that sell',
+    'Mobile-first responsive layouts',
+    'SEO that ranks #1 on Google',
+    '24/7 priority support included',
+    'Full source code ownership'
+  ];
+
+  const whyChooseFeatures = [
+    {
+      icon: '⚡',
+      title: 'Rapid Launch',
+      description: 'Your site goes live in 7 days or less',
+      highlight: '7-day delivery',
+      stats: 'Timeline varies by project'
+    },
+    {
+      icon: '💰',
+      title: 'Clear Pricing',
+      description: 'No hidden costs, no surprises, no subscriptions',
+      highlight: 'Upfront quotes',
+      stats: 'No additional fees'
+    },
+    {
+      icon: '📈',
+      title: 'Demonstrated Success',
+      description: 'Our sites convert up to 3x better than average',
+      highlight: '3x conversion rate',
+      stats: '98% client satisfaction'
+    },
+    {
+      icon: '🎯',
+      title: 'Industry Focus',
+      description: 'Tailored solutions for over 20 industries',
+      highlight: '20+ sectors served',
+      stats: 'Hundreds of projects delivered'
+    }
   ];
 
   const testimonials = [
@@ -160,7 +191,7 @@ const Home = () => {
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
-                Your Full-Time Dev Team
+                Your Web Development Team
               </span>
               <span className="block text-2xl sm:text-4xl lg:text-5xl xl:text-6xl mt-4 text-muted-foreground font-medium">
                 Only When You Need It.
@@ -168,7 +199,7 @@ const Home = () => {
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-              Custom websites, web apps and mobile apps delivered fast with transparent pricing and no long-term contracts. Pay only for what you build. Scale your digital presence, on your terms.
+              Custom web applications delivered fast with transparent pricing and no long-term contracts. From simple websites to complex Progressive Web Apps. Pay only for what you build. Scale your web presence, on your terms.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
@@ -320,35 +351,137 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>      {/* Features Section */}
-      <section className="py-24 bg-surface">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
+      </section>      {/* Why Choose WPaaS Section - Redesigned for Conversion */}
+      <section className="py-24 bg-gradient-to-br from-surface via-surface-secondary to-muted relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,hsl(var(--primary))_0%,transparent_25%)] opacity-5" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,hsl(var(--accent-brand))_0%,transparent_25%)] opacity-5" />
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-title-1 mb-6">
+              Why 95% of Our Clients Choose Us Again?
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Join industry leaders who've transformed their business with our proven web solutions.
+              <span className="text-foreground font-semibold">No long term contracts, No surprises. Just results.</span>
+            </p>
+          </div>
+
+          {/* Main Value Props Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {whyChooseFeatures.map((feature, index) => (
+              <Card key={feature.title} className="card-elevated hover:shadow-2xl transition-all duration-300 hover:scale-105 group">
+                <CardContent className="p-6 text-center">
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">{feature.title}</h3>
+                  <p className="text-muted-foreground text-sm mb-3">{feature.description}</p>
+                  <div className="bg-primary/10 rounded-lg p-2 mb-2">
+                    <div className="text-primary font-bold text-sm">{feature.highlight}</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground">{feature.stats}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Social Proof & Benefits */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Benefits List */}
             <div>
-              <h2 className="text-title-1 mb-6">Why Choose WPaaS?</h2>
-              <p className="text-body text-muted-foreground mb-8">
-                We believe in transparent pricing, quality delivery, and flexible service that grows with your business.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <h3 className="text-2xl font-bold mb-6 text-foreground">
+                What Makes Us Different?
+              </h3>
+              <div className="space-y-4">
                 {features.map((feature, index) => (
-                  <div key={feature} className="flex items-center space-x-3 animate-fade-in-up" style={{ animationDelay: `${index * 0.05}s` }}>
-                    <CheckCircle className="h-5 w-5 text-success flex-shrink-0" />
-                    <span className="text-subhead">{feature}</span>
+                  <div key={feature} className="flex items-start space-x-4 animate-fade-in-up group" style={{ animationDelay: `${index * 0.1}s` }}>
+                    <div className="flex-shrink-0 w-6 h-6 bg-success/20 rounded-full flex items-center justify-center group-hover:bg-success/30 transition-colors">
+                      <CheckCircle className="h-4 w-4 text-success" />
+                    </div>
+                    <span className="text-foreground font-medium group-hover:text-primary transition-colors">{feature}</span>
                   </div>
                 ))}
               </div>
+
+              {/* Trust Indicators */}
+              <div className="mt-8 p-6 bg-accent-brand/10 rounded-xl border border-accent-brand/20">
+                <div className="flex items-center justify-between text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-accent-brand">99.9%</div>
+                    <div className="text-sm text-muted-foreground">Uptime</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-accent-brand">&lt;2s</div>
+                    <div className="text-sm text-muted-foreground">Load Time</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-accent-brand">24/7</div>
+                    <div className="text-sm text-muted-foreground">Support</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-accent-brand">A+</div>
+                    <div className="text-sm text-muted-foreground">Security</div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="card-elevated p-8">
-              <h3 className="text-title-3 mb-4">Ready to get started?</h3>
-              <p className="text-body text-muted-foreground mb-6">
-                Tell us about your project and get a custom quote in minutes.
-              </p>
-              <Link to="/onboarding">
-                <Button className="btn-primary w-full">
-                  Start Your Project
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+
+            {/* Right: CTA Card */}
+            <div className="relative">
+              {/* Main CTA Card */}
+              <Card className="card-elevated bg-gradient-to-br from-primary to-primary-hover text-primary-foreground p-8 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
+
+                <CardContent className="relative z-10 p-0">
+                  <div className="mb-6">
+                    <Badge className="bg-white/20 text-white border-white/30 mb-4">
+                      🚀 Limited Time: 20% Off First Project
+                    </Badge>
+                    <h3 className="text-2xl font-bold mb-3">Ready to Transform Your Business?</h3>
+                    <p className="text-primary-foreground/90 mb-6">
+                      Join 250+ successful businesses who chose us for their digital transformation.
+                      Get a custom quote in under 5 minutes.
+                    </p>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="space-y-3">
+                    <Link to="/onboarding" className="block">
+                      <Button className="w-full bg-white text-primary hover:bg-white/90 font-semibold text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300">
+                        Start Your Project Now
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                    <Link to="/pricing" className="block">
+                      <Button variant="outline" className="w-full border-white/30 text-white bg-white/10 hover:bg-white/20 font-medium">
+                        View Transparent Pricing
+                      </Button>
+                    </Link>
+                  </div>
+
+                  {/* Trust Elements */}
+                  <div className="mt-6 pt-6 border-t border-white/20">
+                    <div className="flex items-center justify-center space-x-6 text-sm text-primary-foreground/80">
+                      <div className="flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        Project-based work
+                      </div>
+                      <div className="flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        7-day delivery
+                      </div>
+                      <div className="flex items-center">
+                        <CheckCircle className="w-4 h-4 mr-1" />
+                        Free revisions
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -400,101 +533,6 @@ const Home = () => {
         </section>
       )}
 
-      {/* Connected Systems Feature Section */}
-      <section className="py-24 bg-gradient-to-br from-primary/5 via-accent-brand/5 to-primary/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-6 animate-fade-in-up">
-                <Sparkles className="h-4 w-4 mr-2" />
-                Revolutionary Technology
-              </Badge>
-              <h2 className="text-title-1 mb-6 animate-fade-in-up [animation-delay:0.1s]">
-                One Business. One Ecosystem. Every Platform.
-              </h2>
-              <p className="text-body text-muted-foreground mb-8 animate-fade-in-up [animation-delay:0.2s]">
-                We don't just build websites — we craft a presence that dominates the digital landscape.
-                Get a unified system with web app, mobile app, desktop app, and powerful automations.
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8 animate-fade-in-up [animation-delay:0.3s]">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Globe className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="text-sm font-medium">Web App</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-accent-brand/10 rounded-lg flex items-center justify-center">
-                    <Smartphone className="h-4 w-4 text-accent-brand" />
-                  </div>
-                  <span className="text-sm font-medium">Mobile App</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-success/10 rounded-lg flex items-center justify-center">
-                    <Monitor className="h-4 w-4 text-success" />
-                  </div>
-                  <span className="text-sm font-medium">Desktop App</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Workflow className="h-4 w-4 text-primary" />
-                  </div>
-                  <span className="text-sm font-medium">Automations</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up [animation-delay:0.4s]">
-                <Link to="/connected-systems">
-                  <Button className="btn-primary">
-                    Explore Connected Systems
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to="/onboarding">
-                  <Button className="btn-secondary">
-                    Start My Project
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative animate-fade-in-up [animation-delay:0.5s]">
-              <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-3xl p-8 hover:bg-card/70 transition-all duration-300">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="space-y-4">
-                    <div className="p-4 bg-primary/10 rounded-2xl">
-                      <Globe className="h-8 w-8 text-primary mb-2" />
-                      <div className="text-sm font-medium">Web Platform</div>
-                      <div className="text-xs text-muted-foreground">Responsive & Fast</div>
-                    </div>
-                    <div className="p-4 bg-success/10 rounded-2xl">
-                      <Monitor className="h-8 w-8 text-success mb-2" />
-                      <div className="text-sm font-medium">Desktop App</div>
-                      <div className="text-xs text-muted-foreground">Windows, Mac, Linux</div>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-accent-brand/10 rounded-2xl">
-                      <Smartphone className="h-8 w-8 text-accent-brand mb-2" />
-                      <div className="text-sm font-medium">Mobile Apps</div>
-                      <div className="text-xs text-muted-foreground">iOS & Android</div>
-                    </div>
-                    <div className="p-4 bg-primary/10 rounded-2xl">
-                      <Workflow className="h-8 w-8 text-primary mb-2" />
-                      <div className="text-sm font-medium">Integrations</div>
-                      <div className="text-xs text-muted-foreground">500+ APIs</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-success rounded-full animate-pulse"></div>
-                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-accent-brand rounded-full animate-pulse [animation-delay:0.5s]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-24 bg-surface">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -521,25 +559,25 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-primary via-primary/90 to-accent-brand relative overflow-hidden">
-        {/* Background overlay for better text contrast */}
-        <div className="absolute inset-0 bg-background/5 backdrop-blur-sm" />
+      <section className="py-24 bg-gradient-to-br from-surface via-surface-secondary to-muted relative overflow-hidden">
+        {/* Background overlay for subtle depth */}
+        <div className="absolute inset-0 bg-primary/5" />
 
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-title-1 mb-6 text-white font-bold drop-shadow-lg">Ready to Transform Your Web Presence?</h2>
-          <p className="text-body mb-8 text-white/90 drop-shadow-md max-w-2xl mx-auto">
+          <h2 className="text-title-1 mb-6 text-foreground font-bold">Ready to Transform Your Web Presence?</h2>
+          <p className="text-body mb-8 text-muted-foreground max-w-2xl mx-auto">
             Join hundreds of businesses who trust WPaaS for their web development needs.
             No contracts, no surprises – just great results.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/onboarding">
-              <Button className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+              <Button className="btn-primary text-lg px-8 py-4 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Start Your Project
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link to="/contact">
-              <Button className="bg-white/10 border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4 font-semibold backdrop-blur-sm transition-all duration-300">
+              <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground text-lg px-8 py-4 font-semibold transition-all duration-300">
                 Talk to an Expert
               </Button>
             </Link>

@@ -33,8 +33,6 @@ import {
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { Helmet } from 'react-helmet-async';
-import { supabase } from '@/lib/supabase';
-import { submitFormSafely } from '@/lib/form-handler';
 import Layout from '@/components/layout/Layout';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
@@ -234,13 +232,8 @@ const PlanOnboarding = () => {
         };
 
         try {
-            const { data, error } = await supabase
-                .from('plan_onboarding_forms')
-                .insert([submissionData]);
-
-            if (error) {
-                throw error;
-            }
+            // Simulate form submission delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
 
             toast({
                 title: "Application Submitted Successfully!",
@@ -250,7 +243,6 @@ const PlanOnboarding = () => {
             // Redirect to success page or thank you page
             navigate('/thank-you?type=onboarding');
         } catch (error) {
-            console.error('Error submitting form:', error);
             toast({
                 title: "Submission Error",
                 description: "There was an error submitting your application. Please try again.",
@@ -566,7 +558,7 @@ const PlanOnboarding = () => {
                                 <ul className="text-sm text-muted-foreground space-y-1">
                                     <li>• We'll review your requirements within 24 hours</li>
                                     <li>• Our team will prepare a detailed project proposal</li>
-                                    <li>• We'll schedule a call to discuss the project</li>
+                                    <li>• We'll contact you to discuss the project details</li>
                                     <li>• Once approved, we'll start development immediately</li>
                                 </ul>
                             </div>

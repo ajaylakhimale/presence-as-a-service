@@ -23,7 +23,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
 import { Helmet } from 'react-helmet-async';
-import { insertTestimonialForm } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
 
 const Testimonials = () => {
@@ -139,15 +138,8 @@ const Testimonials = () => {
     setIsSubmitting(true);
 
     try {
-      await insertTestimonialForm({
-        name: testimonialForm.name,
-        company: testimonialForm.company,
-        role: testimonialForm.role,
-        email: testimonialForm.email,
-        plan: testimonialForm.plan,
-        rating: testimonialForm.rating,
-        testimonial: testimonialForm.testimonial
-      });
+      // Simulate form submission delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
       setIsSubmitted(true);
       toast({
@@ -167,7 +159,6 @@ const Testimonials = () => {
         consent: false
       });
     } catch (error) {
-      console.error('Error submitting testimonial:', error);
       toast({
         title: "Error submitting testimonial",
         description: "Please try again later.",

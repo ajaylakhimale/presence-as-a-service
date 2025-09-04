@@ -18,7 +18,6 @@ const Header = () => {
   // Minimal set of primary navigation items (keeps header uncluttered per HIG)
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Connected System', href: '/connected-systems' },
     { name: 'Pricing', href: '/pricing' },
     { name: 'Solutions', href: '/industries' },
     { name: 'About', href: '/about' },
@@ -80,11 +79,6 @@ const Header = () => {
           {/* Right: Utility actions */}
           <div className="flex items-center justify-end flex-1 gap-3">
             <div className="hidden lg:flex items-center gap-3">
-              <Link to="/schedule-call">
-                <Button variant="ghost" size="sm" aria-label="Schedule a call">
-                  Schedule
-                </Button>
-              </Link>
               <Link to="/onboarding">
                 <Button className="btn-primary" aria-label="Get started">
                   Get Started
@@ -137,13 +131,6 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-                <li className="pt-2">
-                  <Link to="/schedule-call" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      Schedule Call
-                    </Button>
-                  </Link>
-                </li>
                 <li className="pt-2">
                   <Link to="/onboarding" onClick={() => setIsMenuOpen(false)}>
                     <Button className="btn-primary w-full">Get Started</Button>

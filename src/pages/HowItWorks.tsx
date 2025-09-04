@@ -154,11 +154,6 @@ const HowItWorks = () => {
                                     <ArrowRight className="ml-2 h-5 w-5" />
                                 </Button>
                             </Link>
-                            <Link to="/schedule-call">
-                                <Button variant="outline">
-                                    Schedule a Consultation
-                                </Button>
-                            </Link>
                         </div>
                     </div>
                 </div>
@@ -293,11 +288,6 @@ const HowItWorks = () => {
                             <Button className="btn-primary">
                                 Start Your Project Today
                                 <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
-                        </Link>
-                        <Link to="/schedule-call">
-                            <Button variant="outline">
-                                Schedule a Technical Consultation
                             </Button>
                         </Link>
                     </div>

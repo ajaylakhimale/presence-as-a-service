@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
-import { 
-  Dumbbell, 
-  Calendar, 
-  Users, 
-  Target, 
-  Trophy, 
+import {
+  Dumbbell,
+  Calendar,
+  Users,
+  Target,
+  Trophy,
   Activity,
   Heart,
   Clock,
@@ -47,7 +47,7 @@ const Fitness = () => {
     "Nutrition planning and meal tracking",
     "Social features and community building",
     "Subscription management and billing",
-    "Mobile apps for iOS and Android",
+    "Responsive web interface for all devices",
     "Virtual training and live streaming",
     "Challenge and competition management",
     "Detailed analytics and reporting"
@@ -59,24 +59,24 @@ const Fitness = () => {
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_70%)]" />
-        
+
         <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium">
             <Dumbbell className="h-4 w-4 text-primary" />
             Fitness & Wellness Solutions
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Power Your{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Fitness Journey
             </span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Build comprehensive fitness platforms with gym management, class booking, personal training, and wellness tracking for healthier communities.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="group" asChild>
               <Link to="/onboarding">
@@ -102,7 +102,7 @@ const Fitness = () => {
               Complete platforms for fitness centers and wellness businesses
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {examples.map((example, index) => (
               <Card key={index} className="group hover:shadow-lg transition-all duration-300">
@@ -118,7 +118,7 @@ const Fitness = () => {
                   <p className="text-muted-foreground">{example.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {example.features.map((feature, featureIndex) => (
-                      <span 
+                      <span
                         key={featureIndex}
                         className="px-3 py-1 text-sm bg-accent/10 text-accent rounded-full"
                       >
@@ -144,7 +144,7 @@ const Fitness = () => {
               Everything you need to create engaging fitness experiences
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {features.map((feature, index) => (
               <div key={index} className="flex items-center gap-3 p-4 rounded-lg bg-background border">
@@ -165,7 +165,7 @@ const Fitness = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Let's build a comprehensive fitness platform that motivates and engages your community.
           </p>
-          
+
           <Button size="lg" className="group" asChild>
             <Link to="/onboarding">
               Start Your Project Today

@@ -456,11 +456,6 @@ const TechStack = () => {
                 Start Your Project
               </Button>
             </Link>
-            <Link to="/schedule-call">
-              <Button variant="outline" className="text-lg px-8 py-4">
-                Discuss Technology Needs
-              </Button>
-            </Link>
           </div>
         </div>
       </section>

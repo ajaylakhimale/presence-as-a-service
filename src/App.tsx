@@ -8,10 +8,9 @@ import CookieConsentBanner from "./components/CookieConsentBanner";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import CleanPricing from "./pages/CleanPricing";
+import Onboarding from "./pages/Onboarding";
 import PlanOnboarding from "./pages/PlanOnboarding";
 import ThankYou from "./pages/ThankYou";
-import Showcase from "./pages/Showcase";
-import ProjectDetails from "./pages/ProjectDetails";
 import Testimonials from "./pages/Testimonials";
 import TechStack from "./pages/TechStack";
 import LiveStats from "./pages/LiveStats";
@@ -19,10 +18,6 @@ import ClientLogin from "./pages/ClientLogin";
 import ClientSignup from "./pages/ClientSignup";
 import ClientDashboard from "./pages/ClientDashboard";
 import Industries from "./pages/Industries";
-import ConnectedSystems from "./pages/ConnectedSystems";
-// Import database test
-import './lib/database-test';
-import ConnectedSystemsQuote from "./pages/ConnectedSystemsQuote";
 import HowItWorks from "./pages/HowItWorks";
 import CorporateEnterprise from "./pages/industries/CorporateEnterprise";
 import Healthcare from "./pages/industries/Healthcare";
@@ -40,31 +35,19 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import BlogAdmin from "./pages/BlogAdmin";
 import Contact from "./pages/Contact";
-import ScheduleCall from "./pages/ScheduleCall";
-import NotFound from "./pages/NotFound";
+import Careers from "./pages/Careers";
+import TermsOfService from "./pages/TermsOfService";
+import CookiePolicy from "./pages/CookiePolicy";
+import RefundPolicy from "./pages/RefundPolicy";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import HelpCenter from "./pages/HelpCenter";
+import NotFoundPage from "./pages/NotFoundPage";
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from "./components/ScrollToTop";
-import { useEffect } from 'react';
-import { autoRetryPendingSubmissions } from './lib/pending-submissions';
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Auto-retry pending submissions on app load and periodically
-  useEffect(() => {
-    // Initial retry attempt
-    setTimeout(() => {
-      autoRetryPendingSubmissions();
-    }, 5000); // Wait 5 seconds after app loads
-
-    // Set up periodic retry (every 2 minutes)
-    const interval = setInterval(() => {
-      autoRetryPendingSubmissions();
-    }, 120000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -80,6 +63,7 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/pricing" element={<CleanPricing />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               {/* <Route path="/showcase" element={<Showcase />} /> */}
               {/* <Route path="/showcase/:id" element={<ProjectDetails />} /> */}
               <Route path="/testimonials" element={<Testimonials />} />
@@ -103,15 +87,18 @@ const App = () => {
               <Route path="/industries/events" element={<Events />} />
               <Route path="/industries/fitness" element={<Fitness />} />
               <Route path="/industries/marketing" element={<Marketing />} />
-              <Route path="/connected-systems" element={<ConnectedSystems />} />
-              <Route path="/connected-systems/quote" element={<ConnectedSystemsQuote />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/blogAdmin" element={<BlogAdmin />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/schedule-call" element={<ScheduleCall />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/tos" element={<TermsOfService />} />
+              <Route path="/cookie-policy" element={<CookiePolicy />} />
+              <Route path="/refund" element={<RefundPolicy />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/help" element={<HelpCenter />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>

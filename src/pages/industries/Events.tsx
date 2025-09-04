@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
-import { 
-  Calendar, 
-  Ticket, 
-  Users, 
-  MapPin, 
-  QrCode, 
+import {
+  Calendar,
+  Ticket,
+  Users,
+  MapPin,
+  QrCode,
   Bell,
   CreditCard,
   BarChart3,
@@ -46,7 +46,7 @@ const Events = () => {
     "Multi-event management and organization",
     "Custom branding and white-label options",
     "Integration with payment gateways and CRM",
-    "Mobile apps for organizers and attendees",
+    "Responsive web interface for all devices",
     "Email marketing and communication tools",
     "Waitlist management and capacity planning",
     "Speaker and session management",
@@ -59,24 +59,24 @@ const Events = () => {
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_70%)]" />
-        
+
         <div className="relative z-10 max-w-6xl mx-auto text-center space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-medium">
             <Calendar className="h-4 w-4 text-primary" />
             Events & Bookings Solutions
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             Create Unforgettable{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Event Experiences
             </span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Build comprehensive event management platforms with ticketing, registration, check-in systems, and analytics for memorable experiences.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="group" asChild>
               <Link to="/onboarding">
@@ -102,7 +102,7 @@ const Events = () => {
               Complete platforms for event planning and management
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {examples.map((example, index) => (
               <Card key={index} className="group hover:shadow-lg transition-all duration-300">
@@ -118,7 +118,7 @@ const Events = () => {
                   <p className="text-muted-foreground">{example.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {example.features.map((feature, featureIndex) => (
-                      <span 
+                      <span
                         key={featureIndex}
                         className="px-3 py-1 text-sm bg-accent/10 text-accent rounded-full"
                       >
@@ -144,7 +144,7 @@ const Events = () => {
               Everything you need to create and manage successful events
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {features.map((feature, index) => (
               <div key={index} className="flex items-center gap-3 p-4 rounded-lg bg-background border">
@@ -165,7 +165,7 @@ const Events = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Let's build a comprehensive event platform that creates memorable experiences for all attendees.
           </p>
-          
+
           <Button size="lg" className="group" asChild>
             <Link to="/onboarding">
               Start Your Project Today

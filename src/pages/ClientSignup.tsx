@@ -19,7 +19,6 @@ const ClientSignup = () => {
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: Implement actual signup with Supabase
-    console.log('Signup attempt:', formData);
     // Simulate signup success and redirect
     localStorage.setItem('userEmail', formData.email);
     navigate('/client-dashboard');

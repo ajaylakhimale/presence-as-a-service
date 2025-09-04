@@ -3,6 +3,7 @@ import { Zap, Twitter, Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { siteConfig } from '@/config/site';
+import NewsletterSubscription from '@/components/NewsletterSubscription';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,7 +27,7 @@ const Footer = () => {
       { name: 'Terms of Service', href: '/tos' },
       { name: 'Privacy Policy', href: '/privacy' },
       { name: 'Refund Policy', href: '/refund' },
-      { name: 'Cookie Policy', href: '/cookies' },
+      { name: 'Cookie Policy', href: '/cookie-policy' },
     ],
   };
 
@@ -41,21 +42,11 @@ const Footer = () => {
     <footer className="bg-surface border-t border-border-subtle">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 lg:px-8">
         {/* Newsletter Section */}
-        <div className="mb-12 rounded-2xl bg-gradient-hero p-8 text-center">
-          <h3 className="text-title-2 mb-4">Stay Updated</h3>
-          <p className="text-body text-muted-foreground mb-6 max-w-md mx-auto">
-            Get the latest updates on new features, case studies, and web development trends.
-          </p>
-          <div className="flex max-w-md mx-auto space-x-2">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1"
-            />
-            <Button className="btn-primary">
-              Subscribe
-            </Button>
-          </div>
+        <div className="mb-12 rounded-2xl bg-gradient-to-br from-primary/10 via-accent-brand/5 to-primary/10 border border-border-subtle p-8 md:p-10">
+          <NewsletterSubscription
+            title="Stay in the Loop"
+            description="Get the latest updates on new features, case studies, and web development insights delivered to your inbox."
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-6">
@@ -126,7 +117,7 @@ const Footer = () => {
               Privacy
             </Link>
             <Link
-              to="/cookies"
+              to="/cookie-policy"
               className="text-subhead text-muted-foreground hover:text-primary transition-colors"
             >
               Cookies

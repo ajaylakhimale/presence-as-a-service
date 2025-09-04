@@ -1,9 +1,9 @@
+/* Import custom cursor styles */
+@import './styles/cursor.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Import custom cursor styles */
-@import './styles/cursor.css';
 
 /* Hide default cursor only on desktop devices (screens larger than 1024px) */
 @media (min-width: 1024px) {

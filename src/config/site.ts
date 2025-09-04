@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "macro presence",
   fullName: "macro presence",
-  description: "Crafting Powerful Online Identities",
-  shortDescription: "Crafting Powerful Online Identities",
+  description: "Building Powerful Web Applications for Modern Businesses",
+  shortDescription: "Building Powerful Web Applications",
   url: "https://macro-presence.dev",
   ogImage: "https://macro-presence.dev/og-image.png",
   links: {
@@ -24,6 +24,6 @@ export const siteConfig = {
   company: {
     name: "macro presence",
     founded: "2024",
-    mission: "Crafting Powerful Online Identities."
+    mission: "Building Powerful Web Applications for Modern Businesses."
   }
 } as const; 
