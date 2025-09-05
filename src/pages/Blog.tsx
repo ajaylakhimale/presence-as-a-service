@@ -7,6 +7,8 @@ import { Calendar, Clock, ArrowRight, TrendingUp, Users, Zap } from 'lucide-reac
 import { siteConfig } from '@/config/site';
 import ParticleEffect from '@/components/ParticleEffect';
 import Layout from '@/components/layout/Layout';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 
 interface BlogPost {
   id: string;
@@ -152,6 +154,12 @@ const Blog = () => {
 
   return (
     <Layout>
+      <SEO
+        title={seoConfig.pages.blog.title}
+        description={seoConfig.pages.blog.description}
+        keywords={seoConfig.pages.blog.keywords}
+        structuredData={seoConfig.schemas.organization}
+      />
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">

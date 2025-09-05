@@ -43,8 +43,11 @@ import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import HelpCenter from "./pages/HelpCenter";
 import NotFoundPage from "./pages/NotFoundPage";
+import SupabaseDebug from "./pages/SupabaseDebug";
+import Testing from "./pages/Testing";
 import { HelmetProvider } from 'react-helmet-async';
 import ScrollToTop from "./components/ScrollToTop";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +61,7 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <GoogleAnalytics />
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -99,6 +103,13 @@ const App = () => {
               <Route path="/refund" element={<RefundPolicy />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/help" element={<HelpCenter />} />
+              {/* Development routes - only available in development mode */}
+              {import.meta.env.DEV && (
+                <>
+                  <Route path="/supabase-debug" element={<SupabaseDebug />} />
+                  <Route path="/testing" element={<Testing />} />
+                </>
+              )}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFoundPage />} />
             </Routes>

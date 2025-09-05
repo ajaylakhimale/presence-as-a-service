@@ -13,7 +13,7 @@ export const siteConfig = {
   },
   contact: {
     email: "hello@macro-presence.dev",
-    phone: "+1 (555) 123-4567",
+    phone: "+91 92092 52547",
     address: "123 Web Street, Digital City, DC 12345"
   },
   social: {
@@ -25,5 +25,10 @@ export const siteConfig = {
     name: "macro presence",
     founded: "2024",
     mission: "Building Powerful Web Applications for Modern Businesses."
+  },
+  analytics: {
+    googleAnalyticsId: import.meta.env.VITE_GOOGLE_ANALYTICS_ID || "G-XXXXXXXXXX",
+    googleTagManagerId: import.meta.env.VITE_GOOGLE_TAG_MANAGER_ID || "GTM-XXXXXXX",
+    enableInDevelopment: false
   }
 } as const; 

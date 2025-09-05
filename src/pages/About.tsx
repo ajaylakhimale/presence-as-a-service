@@ -29,7 +29,8 @@ import {
   Building,
   Star
 } from "lucide-react";
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 import { siteConfig } from '@/config/site';
 
 const About = () => {
@@ -107,10 +108,12 @@ const About = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>About {siteConfig.name} - Building Powerful Web Applications for Modern Businesses</title>
-        <meta name="description" content="Learn about macro presence - your trusted partner for building modern web applications. We deliver high-quality, scalable solutions with our 7-day delivery guarantee." />
-      </Helmet>
+      <SEO
+        title={seoConfig.pages.about.title}
+        description={seoConfig.pages.about.description}
+        keywords={seoConfig.pages.about.keywords}
+        structuredData={seoConfig.schemas.organization}
+      />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 min-h-screen flex items-center">

@@ -125,12 +125,98 @@ const TermsOfService = () => {
                             </CardContent>
                         </Card>
 
+                        {/* Money-Back Guarantee */}
+                        <Card className="border border-green-200/50 bg-gradient-to-br from-green-50/50 via-emerald-50/30 to-green-50/50 backdrop-blur-sm">
+                            <CardHeader>
+                                <CardTitle className="flex items-center text-2xl">
+                                    <Shield className="w-6 h-6 mr-3 text-green-600" />
+                                    4. Money-Back Guarantee
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-4">
+                                <div className="bg-green-100/80 border border-green-200 rounded-lg p-4 mb-4">
+                                    <h4 className="font-semibold text-green-800 mb-2 flex items-center">
+                                        <CheckCircle className="w-4 h-4 mr-2" />
+                                        Limited Time Offer - First 10 Clients Only
+                                    </h4>
+                                    <p className="text-green-700 text-sm">
+                                        We stand behind our work with a comprehensive money-back guarantee available exclusively
+                                        for our first 10 clients as part of our launch commitment.
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h4 className="font-semibold text-foreground mb-2">4.1 Guarantee Eligibility</h4>
+                                    <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
+                                        <li><strong>Limited Availability:</strong> This guarantee is exclusively available for the first 10 clients who engage our services</li>
+                                        <li><strong>Project Scope:</strong> Applies to complete web development projects as outlined in the initial project proposal</li>
+                                        <li><strong>Documentation Required:</strong> Original project requirements and agreed specifications must be documented in writing</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="font-semibold text-foreground mb-2">4.2 Guarantee Terms</h4>
+                                    <p className="text-muted-foreground mb-3">
+                                        We will provide a full refund of all payments made if:
+                                    </p>
+                                    <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
+                                        <li>
+                                            <strong>Non-Delivery of Agreed Features:</strong> We fail to build or deliver the website/technology
+                                            as specifically discussed and documented in the original project requirements
+                                        </li>
+                                        <li>
+                                            <strong>Fundamental Functionality Failure:</strong> The delivered project fundamentally fails to meet
+                                            the core specifications outlined in the initial agreement
+                                        </li>
+                                        <li>
+                                            <strong>Complete Non-Delivery:</strong> We fail to deliver any working version of the agreed project
+                                            within the specified timeline plus a 30-day grace period
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="font-semibold text-foreground mb-2">4.3 Guarantee Exclusions</h4>
+                                    <p className="text-muted-foreground mb-2">
+                                        This guarantee does NOT apply to:
+                                    </p>
+                                    <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
+                                        <li>Changes in project requirements after initial agreement (scope creep)</li>
+                                        <li>Subjective design preferences or aesthetic disagreements</li>
+                                        <li>Minor bugs or issues that can be resolved through normal support channels</li>
+                                        <li>Third-party service integrations that fail due to external factors</li>
+                                        <li>Performance issues caused by hosting, content, or external dependencies</li>
+                                        <li>Requests for refunds after project completion and client approval</li>
+                                        <li>Projects terminated by the client before completion</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h4 className="font-semibold text-foreground mb-2">4.4 Claim Process</h4>
+                                    <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-4">
+                                        <li>Guarantee claims must be submitted in writing within 30 days of project delivery</li>
+                                        <li>Claims must include specific documentation of how deliverables differ from agreed specifications</li>
+                                        <li>We will have 14 days to attempt resolution before refund processing</li>
+                                        <li>Approved refunds will be processed within 30 business days</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-amber-50/80 border border-amber-200 rounded-lg p-4 mt-4">
+                                    <p className="text-amber-800 text-sm">
+                                        <strong>Important:</strong> This guarantee reflects our confidence in delivering quality work.
+                                        We are committed to working with clients to resolve any issues before considering refund requests.
+                                        Our goal is always successful project completion and client satisfaction.
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
                         {/* Client Responsibilities */}
                         <Card className="border border-border/50 bg-card/50 backdrop-blur-sm">
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <Shield className="w-6 h-6 mr-3 text-primary" />
-                                    4. Client Responsibilities
+                                    5. Client Responsibilities
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -154,7 +240,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <Shield className="w-6 h-6 mr-3 text-primary" />
-                                    5. Intellectual Property Rights
+                                    6. Intellectual Property Rights
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -187,7 +273,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <AlertTriangle className="w-6 h-6 mr-3 text-primary" />
-                                    6. Warranties and Disclaimers
+                                    7. Warranties and Disclaimers
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -215,7 +301,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <Shield className="w-6 h-6 mr-3 text-primary" />
-                                    7. Limitation of Liability
+                                    8. Limitation of Liability
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -236,7 +322,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <AlertTriangle className="w-6 h-6 mr-3 text-primary" />
-                                    8. Termination
+                                    9. Termination
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -257,7 +343,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <Clock className="w-6 h-6 mr-3 text-primary" />
-                                    9. Changes to Terms
+                                    10. Changes to Terms
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
@@ -277,7 +363,7 @@ const TermsOfService = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center text-2xl">
                                     <Users className="w-6 h-6 mr-3 text-primary" />
-                                    10. Contact Information
+                                    11. Contact Information
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">

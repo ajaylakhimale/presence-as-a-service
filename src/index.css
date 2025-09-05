@@ -550,4 +550,13 @@ All colors MUST be HSL. Global theme variables for consistent branding.
       opacity: 1;
     }
   }
+
+  /* Text utilities */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }

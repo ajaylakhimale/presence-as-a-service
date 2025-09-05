@@ -8,43 +8,76 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
-import { Helmet } from 'react-helmet-async';
+import { useContactForm, useFormConditionalRender } from '@/hooks/use-enhanced-forms';
+import { useReCaptcha } from '@/hooks/use-recaptcha';
+import ReCaptcha from '@/components/ReCaptcha';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 import { siteConfig } from '@/config/site';
 
 const Contact = () => {
   const { toast } = useToast();
+  const { formData: persistedData, updateFormData, submitForm, isSubmitting, hasSubmitted, clearForm } = useContactForm();
+  const { shouldShowWelcomeBack, isReturningUser } = useFormConditionalRender();
+  const {
+    recaptchaRef,
+    recaptchaToken,
+    isRecaptchaVerified,
+    resetRecaptcha,
+    handleRecaptchaChange,
+    handleRecaptchaExpired,
+    handleRecaptchaError
+  } = useReCaptcha();
+
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    subject: '',
-    message: '',
+    name: persistedData.name || '',
+    email: persistedData.email || '',
+    company: persistedData.company || '',
+    subject: persistedData.subject || '',
+    message: persistedData.message || '',
     projectType: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    const newData = { ...formData, [name]: value };
+    setFormData(newData);
+
+    // Update persistence
+    updateFormData({
+      name: newData.name,
+      email: newData.email,
+      company: newData.company,
+      subject: newData.subject,
+      message: newData.message
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+
+    // Validate reCAPTCHA
+    if (!isRecaptchaVerified) {
+      toast({
+        title: "Verification Required",
+        description: "Please complete the reCAPTCHA verification.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     try {
-      // Simulate form submission delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+      // Submit using enhanced form hook with reCAPTCHA token
+      await submitForm({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+        recaptchaToken: recaptchaToken
       });
 
+      // Clear form and reset reCAPTCHA after successful submission
       setFormData({
         name: '',
         email: '',
@@ -53,15 +86,12 @@ const Contact = () => {
         message: '',
         projectType: ''
       });
-      setIsSubmitted(true);
+      resetRecaptcha();
     } catch (error) {
-      toast({
-        title: "Error sending message",
-        description: "Please try again later or contact us directly via email.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
+      console.error('Contact submission error:', error);
+      // Reset reCAPTCHA on error
+      resetRecaptcha();
+      // Error handling is done in the hook
     }
   };
 
@@ -75,7 +105,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      content: "+1 (555) 123-4567",
+      content: "+91 92092 52547",
       description: "Mon-Fri from 8am to 5pm"
     },
     {
@@ -105,10 +135,12 @@ const Contact = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>Contact Us - {siteConfig.name}</title>
-        <meta name="description" content="Get in touch with our team. We're here to help you build your perfect web presence." />
-      </Helmet>
+      <SEO
+        title={seoConfig.pages.contact.title}
+        description={seoConfig.pages.contact.description}
+        keywords={seoConfig.pages.contact.keywords}
+        structuredData={seoConfig.schemas.organization}
+      />
 
       <div className="relative min-h-screen bg-background pt-20">
         <ParticleEffect />
@@ -140,7 +172,7 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
-                {isSubmitted ? (
+                {hasSubmitted ? (
                   <div className="text-center py-6">
                     <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Send className="w-8 h-8 text-success" />
@@ -150,7 +182,17 @@ const Contact = () => {
                       Thank you for reaching out. We'll get back to you within 24 hours.
                     </p>
                     <Button
-                      onClick={() => setIsSubmitted(false)}
+                      onClick={() => {
+                        clearForm();
+                        setFormData({
+                          name: '',
+                          email: '',
+                          company: '',
+                          subject: '',
+                          message: '',
+                          projectType: ''
+                        });
+                      }}
                       variant="outline"
                     >
                       Send Another Message
@@ -258,10 +300,23 @@ const Contact = () => {
                       />
                     </div>
 
+                    {/* reCAPTCHA */}
+                    <div className="flex justify-center">
+                      <ReCaptcha
+                        ref={recaptchaRef}
+                        onVerify={handleRecaptchaChange}
+                        onExpired={handleRecaptchaExpired}
+                        onError={handleRecaptchaError}
+                        size="normal"
+                        theme="light"
+                        className="mb-4"
+                      />
+                    </div>
+
                     <Button
                       type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-primary hover:bg-primary-hover text-white py-3 transition-colors duration-200"
+                      disabled={isSubmitting || !isRecaptchaVerified}
+                      className="w-full bg-primary hover:bg-primary-hover text-white py-3 transition-colors duration-200 disabled:opacity-50"
                     >
                       {isSubmitting ? (
                         <>

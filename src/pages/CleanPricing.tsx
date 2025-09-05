@@ -23,7 +23,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Layout from '@/components/layout/Layout';
-import { Helmet } from 'react-helmet-async';
+import GuaranteeBanner from '@/components/GuaranteeBanner';
+import SupportHighlight from '@/components/SupportHighlight';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 
 const CleanPricing = () => {
     const [selectedCategory, setSelectedCategory] = useState<'starter' | 'professional' | 'enterprise'>('professional');
@@ -190,10 +193,12 @@ const CleanPricing = () => {
 
     return (
         <Layout>
-            <Helmet>
-                <title>Build Your Dream Website Today | Presence as a Service</title>
-                <meta name="description" content="One-time payment, lifetime ownership. Transparent pricing for websites and web applications. No hidden fees, no recurring charges. Choose your perfect plan today." />
-            </Helmet>
+            <SEO
+                title={seoConfig.pages.pricing.title}
+                description={seoConfig.pages.pricing.description}
+                keywords={seoConfig.pages.pricing.keywords}
+                structuredData={seoConfig.schemas.service}
+            />
 
             <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent-brand/10">
                 {/* Hero Section */}
@@ -214,6 +219,12 @@ const CleanPricing = () => {
                                 One-time payment, lifetime ownership. Choose your perfect plan and start building
                                 your digital presence with no hidden fees or recurring charges.
                             </p>
+
+                            {/* Conversion Elements */}
+                            <div className="flex flex-col lg:flex-row gap-6 justify-center items-center mb-8">
+                                <GuaranteeBanner variant="compact" />
+                                <SupportHighlight variant="inline" />
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -433,6 +444,24 @@ const CleanPricing = () => {
                                     </div>
                                 </CardContent>
                             </Card>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Trust and Support Section */}
+                <section className="py-16 bg-surface">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-foreground mb-4">
+                                Your Success is Guaranteed
+                            </h2>
+                            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                                We stand behind our work with industry-leading guarantees and support.
+                            </p>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                            <GuaranteeBanner variant="section" />
+                            <SupportHighlight variant="card" />
                         </div>
                     </div>
                 </section>

@@ -11,7 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 
 const HowItWorks = () => {
     const developmentPhases = [
@@ -122,12 +123,12 @@ const HowItWorks = () => {
 
     return (
         <Layout>
-            <Helmet>
-                <title>How It Works - Our Software Development Process | WPaaS</title>
-                <meta name="description" content="Discover our industry-standard software development process. From discovery to deployment, learn how we build robust, scalable solutions using DevOps, automated testing, and modern development practices." />
-                <meta property="og:title" content="How It Works - Software Development Process" />
-                <meta property="og:description" content="Enterprise-grade development with DevOps and modern tools" />
-            </Helmet>
+            <SEO
+                title={seoConfig.pages.howItWorks?.title || "How It Works - Our Software Development Process | macro presence"}
+                description={seoConfig.pages.howItWorks?.description || "Discover our industry-standard software development process. From discovery to deployment, learn how we build robust, scalable solutions using DevOps, automated testing, and modern development practices."}
+                keywords={seoConfig.pages.howItWorks?.keywords || "software development process, web development workflow, agile development, DevOps"}
+                structuredData={seoConfig.schemas.service}
+            />
 
             {/* Hero Section */}
             <section className="relative bg-gradient-hero py-24 overflow-hidden">

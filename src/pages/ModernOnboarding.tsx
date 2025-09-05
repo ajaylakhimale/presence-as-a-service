@@ -45,8 +45,14 @@ import {
     Shield
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
-import { Helmet } from 'react-helmet-async';
+import { useProjectForm, useFormConditionalRender } from '@/hooks/use-enhanced-forms';
+import { useReCaptcha } from '@/hooks/use-recaptcha';
+import ReCaptcha from '@/components/ReCaptcha';
+import { ProjectFormData } from '@/lib/form-persistence';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
 import Layout from '@/components/layout/Layout';
+import { trackFormSubmission, trackButtonClick } from '@/components/GoogleAnalytics';
 
 // Plans configuration matching CleanPricing.tsx
 const PRICING_PLANS = {
@@ -200,42 +206,26 @@ const ADD_ONS = [
 const ModernOnboarding = () => {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const { formData, updateFormData, submitForm, isSubmitting, hasSubmitted } = useProjectForm();
+    const { shouldShowWelcomeBack, isReturningUser } = useFormConditionalRender();
+    const {
+        recaptchaRef,
+        recaptchaToken,
+        isRecaptchaVerified,
+        resetRecaptcha,
+        handleRecaptchaChange,
+        handleRecaptchaExpired,
+        handleRecaptchaError
+    } = useReCaptcha();
     const preSelectedPlan = searchParams.get('plan');
     const preSelectedCategory = searchParams.get('category') || 'professional';
 
     const [currentStep, setCurrentStep] = useState(1);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [selectedPlan, setSelectedPlan] = useState(preSelectedPlan || '');
     const [selectedCategory, setSelectedCategory] = useState(preSelectedCategory);
     const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
     const [showAddOnDetails, setShowAddOnDetails] = useState(false);
     const [addOnsOnlyMode, setAddOnsOnlyMode] = useState(false);
-
-    const [formData, setFormData] = useState({
-        // Contact Information
-        contact_name: '',
-        contact_email: '',
-        contact_phone: '',
-        company_name: '',
-        company_size: '',
-        industry: '',
-
-        // Project Details
-        project_title: '',
-        project_description: '',
-        target_audience: '',
-        existing_website_url: '',
-        has_existing_branding: false,
-
-        // Timeline & Budget
-        preferred_timeline: '',
-        launch_date: '',
-        budget_flexibility: false,
-
-        // Additional Requirements
-        special_requirements: '',
-        referral_source: ''
-    });
 
     // Auto-select plan and category when coming from pricing page
     useEffect(() => {
@@ -250,6 +240,11 @@ const ModernOnboarding = () => {
             }
         }
     }, [preSelectedPlan]);
+
+    // Helper function to update form data with persistence
+    const updateFormField = (field: keyof ProjectFormData, value: any) => {
+        updateFormData({ [field]: value });
+    };
 
     const totalSteps = 5;
     const progress = (currentStep / totalSteps) * 100;
@@ -308,7 +303,7 @@ const ModernOnboarding = () => {
                 // Add-ons are optional, but if in add-ons only mode, at least one add-on should be selected
                 return addOnsOnlyMode ? selectedAddOns.length > 0 : true;
             case 3:
-                return formData.contact_name && formData.contact_email && formData.project_title;
+                return formData.name && formData.email && formData.project_title;
             case 4:
                 return formData.project_description && formData.target_audience;
             case 5:
@@ -344,35 +339,62 @@ const ModernOnboarding = () => {
             return;
         }
 
-        setIsSubmitting(true);
-
-        const submissionData = {
-            selected_plan: selectedPlan,
-            selected_addons: selectedAddOns,
-            total_price: calculateTotal(),
-            ...formData,
-            submission_timestamp: new Date().toISOString()
-        };
+        // Validate reCAPTCHA
+        if (!isRecaptchaVerified) {
+            toast({
+                title: "Verification Required",
+                description: "Please complete the reCAPTCHA verification.",
+                variant: "destructive",
+            });
+            return;
+        }
 
         try {
-            // Simulate form submission delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Prepare submission data
+            const submissionData = {
+                name: formData.name!,
+                email: formData.email!,
+                phone: formData.phone,
+                company_name: formData.company_name,
+                company_size: formData.company_size,
+                industry: formData.industry,
+                project_title: formData.project_title,
+                project_type: selectedPlan || 'custom',
+                project_description: formData.project_description,
+                target_audience: formData.target_audience,
+                existing_website_url: formData.existing_website_url,
+                has_existing_branding: formData.has_existing_branding,
+                features: selectedAddOns,
+                preferred_timeline: formData.preferred_timeline,
+                launch_date: formData.launch_date,
+                budget: calculateTotal().toString(),
+                budget_flexibility: formData.budget_flexibility,
+                special_requirements: formData.special_requirements,
+                referral_source: formData.referral_source,
+                recaptchaToken: recaptchaToken
+            };
 
-            toast({
-                title: "Project Submitted Successfully!",
-                description: "We'll review your requirements and get back to you within 24 hours.",
-            });
+            // Submit using enhanced form hook
+            await submitForm(submissionData);
+
+            // Track successful form submission
+            trackFormSubmission('modern_onboarding', true);
+
+            // Reset reCAPTCHA on success
+            resetRecaptcha();
 
             // Redirect to success page
             navigate('/thank-you?type=onboarding&plan=' + selectedPlan);
         } catch (error) {
-            toast({
-                title: "Submission Failed",
-                description: "Please try again or contact us directly.",
-                variant: "destructive"
-            });
-        } finally {
-            setIsSubmitting(false);
+            console.error('Submission error:', error);
+
+            // Reset reCAPTCHA on error
+            resetRecaptcha();
+
+            // Track failed form submission
+            trackFormSubmission('modern_onboarding', false);
+
+            // Error handling is done in the hook
         }
     };
 
@@ -678,8 +700,8 @@ const ModernOnboarding = () => {
                                         id="contact_name"
                                         placeholder="Enter your full name"
                                         className="pl-10"
-                                        value={formData.contact_name}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, contact_name: e.target.value }))}
+                                        value={formData.name || ''}
+                                        onChange={(e) => updateFormField('name', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -693,8 +715,8 @@ const ModernOnboarding = () => {
                                         type="email"
                                         placeholder="your@email.com"
                                         className="pl-10"
-                                        value={formData.contact_email}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, contact_email: e.target.value }))}
+                                        value={formData.email || ''}
+                                        onChange={(e) => updateFormField('email', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -707,8 +729,8 @@ const ModernOnboarding = () => {
                                         id="contact_phone"
                                         placeholder="+91 9876543210"
                                         className="pl-10"
-                                        value={formData.contact_phone}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, contact_phone: e.target.value }))}
+                                        value={formData.phone || ''}
+                                        onChange={(e) => updateFormField('phone', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -721,15 +743,15 @@ const ModernOnboarding = () => {
                                         id="company_name"
                                         placeholder="Your company name"
                                         className="pl-10"
-                                        value={formData.company_name}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, company_name: e.target.value }))}
+                                        value={formData.company_name || ''}
+                                        onChange={(e) => updateFormField('company_name', e.target.value)}
                                     />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <Label htmlFor="company_size">Company Size</Label>
-                                <Select value={formData.company_size} onValueChange={(value) => setFormData(prev => ({ ...prev, company_size: value }))}>
+                                <Select value={formData.company_size || ''} onValueChange={(value) => updateFormField('company_size', value)}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select company size" />
                                     </SelectTrigger>
@@ -745,7 +767,7 @@ const ModernOnboarding = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="industry">Industry</Label>
-                                <Select value={formData.industry} onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}>
+                                <Select value={formData.industry || ''} onValueChange={(value) => updateFormField('industry', value)}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select your industry" />
                                     </SelectTrigger>
@@ -774,7 +796,7 @@ const ModernOnboarding = () => {
                                     placeholder="What would you like to call this project?"
                                     className="pl-10"
                                     value={formData.project_title}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, project_title: e.target.value }))}
+                                    onChange={(e) => updateFormField('project_title', e.target.value)}
                                 />
                             </div>
                         </div>
@@ -796,8 +818,8 @@ const ModernOnboarding = () => {
                                     id="project_description"
                                     placeholder="Describe your project goals, key features you need, and what success looks like for you..."
                                     className="min-h-[120px]"
-                                    value={formData.project_description}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, project_description: e.target.value }))}
+                                    value={formData.project_description || ''}
+                                    onChange={(e) => updateFormField('project_description', e.target.value)}
                                 />
                             </div>
 
@@ -807,8 +829,8 @@ const ModernOnboarding = () => {
                                     id="target_audience"
                                     placeholder="Who are your customers? What age group, interests, or demographics?"
                                     className="min-h-[80px]"
-                                    value={formData.target_audience}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, target_audience: e.target.value }))}
+                                    value={formData.target_audience || ''}
+                                    onChange={(e) => updateFormField('target_audience', e.target.value)}
                                 />
                             </div>
 
@@ -820,8 +842,8 @@ const ModernOnboarding = () => {
                                         id="existing_website_url"
                                         placeholder="https://your-current-website.com"
                                         className="pl-10"
-                                        value={formData.existing_website_url}
-                                        onChange={(e) => setFormData(prev => ({ ...prev, existing_website_url: e.target.value }))}
+                                        value={formData.existing_website_url || ''}
+                                        onChange={(e) => updateFormField('existing_website_url', e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -829,8 +851,8 @@ const ModernOnboarding = () => {
                             <div className="flex items-center space-x-2">
                                 <Checkbox
                                     id="has_existing_branding"
-                                    checked={formData.has_existing_branding}
-                                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, has_existing_branding: checked === true }))}
+                                    checked={formData.has_existing_branding || false}
+                                    onCheckedChange={(checked) => updateFormField('has_existing_branding', checked === true)}
                                 />
                                 <Label htmlFor="has_existing_branding">
                                     I have existing branding (logo, colors, style guide)
@@ -843,8 +865,8 @@ const ModernOnboarding = () => {
                                     id="special_requirements"
                                     placeholder="Any specific requirements, integrations, or concerns we should know about..."
                                     className="min-h-[80px]"
-                                    value={formData.special_requirements}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, special_requirements: e.target.value }))}
+                                    value={formData.special_requirements || ''}
+                                    onChange={(e) => updateFormField('special_requirements', e.target.value)}
                                 />
                             </div>
                         </div>
@@ -862,7 +884,7 @@ const ModernOnboarding = () => {
                         <div className="space-y-6">
                             <div className="space-y-4">
                                 <Label>Preferred Timeline *</Label>
-                                <RadioGroup value={formData.preferred_timeline} onValueChange={(value) => setFormData(prev => ({ ...prev, preferred_timeline: value }))}>
+                                <RadioGroup value={formData.preferred_timeline || ''} onValueChange={(value) => updateFormField('preferred_timeline', value)}>
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem value="asap" id="timeline-asap" />
                                         <Label htmlFor="timeline-asap">As soon as possible</Label>
@@ -887,16 +909,16 @@ const ModernOnboarding = () => {
                                 <Input
                                     id="launch_date"
                                     type="date"
-                                    value={formData.launch_date}
-                                    onChange={(e) => setFormData(prev => ({ ...prev, launch_date: e.target.value }))}
+                                    value={formData.launch_date || ''}
+                                    onChange={(e) => updateFormField('launch_date', e.target.value)}
                                 />
                             </div>
 
                             <div className="flex items-center space-x-2">
                                 <Checkbox
                                     id="budget_flexibility"
-                                    checked={formData.budget_flexibility}
-                                    onCheckedChange={(checked) => setFormData(prev => ({ ...prev, budget_flexibility: checked === true }))}
+                                    checked={formData.budget_flexibility || false}
+                                    onCheckedChange={(checked) => updateFormField('budget_flexibility', checked === true)}
                                 />
                                 <Label htmlFor="budget_flexibility">
                                     I have flexibility in budget for additional features
@@ -905,7 +927,7 @@ const ModernOnboarding = () => {
 
                             <div className="space-y-2">
                                 <Label htmlFor="referral_source">How did you hear about us?</Label>
-                                <Select value={formData.referral_source} onValueChange={(value) => setFormData(prev => ({ ...prev, referral_source: value }))}>
+                                <Select value={formData.referral_source || ''} onValueChange={(value) => updateFormField('referral_source', value)}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Select source" />
                                     </SelectTrigger>
@@ -975,13 +997,26 @@ const ModernOnboarding = () => {
                                         </div>
 
                                         <div className="text-sm text-muted-foreground">
-                                            <div>Contact: {formData.contact_name}</div>
-                                            <div>Email: {formData.contact_email}</div>
+                                            <div>Contact: {formData.name}</div>
+                                            <div>Email: {formData.email}</div>
                                             <div>Project: {formData.project_title}</div>
-                                            <div>Timeline: {formData.preferred_timeline.replace('-', ' ')}</div>
+                                            <div>Timeline: {formData.preferred_timeline?.replace('-', ' ')}</div>
                                         </div>
                                     </CardContent>
                                 </Card>
+                            </div>
+
+                            {/* reCAPTCHA */}
+                            <div className="flex justify-center">
+                                <ReCaptcha
+                                    ref={recaptchaRef}
+                                    onVerify={handleRecaptchaChange}
+                                    onExpired={handleRecaptchaExpired}
+                                    onError={handleRecaptchaError}
+                                    size="normal"
+                                    theme="light"
+                                    className="mb-4"
+                                />
                             </div>
 
                             <div className="bg-blue-50 p-4 rounded-lg">
@@ -1007,10 +1042,12 @@ const ModernOnboarding = () => {
 
     return (
         <Layout>
-            <Helmet>
-                <title>Modern Project Onboarding | Presence as a Service</title>
-                <meta name="description" content="Start your project with our comprehensive onboarding process. Choose your plan, add services, and provide project details." />
-            </Helmet>
+            <SEO
+                title="Start Your Web Development Project | Get Quote & Begin Today | macro presence"
+                description="Ready to start your web development project? Get an instant quote, choose your plan, and begin your 7-day delivery journey with our expert team."
+                keywords="start web development project, get web development quote, project onboarding, begin website development"
+                structuredData={seoConfig.schemas.service}
+            />
 
             <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 py-20">
                 <div className="container mx-auto px-4">
@@ -1060,8 +1097,8 @@ const ModernOnboarding = () => {
                                     ) : (
                                         <Button
                                             onClick={handleSubmit}
-                                            disabled={!validateStep(currentStep) || isSubmitting}
-                                            className="flex items-center gap-2 bg-green-600 hover:bg-green-700"
+                                            disabled={!validateStep(currentStep) || isSubmitting || !isRecaptchaVerified}
+                                            className="flex items-center gap-2 bg-green-600 hover:bg-green-700 disabled:opacity-50"
                                         >
                                             {isSubmitting ? (
                                                 "Submitting..."

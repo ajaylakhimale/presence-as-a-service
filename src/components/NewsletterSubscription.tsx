@@ -1,47 +1,74 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { subscribeToNewsletter } from '@/lib/newsletter';
-import { Loader2, Mail } from 'lucide-react';
+import { useNewsletterForm, useFormConditionalRender } from '@/hooks/use-enhanced-forms';
+import { useReCaptcha } from '@/hooks/use-recaptcha';
+import ReCaptcha from '@/components/ReCaptcha';
+import { Loader2, Mail, CheckCircle } from 'lucide-react';
 
 interface NewsletterSubscriptionProps {
     title?: string;
     description?: string;
     className?: string;
+    source?: string;
 }
 
 const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
     title = "Stay Updated",
     description = "Get the latest updates on new features and web development trends.",
-    className = ""
+    className = "",
+    source = "newsletter-component"
 }) => {
     const [email, setEmail] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const { subscribeToNewsletter, isSubscribing, hasSubscribed } = useNewsletterForm();
+    const { shouldShowNewsletterSignup } = useFormConditionalRender();
+    const {
+        recaptchaRef,
+        recaptchaToken,
+        isRecaptchaVerified,
+        resetRecaptcha,
+        handleRecaptchaChange,
+        handleRecaptchaExpired,
+        handleRecaptchaError
+    } = useReCaptcha();
     const [message, setMessage] = useState('');
-    const [isSuccess, setIsSuccess] = useState(false);
+
+    // Don't show if already subscribed
+    if (!shouldShowNewsletterSignup) {
+        return (
+            <div className={`p-4 bg-success/10 border border-success/20 rounded-lg ${className}`}>
+                <div className="flex items-center gap-2 text-success">
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="font-medium">You're already subscribed to our newsletter!</span>
+                </div>
+            </div>
+        );
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!email.trim()) {
             setMessage('Please enter your email address.');
-            setIsSuccess(false);
             return;
         }
 
-        setIsLoading(true);
-        setMessage('');
-
-        const result = await subscribeToNewsletter(email);
-
-        setMessage(result.message);
-        setIsSuccess(result.success);
-
-        if (result.success) {
-            setEmail('');
+        if (!isRecaptchaVerified) {
+            setMessage('Please complete the reCAPTCHA verification.');
+            return;
         }
 
-        setIsLoading(false);
+        setMessage('');
+
+        try {
+            await subscribeToNewsletter(email, source);
+            setMessage('Successfully subscribed to newsletter!');
+            setEmail('');
+            resetRecaptcha();
+        } catch (err) {
+            setMessage('Failed to subscribe. Please try again.');
+            resetRecaptcha();
+        }
     };
 
     return (
@@ -60,15 +87,15 @@ const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="bg-background border-border hover:border-primary focus:border-primary transition-colors"
-                            disabled={isLoading}
+                            disabled={isSubscribing}
                         />
                     </div>
                     <Button
                         type="submit"
-                        disabled={isLoading}
-                        className="bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-2 font-semibold transition-all duration-200 hover:scale-105"
+                        disabled={isSubscribing || !isRecaptchaVerified}
+                        className="bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-2 font-semibold transition-all duration-200 hover:scale-105 disabled:opacity-50"
                     >
-                        {isLoading ? (
+                        {isSubscribing ? (
                             <>
                                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                                 Subscribing...
@@ -82,8 +109,20 @@ const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
                     </Button>
                 </div>
 
+                {/* reCAPTCHA */}
+                <div className="flex justify-center">
+                    <ReCaptcha
+                        ref={recaptchaRef}
+                        onVerify={handleRecaptchaChange}
+                        onExpired={handleRecaptchaExpired}
+                        onError={handleRecaptchaError}
+                        size="compact"
+                        theme="light"
+                    />
+                </div>
+
                 {message && (
-                    <p className={`text-sm font-medium ${isSuccess ? 'text-success' : 'text-destructive'}`}>
+                    <p className="text-sm font-medium text-success">
                         {message}
                     </p>
                 )}

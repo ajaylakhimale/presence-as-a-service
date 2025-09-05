@@ -12,7 +12,12 @@ import {
 import { Badge } from '@/components/ui/badge';
 import Layout from '@/components/layout/Layout';
 import ParticleEffect from '@/components/ParticleEffect';
-import { Helmet } from 'react-helmet-async';
+import GuaranteeBanner from '@/components/GuaranteeBanner';
+import SupportHighlight from '@/components/SupportHighlight';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import SEO from '@/components/SEO';
+import { seoConfig } from '@/config/seo';
+import { trackButtonClick } from '@/components/GoogleAnalytics';
 
 const Home = () => {
   const stats = {
@@ -160,18 +165,13 @@ const Home = () => {
 
   return (
     <Layout>
-      <Helmet>
-        <title>Custom Web & Mobile Solutions for Every Industry | macro presence</title>
-        <meta name="description" content="Premium web agency delivering tailored digital solutions for 20+ industries. Expert UI/UX, seamless onboarding, and proven results. Get your custom quote today!" />
-        <meta property="og:title" content="Custom Web & Mobile Solutions for Every Industry | macro presence" />
-        <meta property="og:description" content="Premium web and mobile development for Real Estate, Law, Startups, and more." />
-        <meta property="og:image" content="https://macro-presence.dev/og-image.png" />
-        <meta property="og:url" content="https://macro-presence.dev/" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@macro_presence" />
-        <meta name="twitter:image" content="https://macro-presence.dev/og-image.png" />
-      </Helmet>
+      <SEO
+        title={seoConfig.pages.home.title}
+        description={seoConfig.pages.home.description}
+        keywords={seoConfig.pages.home.keywords}
+        canonicalUrl={seoConfig.pages.home.canonicalUrl}
+        structuredData={seoConfig.schemas.service}
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent-brand/10 min-h-screen flex items-center">
         {/* Background Elements */}
@@ -191,30 +191,39 @@ const Home = () => {
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 animate-fade-in-up [animation-delay:0.1s]">
               <span className="block bg-gradient-to-r from-foreground via-primary to-accent-brand bg-clip-text text-transparent">
-                Your Web Development Team
+                Professional Web Development Services
               </span>
               <span className="block text-2xl sm:text-4xl lg:text-5xl xl:text-6xl mt-4 text-muted-foreground font-medium">
-                Only When You Need It.
+                7-Day Delivery Guarantee
               </span>
             </h1>
 
             <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in-up [animation-delay:0.2s] px-4">
-              Custom web applications delivered fast with transparent pricing and no long-term contracts. From simple websites to complex Progressive Web Apps. Pay only for what you build. Scale your web presence, on your terms.
+              Get your custom website or web application delivered in just 7 days. Expert React development, transparent pricing, no contracts required. <strong>30-day money-back guarantee</strong> and <strong>15 days of free support</strong> included.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-16">
-              <Link to="/onboarding">
-                <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-fade-in-up [animation-delay:0.3s] mb-8">
+              <Link to="/modern-onboarding">
+                <Button
+                  className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  onClick={() => trackButtonClick('hero_get_started', 'home_hero')}
+                >
                   Get Started Today
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Button>
               </Link>
-              <Link to="/industries">
-                <Button className="btn-primary text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                  <Play className="mr-3 h-6 w-6" />
-                  Explore Solutions
-                </Button>
-              </Link>
+              <WhatsAppButton
+                variant="inline"
+                className="text-lg px-10 py-6 h-auto shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                message="Hi! I saw your website and I'm interested in getting a professional website built. Can we discuss my project requirements?"
+                onClick={() => trackButtonClick('hero_whatsapp', 'home_hero')}
+              />
+            </div>
+
+            {/* Guarantee and Support Highlights */}
+            <div className="space-y-6 mb-12 animate-fade-in-up [animation-delay:0.4s]">
+              <GuaranteeBanner variant="hero" />
+              <SupportHighlight variant="hero" />
             </div>
 
             {/* Trust Indicators */}
